@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Pacer{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1>The Pacer Archives</h1>
+
+  <div class="row">
+    {% for volume in volumes %}
+    <div class="col-lg-4">
+      <div class="card mb-2">
+        <div class="card-body">
+          <a href="/volume-1"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/TheVolette19290211" alt="TheVolette19290211"></a>
+          <h5 class="mt-2"><a href="/volume-1">Volume {{volume.number}} ({{volume.yearStart}}-{{volume.yearEnd}})</a></h5>
+          <p class="card-text">{{volume.issueCount}} issues.</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}
