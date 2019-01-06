@@ -26,4 +26,12 @@ class PublicController extends AbstractController
             'volumes' => $volumes
         ]);
     }
+
+    /**
+     * @Route("/missing-issues", name="missing-issues")
+     */
+    public function missingIssues()
+    {
+        return $this->render('public/missing-issues.html.twig');
+    }
 }
