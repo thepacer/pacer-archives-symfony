@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }}){% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1>Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y') }}-{{ volume.volumeEndDate | date('Y') }})</h1>
+
+  <div class="row">
+    {% for issue in volume.issues %}
+    <div class="col-lg-4">
+      <div class="card mb-2">
+        <div class="card-body">
+          <a href="#"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
+          <h5 class="mt-2"><a href="#">{{ issue.issueDate | date('F j, Y')}}</a></h5>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

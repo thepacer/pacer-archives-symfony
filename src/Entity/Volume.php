@@ -36,6 +36,7 @@ class Volume
 
     /**
      * @ORM\OneToMany(targetEntity="Issue", mappedBy="volume")
+     * @ORM\OrderBy({"issueDate" = "ASC"})
      */
     private $issues;
 
