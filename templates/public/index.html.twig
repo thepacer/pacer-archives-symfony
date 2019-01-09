@@ -11,9 +11,9 @@
     <div class="col-lg-4">
       <div class="card mb-2">
         <div class="card-body">
-          <a href="/volume-1"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/TheVolette19290211" alt="TheVolette19290211"></a>
-          <h5 class="mt-2"><a href="/volume-1">Volume {{volume.number}} ({{volume.yearStart}}-{{volume.yearEnd}})</a></h5>
-          <p class="card-text">{{volume.issueCount}} issues.</p>
+          <a href="/volume-1"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="TheVolette19290211"></a>
+          <h5 class="mt-2"><a href="/volume-1">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }})</a></h5>
+          <p class="card-text">{{volume.issues.count}} issues.</p>
         </div>
       </div>
     </div>

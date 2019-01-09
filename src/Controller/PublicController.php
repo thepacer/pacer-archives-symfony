@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use App\Entity\Volume;
+
 class PublicController extends AbstractController
 {
     /**
@@ -12,15 +14,8 @@ class PublicController extends AbstractController
      */
     public function index()
     {
-        $volumes = [];
-        foreach (range(1928, 2019) as $value) {
-            $volumes[] = [
-                'number' => $value - 1927,
-                'yearStart' => $value,
-                'yearEnd' => $value + 1,
-                'issueCount' => 0
-            ];
-        }
+        $entityManager = $this->getDoctrine()->getManager();
+        $volumes = $entityManager->getRepository(Volume::class)->findAllCurrentVolumes();
 
         return $this->render('public/index.html.twig', [
             'volumes' => $volumes
