@@ -8,11 +8,13 @@
 
   <div class="row">
     {% for issue in volume.issues %}
-    <div class="col-lg-4">
+    <div class="col-lg-2">
       <div class="card mb-2">
-        <div class="card-body">
-          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
-          <h5 class="mt-2"><a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a></h5>
+        <div class="card-img-top">
+          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}"><img class="img-fluid" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
+        </div>
+        <div class="card-body small">
+          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a>
         </div>
       </div>
     </div>

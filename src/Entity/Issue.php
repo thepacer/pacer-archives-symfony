@@ -41,6 +41,11 @@ class Issue
      */
     private $archiveKey;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $archiveNotes;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Issue
     public function setArchiveKey(?string $archiveKey): self
     {
         $this->archiveKey = $archiveKey;
+
+        return $this;
+    }
+
+    public function getArchiveNotes(): ?string
+    {
+        return $this->archiveNotes;
+    }
+
+    public function setArchiveNotes(?string $archiveNotes): self
+    {
+        $this->archiveNotes = $archiveNotes;
 
         return $this;
     }

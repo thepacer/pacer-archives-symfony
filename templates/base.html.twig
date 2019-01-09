@@ -10,7 +10,7 @@
     </head>
     <body>
         <div class="container">
-          <h1>The Pacer Archives</h1>
+          <h1><em>The Pacer</em> <span class="text-muted">Archives</span></h1>
           <ul class="list-inline">
             <li class="list-inline-item"><a href="{{ path('home') }}">Archives</a></li>
             <li class="list-inline-item"><a href="{{ path('missing-issues') }}">Missing Issues</a></li>
@@ -18,6 +18,12 @@
           <hr />
         </div>
         {% block body %}{% endblock %}
+        <div class="container">
+          <hr />
+          <a href="{{ path('home') }}"><em>The Pacer</em></a>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

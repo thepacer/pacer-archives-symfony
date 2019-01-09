@@ -21,6 +21,10 @@ class VolumeFixtures extends Fixture
             $volume->setVolumeNumber($v + 1);
             $volume->setVolumeStartDate(new \DateTime("$start_year-08-01"));
             $volume->setVolumeEndDate(new \DateTime("$end_year-07-31"));
+            $volume->setNameplateKey('volette');
+            if ($volume->getVolumeNumber() >= 54) {
+                $volume->setNameplateKey('pacer');
+            }
             $manager->persist($volume);
             $v++;
         } while ($v <= 99);

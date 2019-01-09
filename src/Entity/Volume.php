@@ -45,6 +45,11 @@ class Volume
      */
     private $coverIssue;
 
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $nameplateKey;
+
     public function __construct()
     {
         $this->issues = new ArrayCollection();
@@ -124,5 +129,17 @@ class Volume
         // Default to grabbing the first cover issue
         $issue = $this->issues->first();
         return $issue;
+    }
+
+    public function getNameplateKey(): ?string
+    {
+        return $this->nameplateKey;
+    }
+
+    public function setNameplateKey(string $nameplateKey): self
+    {
+        $this->nameplateKey = $nameplateKey;
+
+        return $this;
     }
 }
