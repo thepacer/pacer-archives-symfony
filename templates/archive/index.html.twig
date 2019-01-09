@@ -4,16 +4,14 @@
 
 {% block body %}
 <div class="container">
-  <h1>The Pacer Archives</h1>
-
   <div class="row">
     {% for volume in volumes %}
     <div class="col-lg-4">
       <div class="card mb-2">
         <div class="card-body">
-          <a href="{{ path('volume', { volume_number: volume.volumeNumber } )}}"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}"></a>
-          <h5 class="mt-2"><a href="{{ path('volume', { volume_number: volume.volumeNumber } )}}">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }})</a></h5>
-          <p class="card-text">{{volume.issues.count}} issues.</p>
+          <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}"></a>
+          <h5 class="mt-2"><a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }})</a></h5>
+          <p class="card-text">{{ pluralize(volume.issues.count, '1 issue', '%d issues', 'No issues') }}.</p>
         </div>
       </div>
     </div>

@@ -11,8 +11,8 @@
     <div class="col-lg-4">
       <div class="card mb-2">
         <div class="card-body">
-          <a href="#"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
-          <h5 class="mt-2"><a href="#">{{ issue.issueDate | date('F j, Y')}}</a></h5>
+          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}"><img class="float-left w-25 mr-4" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
+          <h5 class="mt-2"><a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a></h5>
         </div>
       </div>
     </div>

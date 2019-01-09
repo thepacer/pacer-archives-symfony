@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ issue.issueDate | date('F j, Y') }}{% endblock %}
+
+{% block body %}
+<div class="container">
+  <h1>{{ issue.issueDate | date('F j, Y') }}</h1>
+  <div class="embed-responsive embed-responsive-16by9 mt-4 mb-4">
+    <iframe class="embed-responsive-item" src="https://archive.org/embed/{{ issue.archiveKey }}" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
+  </div>
+</div>
+{% endblock %}

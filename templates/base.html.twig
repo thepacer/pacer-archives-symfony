@@ -9,6 +9,14 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+        <div class="container">
+          <h1>The Pacer Archives</h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="{{ path('home') }}">Archives</a></li>
+            <li class="list-inline-item"><a href="{{ path('missing-issues') }}">Missing Issues</a></li>
+          </ul>
+          <hr />
+        </div>
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
