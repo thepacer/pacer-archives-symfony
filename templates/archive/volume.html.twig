@@ -1,9 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }}){% endblock %}
+{% block title %}Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }}) - {{ parent() }}{% endblock %}
 
 {% block body %}
 <div class="container">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('archive') }}">Archives</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Volume {{volume.volumeNumber}}</li>
+    </ol>
+  </nav>
+
   <div class="float-right">
     <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-link">Browse on Archive.org</a>
   </div>
@@ -14,12 +21,17 @@
     {% for issue in volume.issues %}
     <div class="col-lg-2">
       <div class="card mb-2">
-        <div class="card-img-top">
+        <div class="card-img-top text-center">
           <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}"><img class="img-fluid" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
         </div>
-        <div class="card-body small">
-          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a><br />
-          {{ pluralize(issue.pageCount, '1 page.', '%d pages', 'Unknown') }} <span class="divider">|</span> Issue: {{ issue.issueNumber }}
+        <div class="card-body text-center small">
+          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a>
+        </div>
+        <div class="card-footer small">
+          <ul class="list-inline mb-0">
+            <li class="list-inline-item"><span data-toggle="tooltip" title="Total newsprint pages. May not include inserts or other material.">{{ pluralize(issue.pageCount, '1 page.', '%d pages', 'Unknown') }}</span></li>
+            <li class="list-inline-item"><span data-toggle="tooltip" title="Displayed issue, may vary from actual sequence of issues.">Issue {{ issue.issueNumber }}</span></li>
+          </ul>
         </div>
       </div>
     </div>

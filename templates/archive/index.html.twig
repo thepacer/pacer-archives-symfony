@@ -48,7 +48,7 @@
           </td>
           <td class="align-middle">
             {% if volume.issues.count %}
-            <a href="">{{ pluralize(volume.issues.count, '<strong>1</strong> issue', '<strong>%d</strong> issues') | raw }}</a>
+            <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">{{ pluralize(volume.issues.count, '<strong>1</strong> issue', '<strong>%d</strong> issues') | raw }}</a>
             {% else %}
             <span class="text-muted">No issues</span>
             {% endif %}
@@ -89,7 +89,7 @@
 {% endblock %}
 
 {% block javascripts %}
-{{ encore_entry_script_tags('app') }}
+{{ parent() }}
 <script>
 $(document).ready(function () {
   $('input[name="viewOptions"]').on('change', function(el) {

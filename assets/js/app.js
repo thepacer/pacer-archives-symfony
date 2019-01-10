@@ -14,3 +14,5 @@ require('bootstrap')
 // CSS
 require('../../node_modules/bootstrap/dist/css/bootstrap.css')
 require('../css/app.scss')
+
+$('[data-toggle="tooltip"]').css({cursor:'help'}).tooltip();
