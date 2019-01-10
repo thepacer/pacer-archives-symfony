@@ -11,9 +11,13 @@
     </head>
     <body>
         <div class="container">
-          <h1><em>The Pacer</em> <span class="text-muted">Archives</span></h1>
+          <div class="float-right mt-4">
+            <a href="http://www.thepacer.net" class="btn btn-secondary">Return to <em>The Pacer Online Edition</em></a>
+          </div>
+          <h1><em>The Pacer</em></h1>
           <ul class="list-inline">
-            <li class="list-inline-item"><a href="{{ path('home') }}">Archives</a></li>
+            <li class="list-inline-item"><a href="{{ path('home') }}">Home</a></li>
+            <li class="list-inline-item"><a href="{{ path('archive') }}">Archives</a></li>
             <li class="list-inline-item"><a href="{{ path('missing-issues') }}">Missing Issues</a></li>
           </ul>
           <hr />

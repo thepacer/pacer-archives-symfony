@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}The Pacer{% endblock %}
+
+{% block body %}
+<div class="container">
+  <p class="lead"><em>The Pacer</em> is the student newspaper at the University of Tennessee at Martin. First printed as a stand-alone edition as <em>The Volette</em> in 1928, the newspaper has been the voice of the student body through through almost all of UT Martin's history.</p>
+  <p class="lead">Through its time as the University of Tennessee Junior College, its ascendance to a four-year degree granting instutution as the University of Tennessee Martin Branch and through today, <em>The Pacer</em> is our eye to the history of the campus we call home.</p>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3><a href="{{ path('archive') }}">The Archives</a></h3>
+          <p>We have collected more than 1,100 issues of <em>The Volette</em> and <em>The Pacer</em> and made them available online.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3><a href="{{ path('missing-issues') }}">Missing Issues</a></h3>
+          <p>Help us locate print copies of these issues so we can make them available online.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

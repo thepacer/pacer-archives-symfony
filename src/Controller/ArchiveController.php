@@ -11,7 +11,7 @@ use App\Entity\Issue;
 class ArchiveController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/archive", name="archive")
      */
     public function index()
     {
@@ -24,7 +24,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/volume-{volumeNumber}", name="volume")
+     * @Route("/archive/volume-{volumeNumber}", name="volume")
      */
     public function volume(int $volumeNumber)
     {
@@ -37,7 +37,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/issue-{archiveKey}", name="issue")
+     * @Route("/archive/issue-{archiveKey}", name="issue")
      */
     public function issue(string $archiveKey)
     {

@@ -4,7 +4,10 @@
 
 {% block body %}
 <div class="container">
-  <h1>{{ issue.issueDate | date('F j, Y') }}</h1>
+  <div class="float-right">
+    <a href="https://archive.org/details/{{ issue.archiveKey }}" target="_blank" class="btn btn-link">View on Archive.org</a>
+  </div>
+  <h2>{{ issue.issueDate | date('F j, Y') }}</h2>
   <div class="embed-responsive embed-responsive-16by9 mt-4 mb-4">
     <iframe class="embed-responsive-item" src="https://archive.org/embed/{{ issue.archiveKey }}" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
   </div>

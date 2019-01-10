@@ -4,6 +4,10 @@
 
 {% block body %}
 <div class="container">
+  <div class="float-right">
+    <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-link">Browse on Archive.org</a>
+  </div>
+  
   <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y') }}-{{ volume.volumeEndDate | date('Y') }})</h2>
 
   <div class="row">
