@@ -10,16 +10,16 @@
   <div class="text-right mb-5">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-light active">
-        <input type="radio" name="viewOptions" id="tableView" autocomplete="off" checked><i class="fas fa-th-list"></i>
+        <input type="radio" name="viewOptions" id="tableView" autocomplete="off" data-target="tableViewContent" checked><i class="fas fa-th-list"></i>
       </label>
       <label class="btn btn-light">
-        <input type="radio" name="viewOptions" id="gridView" autocomplete="off"><i class="fas fa-th"></i>
+        <input type="radio" name="viewOptions" id="gridView" autocomplete="off" data-target="gridViewContent"><i class="fas fa-th"></i>
       </label>
     </div>
   </div>
 
   <!-- Table View -->
-  <div class="collapse show">
+  <div id="tableViewContent" class="collapse show">
     <table class="table table-hover">
       <thead>
         <tr>
@@ -60,7 +60,7 @@
   </div>
   
   <!-- Grid View -->
-  <div class="collapse">
+  <div id="gridViewContent" class="collapse">
     <div class="row">
       {% for volume in volumes %}
       <div class="col-lg-4">
@@ -86,4 +86,17 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+{{ encore_entry_script_tags('app') }}
+<script>
+$(document).ready(function () {
+  $('input[name="viewOptions"]').on('change', function(el) {
+    var view = $(el.target).data('target')
+    $('.collapse').collapse('hide')
+    $('#' + view).collapse('toggle')
+  })
+})
+</script>
 {% endblock %}

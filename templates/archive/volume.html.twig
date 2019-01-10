@@ -4,7 +4,7 @@
 
 {% block body %}
 <div class="container">
-  <h1>Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y') }}-{{ volume.volumeEndDate | date('Y') }})</h1>
+  <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y') }}-{{ volume.volumeEndDate | date('Y') }})</h2>
 
   <div class="row">
     {% for issue in volume.issues %}
@@ -14,7 +14,8 @@
           <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}"><img class="img-fluid" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
         </div>
         <div class="card-body small">
-          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a>
+          <a href="{{ path('issue', { archiveKey: issue.archiveKey} ) }}">{{ issue.issueDate | date('F j, Y')}}</a><br />
+          {{ pluralize(issue.pageCount, '1 page.', '%d pages', 'Unknown') }} <span class="divider">|</span> Issue: {{ issue.issueNumber }}
         </div>
       </div>
     </div>
