@@ -1,0 +1,42 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Issue{% endblock %}
+
+{% block body %}
+    <h1>Issue</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ issue.id }}</td>
+            </tr>
+            <tr>
+                <th>IssueDate</th>
+                <td>{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>IssueNumber</th>
+                <td>{{ issue.issueNumber }}</td>
+            </tr>
+            <tr>
+                <th>PageCount</th>
+                <td>{{ issue.pageCount }}</td>
+            </tr>
+            <tr>
+                <th>ArchiveKey</th>
+                <td>{{ issue.archiveKey }}</td>
+            </tr>
+            <tr>
+                <th>ArchiveNotes</th>
+                <td>{{ issue.archiveNotes }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_issue_index') }}">back to list</a>
+
+    <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}">edit</a>
+
+    {{ include('admin/issue/_delete_form.html.twig') }}
+{% endblock %}

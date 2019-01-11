@@ -122,4 +122,11 @@ class Issue
 
         return $this;
     }
+
+    /* model methods */
+
+    public function __toString()
+    {
+        return $this->issueDate->format('F j, Y');
+    }
 }

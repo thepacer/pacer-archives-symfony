@@ -142,4 +142,9 @@ class Volume
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return sprintf('Volume %s', $this->volumeNumber);
+    }
 }

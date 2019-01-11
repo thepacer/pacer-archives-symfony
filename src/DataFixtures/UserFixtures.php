@@ -23,6 +23,9 @@ class UserFixtures extends Fixture
     {
         $user = new User();
         $user->setEmail('user@example.com');
+        $user->setRoles([
+            'ROLE_ADMIN'
+        ]);
         $user->setPassword($this->passwordEncoder->encodePassword(
             $user,
             'temporarypassword'

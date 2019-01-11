@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}The Pacer Admin{% endblock %}</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+        {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="container">
+          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+          <div class="float-right">
+            <a class="btn btn-secondary" href="{{ path('app_logout') }}">Logout</a>
+          </div>
+          <h1><em>The Pacer</em> Admin</h1>
+          <ul class="list-inline">
+            <li class="list-inline-item"><a href="{{ path('admin_volume_index') }}">Volumes</a></li>
+            <li class="list-inline-item"><a href="{{ path('admin_issue_index') }}">Archives</a></li>
+          </ul>
+          <hr />
+          {% endif %}
+        </div>
+        <div class="container">
+          {% block body %}{% endblock %}
+        </div>
+        {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

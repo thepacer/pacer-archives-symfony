@@ -8,6 +8,23 @@
   <p class="lead">Through its time as the University of Tennessee Junior College, its ascendance to a four-year degree granting instutution as the University of Tennessee Martin Branch and through today, <em>The Pacer</em> is our eye to the history of the campus we call home.</p>
 
   <div class="row">
+    <div class="col-lg-12">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3><a href="http://www.thepacer.net/">Latest from <em>The Pacer Online Edition</em></a></h3>
+          <ul class="list-unstyled">
+            {% for item in feed %}
+              <li>
+                <span class="text-muted">{{ item.date | date('F j, Y') }}</span>: <a href="{{ item.link }}" target="_blank">{{ item.title.rendered | raw }}</a> - <cite>{{ item._embedded.author | first.name }}</cite>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-lg-6">
       <div class="card mb-3">
         <div class="card-body">

@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Cache\Simple\FilesystemCache;
+
+use GuzzleHttp\Client as Client;
 
 class PublicController extends AbstractController
 {
@@ -12,7 +15,20 @@ class PublicController extends AbstractController
      */
     public function index()
     {
-        return $this->render('public/index.html.twig');
+        $cache = new FilesystemCache();
+
+        if (!$cache->has('public.pacer_feed')) {
+            $client = new Client();
+            $response = $client->get('http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5');
+            $feed = json_decode($response->getBody());
+            $cache->set('public.pacer_feed', $feed);
+        }
+
+        $feed = $cache->get('public.pacer_feed');
+
+        return $this->render('public/index.html.twig', [
+            'feed' => $feed
+        ]);
     }
 
     /**
