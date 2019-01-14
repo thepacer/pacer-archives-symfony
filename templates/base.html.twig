@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <title>{% block title %}The Pacer{% endblock %}</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
         <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
         {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
@@ -12,21 +12,33 @@
     </head>
     <body>
         <div class="container">
-          <div class="float-right mt-4">
-            <a href="http://www.thepacer.net" class="btn btn-secondary">Return to <em>The Pacer Online Edition</em></a>
+
+          <header class="blog-header py-3">
+          <div class="row align-items-center">
+            <div class="col-md-4 text-center text-md-left pt-1">
+              <a class="text-muted" href="{{ path('donate') }}">Support <em>The Pacer</em></a>
+            </div>
+            <div class="col-md-4 text-center">
+              <a class="h3 blog-header-logo text-dark" href="{{ path('home') }}"><img src="{{ asset('assets/images/nameplates/nameplate-2004-0.png') }}" class="img-fluid" style="max-height:80px" /></a>
+            </div>
+            <div class="col-md-4 text-center text-md-right align-items-center">
+              <a class="btn btn-sm btn-outline-secondary" href="https://www.thepacer.net/" target="_blank"><em>ThePacer.net</em></a>
+            </div>
           </div>
-          <h1><em>The Pacer</em></h1>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="{{ path('home') }}">Home</a></li>
-            <li class="list-inline-item"><a href="{{ path('archive') }}">Archives</a></li>
-            <li class="list-inline-item"><a href="{{ path('missing-issues') }}">Missing Issues</a></li>
-          </ul>
-          <hr />
+          </header>
+          <!-- <div class="nav-scroller py-1 mb-2">
+            <nav class="nav d-flex justify-content-between">
+              <a class="p-2 text-muted" href="{{ path('home') }}">Home</a></a>
+              <a class="p-2 text-muted" href="{{ path('archive') }}">Archives</a></a>
+              <a class="p-2 text-muted" href="{{ path('missing_issues') }}">Missing Issues</a>
+              <a class="p-2 text-muted" href="{{ path('about') }}">About</a>
+            </nav>
+          </div> -->
         </div>
         {% block body %}{% endblock %}
         <div class="container">
           <hr />
-          <a href="{{ path('home') }}"><em>The Pacer</em></a>
+          <a href="{{ path('about') }}">About</a>
         </div>
         {% block javascripts %}
         {{ encore_entry_script_tags('app') }}

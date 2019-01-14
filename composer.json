@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "guzzlehttp/guzzle": "^6.3",
         "sensio/framework-extra-bundle": "^5.2",
+        "symfony/asset": "4.2.*",
         "symfony/cache": "4.2.*",
         "symfony/console": "4.2.*",
         "symfony/dotenv": "4.2.*",

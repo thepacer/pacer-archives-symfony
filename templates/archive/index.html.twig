@@ -4,10 +4,8 @@
 
 {% block body %}
 
-<div class="container">
-
-  <!-- View Toggle -->
-  <div class="text-right mb-5">
+<div class="container mt-3">
+  <div class="float-right">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-light active">
         <input type="radio" name="viewOptions" id="tableView" autocomplete="off" data-target="tableViewContent" checked><i class="fas fa-th-list"></i>
@@ -17,6 +15,7 @@
       </label>
     </div>
   </div>
+  <h2>Archives</h2>
 
   <!-- Table View -->
   <div id="tableViewContent" class="collapse show">
@@ -32,9 +31,13 @@
       </thead>
       <tbody>
         {% for volume in volumes %}
-        <tr>
+        <tr class="{% if volume.issues.count == 0 %}text-muted{% endif %}">
           <td class="align-middle">
+            {% if volume.issues.count > 0 %}
             <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}"><img src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}" class="img-fluid img-thumbnail"></a>
+            {% else %}
+            &nbsp;
+            {% endif %}
           </td>
           <td class="align-middle">
             <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">Volume {{volume.volumeNumber}}</a>
@@ -50,7 +53,7 @@
             {% if volume.issues.count %}
             <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">{{ pluralize(volume.issues.count, '<strong>1</strong> issue', '<strong>%d</strong> issues') | raw }}</a>
             {% else %}
-            <span class="text-muted">No issues</span>
+            <span class="text-muted">No issues available.</span>
             {% endif %}
           </td>
         </tr>

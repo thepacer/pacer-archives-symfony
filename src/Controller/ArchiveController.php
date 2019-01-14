@@ -37,12 +37,12 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/archive/issue-{archiveKey}", name="issue")
+     * @Route("/archive/issue-{issueDate}", name="issue")
      */
-    public function issue(string $archiveKey)
+    public function issue(string $issueDate)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $issue = $entityManager->getRepository(Issue::class)->findOneBy(['archiveKey' => $archiveKey]);
+        $issue = $entityManager->getRepository(Issue::class)->findOneBy(['issueDate' => new \DateTime($issueDate)]);
 
         return $this->render('archive/issue.html.twig', [
             'issue' => $issue
