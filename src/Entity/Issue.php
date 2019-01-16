@@ -37,7 +37,7 @@ class Issue
     private $volume;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
      */
     private $archiveKey;
 
@@ -87,7 +87,7 @@ class Issue
         return $this;
     }
 
-    public function getVolume(): Volume
+    public function getVolume(): ?Volume
     {
         return $this->volume;
     }

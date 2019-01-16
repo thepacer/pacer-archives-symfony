@@ -3,41 +3,42 @@
 {% block title %}Issue index{% endblock %}
 
 {% block body %}
-    <h1>Issue index</h1>
+    <h1>Issues</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>IssueDate</th>
-                <th>IssueNumber</th>
-                <th>PageCount</th>
-                <th>ArchiveKey</th>
-                <th>ArchiveNotes</th>
-                <th>actions</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Issue #</th>
+                <th>Volume #</th>
+                <th>Pages</th>
+                <th>Archive Key</th>
+                <th>Notes</th>
+                <th width="10"></th>
             </tr>
         </thead>
         <tbody>
         {% for issue in issues %}
             <tr>
-                <td>{{ issue.id }}</td>
+                <td><a href="{{ path('admin_issue_show', {'id': issue.id}) }}">{{ issue.id }}</a></td>
                 <td>{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}</td>
                 <td>{{ issue.issueNumber }}</td>
+                <td>{{ issue.volume.volumeNumber }}</td>
                 <td>{{ issue.pageCount }}</td>
                 <td>{{ issue.archiveKey }}</td>
                 <td>{{ issue.archiveNotes }}</td>
                 <td>
-                    <a href="{{ path('admin_issue_show', {'id': issue.id}) }}">show</a>
-                    <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}">edit</a>
+                    <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="99">No records found.</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_issue_new') }}">Create new</a>
+    <a href="{{ path('admin_issue_new') }}" class="btn btn-secondary"><i class="fas fa-plus"></i> Create Issue</a>
 {% endblock %}

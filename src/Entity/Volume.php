@@ -115,7 +115,7 @@ class Volume
         return $self;
     }
 
-    public function getCoverIssue(): Issue
+    public function getCoverIssue(): ?Issue
     {
         if ($this->coverIssue) {
             return $this->coverIssue;

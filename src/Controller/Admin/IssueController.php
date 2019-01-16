@@ -20,7 +20,7 @@ class IssueController extends AbstractController
      */
     public function index(IssueRepository $issueRepository): Response
     {
-        return $this->render('admin/issue/index.html.twig', ['issues' => $issueRepository->findAll()]);
+        return $this->render('admin/issue/index.html.twig', ['issues' => $issueRepository->findBy([], ['issueDate' => 'asc'])]);
     }
 
     /**
@@ -37,7 +37,7 @@ class IssueController extends AbstractController
             $entityManager->persist($issue);
             $entityManager->flush();
 
-            return $this->redirectToRoute('issue_index');
+            return $this->redirectToRoute('admin_issue_index');
         }
 
         return $this->render('admin/issue/new.html.twig', [

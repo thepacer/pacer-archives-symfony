@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}The Pacer Admin{% endblock %}</title>
+        <title>{% block title %}Archive Admin{% endblock %}</title>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
         <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
@@ -11,15 +11,15 @@
         {% endblock %}
     </head>
     <body>
-        <div class="container">
+        <div class="container mt-4">
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <div class="float-right">
             <a class="btn btn-secondary" href="{{ path('app_logout') }}">Logout</a>
           </div>
-          <h1><em>The Pacer</em> Admin</h1>
+          <h1>Archive Admin</h1>
           <ul class="list-inline">
             <li class="list-inline-item"><a href="{{ path('admin_volume_index') }}">Volumes</a></li>
-            <li class="list-inline-item"><a href="{{ path('admin_issue_index') }}">Archives</a></li>
+            <li class="list-inline-item"><a href="{{ path('admin_issue_index') }}">Issues</a></li>
           </ul>
           <hr />
           {% endif %}
