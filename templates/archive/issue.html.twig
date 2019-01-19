@@ -13,11 +13,28 @@
   </nav>
 
   <div class="float-right">
-    <a href="https://archive.org/details/{{ issue.archiveKey }}" target="_blank" class="btn btn-link">View on Archive.org</a>
+    <a href="https://archive.org/details/{{ issue.archiveKey }}" target="_blank" class="btn btn-link"><i class="fas fa-search-plus mr-1"></i>View on Archive.org</a>
   </div>
   <h2>{{ issue.issueDate | date('F j, Y') }}</h2>
   <div class="embed-responsive embed-responsive-16by9 mt-4 mb-4">
     <iframe class="embed-responsive-item" src="https://archive.org/embed/{{ issue.archiveKey }}" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
   </div>
+
+  {% if issue.articles.count > 0 %}
+  <h3>Articles</h3>
+  <hr />
+  <div class="row">
+    {% for article in issue.articles %}
+    <div class="col-lg-4">
+      <div class="mb-3">
+        <h5><a href="{{ path('article', { id: article.id, slug: article.slug } )}}">{{ article.headline }}</a></h5>
+        <p class="text-muted">{{ article.printSection }} / {{ article.authorByline }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
 </div>
+
 {% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ article.headline }} - {{ article.datePublished | date('F j, Y') }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container mt-3">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('archive') }}">Archives</a></li>
+      {% if article.issue %}
+      <li class="breadcrumb-item"><a href="{{ path('volume', {volumeNumber: article.issue.volume.volumeNumber} ) }}">Volume {{article.issue.volume.volumeNumber}}</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('issue', {issueDate: article.issue.issueDate | date('F j, Y')}) }}">{{ article.issue.issueDate | date('F j, Y') }}</a></li>
+      {% else %}
+      <li class="breadcrumb-item">{{ article.datePublished | date('F j, Y') }}</li>
+      {% endif %}
+      <li class="breadcrumb-item" aria-current="page">{{ article.headline }}<li>
+    </ol>
+  </nav>
+
+  <h2>{{ article.headline }}</h2>
+  {% if article.alternativeHeadline %}
+  <h3>{{ article.alternativeHeadline }}</h3>
+  {% endif %}
+  
+  <ul class="list-inline">
+    <li class="list-inline-item"><cite>{{ article.authorByline }}</cite></li>
+    <li class="list-inline-item"><cite>{{ article.contributorByline }}</cite></li>
+  </ul>
+    
+  <hr />
+  
+  {{ article.articleBody | markdown }}
+
+  <hr />
+
+  <ul class="list-inline text-muted small">
+    <li class="list-inline-item">Section: {{ article.printSection }}</li>
+    <li class="list-inline-item">Page: {{ article.printPage }}</li>
+    <li class="list-inline-item">Column: {{ article.printColumn }}</li>
+  </ul>
+
+</div>
+
+{% endblock %}

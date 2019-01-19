@@ -3,8 +3,12 @@
 #    controller: App\Controller\DefaultController::index
 
 admin_index:
-  path: /admin
-  controller: App\Controller\Admin\VolumeController::index
+    path: /admin
+    controller: App\Controller\Admin\VolumeController::index
 
 app_logout:
     path: /logout
+
+legacy_article:
+    path: /article/{slug}/{legacy_id}
+    controller: App\Controller\ArchiveController::legacyArticle

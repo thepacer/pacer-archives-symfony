@@ -7,11 +7,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use App\Entity\Volume;
 use App\Entity\Issue;
+use App\Entity\Article;
 
+/**
+ * @Route("/archive")
+ */
 class ArchiveController extends AbstractController
 {
     /**
-     * @Route("/archive", name="archive")
+     * @Route("/", name="archive")
      */
     public function index()
     {
@@ -24,7 +28,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/archive/volume-{volumeNumber}", name="volume")
+     * @Route("/volume-{volumeNumber}", name="volume")
      */
     public function volume(int $volumeNumber)
     {
@@ -37,7 +41,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/archive/issue-{issueDate}", name="issue")
+     * @Route("/issue-{issueDate}", name="issue")
      */
     public function issue(string $issueDate)
     {
@@ -47,5 +51,48 @@ class ArchiveController extends AbstractController
         return $this->render('archive/issue.html.twig', [
             'issue' => $issue
         ]);
+    }
+
+    /**
+     * @Route("/article/{slug}/{id}", name="article")
+     */
+    public function article(string $slug, int $id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $article = $entityManager->getRepository(Article::class)->find($id);
+
+        // Prevent slug manipulation
+        if ($slug != $article->getSlug()) {
+            return $this->redirectToRoute('article', [
+                'id' => $article->getId(),
+                'slug' => $article->getSlug()
+            ], 301);
+        }
+
+        return $this->render('archive/article.html.twig', [
+            'article' => $article
+        ]);
+    }
+
+    /**
+     * Handle PacerCMS (Legacy) Article Links
+     *
+     * @Route("/legacy-article/{legacy_id}", name="legacy_article")
+     */
+    public function legacyArticle(int $legacy_id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $legacy_id]);
+
+        // Handle not found
+        if ($article === null) {
+            return $this->createNotFoundException('Could not locate legacy article');
+        }
+
+        // Redirect to new route
+        return $this->redirectToRoute('article', [
+            'id' => $article->getId(),
+            'slug' => $article->getSlug()
+        ], 301);
     }
 }
