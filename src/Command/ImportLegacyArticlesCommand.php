@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 use App\Entity\Article;
+use App\Entity\Image;
 use App\Entity\Issue;
 use App\Entity\LegacyArticle;
 
@@ -20,7 +21,7 @@ class ImportLegacyArticlesCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setDescription('Imports LegacyArticle items into their normal tree')
+            ->setDescription('Imports LegacyArticle items into Article items')
         ;
     }
 
@@ -63,6 +64,22 @@ class ImportLegacyArticlesCommand extends ContainerAwareCommand
                 'issueDate' => new \DateTime($row->getIssueId())
             ]);
             $article->setIssue($issue);
+
+            // Handle attached Images
+            if ($row->getPhotoSrc()) {
+                if ($article->getImages() && $article->getImages()->first()) {
+                    $image = $article->getImages()->first();
+                    $image->setPath($row->getPhotoSrc());
+                    $image->setCredit((string) $row->getPhotoCredit());
+                    $image->setCaption((string) $row->getPhotoCaption());
+                } else {
+                    $image = new Image();
+                    $image->setPath($row->getPhotoSrc());
+                    $image->setCredit((string) $row->getPhotoCredit());
+                    $image->setCaption((string) $row->getPhotoCaption());
+                    $article->addImage($image);
+                }
+            }
 
             $entityManager->persist($article);
         }

@@ -274,6 +274,10 @@ class LegacyArticle
 
     public function getPhotoSrc(): ?string
     {
+        $this->photoSrc = trim($this->photoSrc);
+        $this->photoSrc = preg_replace('/\\\\/i', '/', $this->photoSrc);
+        $this->photoSrc = preg_replace('/^\/photo_upload/i', 'photo_upload', $this->photoSrc);
+        $this->photoSrc = preg_replace('/\/\//', '/', $this->photoSrc);
         return $this->photoSrc;
     }
 

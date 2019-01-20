@@ -23,11 +23,33 @@
   {% endif %}
   
   <ul class="list-inline">
+    <li class="list-inline-item">{{ article.datePublished | date('F j, Y') }}</li>
+    <li class="list-inline-item text-muted">|</li>
+    {% if article.authorByline %}
     <li class="list-inline-item"><cite>{{ article.authorByline }}</cite></li>
+    {% endif %}
+    {% if article.contributorByline %}
     <li class="list-inline-item"><cite>{{ article.contributorByline }}</cite></li>
+    {% endif %}
   </ul>
     
   <hr />
+  
+  {% if article.images.count > 0 %}
+  <div class="float-right w-25 ml-3">
+    {% for image in article.images %}
+    <div class="card mb-3">
+      <img src="{{ path('s3_proxy', {image_id: image.id}) }}" class="card-img-top" alt="Article Image" />
+      <div class="card-body">
+        {{ image.caption | markdown }}
+      </div>
+      <div class="card-body text-right text-muted">
+        <cite>{{ image.credit }}</cite>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
   
   {{ article.articleBody | markdown }}
 

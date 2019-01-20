@@ -5,7 +5,10 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
+use Aws\S3\S3Client;
+
 use App\Entity\Volume;
+use App\Entity\Image;
 use App\Entity\Issue;
 use App\Entity\Article;
 
@@ -72,6 +75,34 @@ class ArchiveController extends AbstractController
         return $this->render('archive/article.html.twig', [
             'article' => $article
         ]);
+    }
+
+    /**
+     * S3 Proxy
+     *
+     * @Route("/image/{image_id}", name="s3_proxy")
+     */
+    public function s3Proxy($image_id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $image = $entityManager->getRepository(Image::class)->find($image_id);
+
+        $s3Client = new S3Client([
+            'version' => 'latest',
+            'region' => 'us-east-1'
+        ]);
+
+        $cmd = $s3Client->getCommand('GetObject', [
+            'Bucket' => 'pacer-archives',
+            'Key'    => $image->getPath(),
+        ]);
+
+        $request = $s3Client->createPresignedRequest($cmd, '+20 minutes');
+
+        // Get the actual presigned-url
+        $presignedUrl = (string)$request->getUri();
+
+        return $this->redirect($presignedUrl);
     }
 
     /**
