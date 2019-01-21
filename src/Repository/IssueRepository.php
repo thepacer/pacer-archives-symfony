@@ -19,32 +19,25 @@ class IssueRepository extends ServiceEntityRepository
         parent::__construct($registry, Issue::class);
     }
 
-    // /**
-    //  * @return Issue[] Returns an array of Issue objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findPreviousIssue(Issue $issue)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('i.issueDate < :issueDate')
+            ->setParameter('issueDate', $issue->getIssueDate())
+            ->orderBy('i.issueDate', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Issue
+    public function findNextIssue(Issue $issue)
     {
         return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
+            ->where('i.issueDate > :issueDate')
+            ->setParameter('issueDate', $issue->getIssueDate())
+            ->orderBy('i.issueDate', 'ASC')
+            ->setMaxResults(1)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getOneOrNullResult();
     }
-    */
 }

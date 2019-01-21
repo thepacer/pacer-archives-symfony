@@ -9,7 +9,7 @@
       <li class="breadcrumb-item"><a href="{{ path('archive') }}">Archives</a></li>
       {% if article.issue %}
       <li class="breadcrumb-item"><a href="{{ path('volume', {volumeNumber: article.issue.volume.volumeNumber} ) }}">Volume {{article.issue.volume.volumeNumber}}</a></li>
-      <li class="breadcrumb-item"><a href="{{ path('issue', {issueDate: article.issue.issueDate | date('F j, Y')}) }}">{{ article.issue.issueDate | date('F j, Y') }}</a></li>
+      <li class="breadcrumb-item"><a href="{{ path('issue', {issueDate: article.issue.issueDate|date('Y-m-d') }) }}">{{ article.issue.issueDate | date('F j, Y') }}</a></li>
       {% else %}
       <li class="breadcrumb-item">{{ article.datePublished | date('F j, Y') }}</li>
       {% endif %}

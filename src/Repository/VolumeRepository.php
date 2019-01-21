@@ -31,4 +31,26 @@ class VolumeRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    public function findPreviousVolume(Volume $volume)
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.volumeStartDate < :volumeStartDate')
+            ->setParameter('volumeStartDate', $volume->getVolumeStartDate())
+            ->orderBy('v.volumeStartDate', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findNextVolume(Volume $volume)
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.volumeStartDate > :volumeStartDate')
+            ->setParameter('volumeStartDate', $volume->getVolumeEndDate())
+            ->orderBy('v.volumeStartDate', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

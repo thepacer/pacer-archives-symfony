@@ -31,38 +31,60 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/volume-{volumeNumber}", name="volume")
+     * @Route("/volume-{volumeNumber}", name="volume", requirements={"volumeNumber"="\d+"})
      */
     public function volume(int $volumeNumber)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $volume = $entityManager->getRepository(Volume::class)->findOneBy(['volumeNumber' => $volumeNumber]);
 
+        if (!$volume) {
+            return $this->createNotFoundException('No matching volume found.');
+        }
+
+        $previousVolume = $entityManager->getRepository(Volume::class)->findPreviousVolume($volume);
+        $nextVolume = $entityManager->getRepository(Volume::class)->findNextVolume($volume);
+
         return $this->render('archive/volume.html.twig', [
-            'volume' => $volume
+            'volume' => $volume,
+            'previousVolume' => $previousVolume,
+            'nextVolume' => $nextVolume
         ]);
     }
 
     /**
-     * @Route("/issue-{issueDate}", name="issue")
+     * @Route("/issue-{issueDate}", name="issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
      */
     public function issue(string $issueDate)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $issue = $entityManager->getRepository(Issue::class)->findOneBy(['issueDate' => new \DateTime($issueDate)]);
 
+        if (!$issue) {
+            return $this->createNotFoundException('No matching issue found.');
+        }
+
+        $previousIssue = $entityManager->getRepository(Issue::class)->findPreviousIssue($issue);
+        $nextIssue = $entityManager->getRepository(Issue::class)->findNextIssue($issue);
+
         return $this->render('archive/issue.html.twig', [
-            'issue' => $issue
+            'issue' => $issue,
+            'previousIssue' => $previousIssue,
+            'nextIssue' => $nextIssue
         ]);
     }
 
     /**
-     * @Route("/article/{slug}/{id}", name="article")
+     * @Route("/article/{slug}/{id}", name="article", requirements={"id"="\d+"})
      */
     public function article(string $slug, int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $article = $entityManager->getRepository(Article::class)->find($id);
+
+        if (!$article) {
+            return $this->createNotFoundException('No matching article found.');
+        }
 
         // Prevent slug manipulation
         if ($slug != $article->getSlug()) {
@@ -80,12 +102,16 @@ class ArchiveController extends AbstractController
     /**
      * S3 Proxy
      *
-     * @Route("/image/{image_id}", name="s3_proxy")
+     * @Route("/image/{id}", name="s3_proxy", requirements={"id"="\d+"})
      */
-    public function s3Proxy($image_id)
+    public function s3Proxy($id)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $image = $entityManager->getRepository(Image::class)->find($image_id);
+        $image = $entityManager->getRepository(Image::class)->find($id);
+
+        if (!$image) {
+            return $this->createNotFoundException('No matching image found.');
+        }
 
         $s3Client = new S3Client([
             'version' => 'latest',
@@ -108,15 +134,14 @@ class ArchiveController extends AbstractController
     /**
      * Handle PacerCMS (Legacy) Article Links
      *
-     * @Route("/legacy-article/{legacy_id}", name="legacy_article")
+     * @Route("/legacy-article/{id}", name="legacy_article", requirements={"id"="\d+"})
      */
-    public function legacyArticle(int $legacy_id)
+    public function legacyArticle(int $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $legacy_id]);
+        $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $id]);
 
-        // Handle not found
-        if ($article === null) {
+        if (!$article) {
             return $this->createNotFoundException('Could not locate legacy article');
         }
 
