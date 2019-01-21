@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Issue index{% endblock %}
+{% block title %}Admin - Issues{% endblock %}
 
 {% block body %}
     <h1>Issues</h1>
@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for issue in issues %}
+            {% for issue in issues %}
             <tr>
                 <td><a href="{{ path('admin_issue_show', {'id': issue.id}) }}">{{ issue.id }}</a></td>
                 <td>{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}</td>
@@ -32,11 +32,11 @@
                     <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
                 <td colspan="99">No records found.</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 

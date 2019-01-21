@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Volume index{% endblock %}
+{% block title %}Admin - Volumes{% endblock %}
 
 {% block body %}
     <h1>Volumes</h1>
@@ -18,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for volume in volumes %}
+            {% for volume in volumes %}
             <tr>
                 <td><a href="{{ path('admin_volume_show', {'id': volume.id}) }}">{{ volume.id }}</a></td>
                 <td>{{ volume.volumeNumber }}</td>
@@ -30,11 +30,11 @@
                     <a href="{{ path('admin_volume_edit', {'id': volume.id}) }}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
                 <td colspan="99">No records found.</td>
             </tr>
-        {% endfor %}
+            {% endfor %}
         </tbody>
     </table>
 

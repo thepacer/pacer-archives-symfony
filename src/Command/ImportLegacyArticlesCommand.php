@@ -16,6 +16,8 @@ use App\Entity\LegacyArticle;
 
 class ImportLegacyArticlesCommand extends ContainerAwareCommand
 {
+    const BATCH_SIZE = 1000;
+
     protected static $defaultName = 'app:import-legacy-articles';
 
     protected function configure()
@@ -32,7 +34,7 @@ class ImportLegacyArticlesCommand extends ContainerAwareCommand
 
         $io = new SymfonyStyle($input, $output);
 
-        foreach ($legacyArticles as $row) {
+        foreach ($legacyArticles as $i => $row) {
             $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $row->getArticleId()]);
             if ($article === null) {
                 $article = new Article();
@@ -82,8 +84,17 @@ class ImportLegacyArticlesCommand extends ContainerAwareCommand
             }
 
             $entityManager->persist($article);
+
+            // Batch inserts
+            if (($i%self::BATCH_SIZE) === 0) {
+                $entityManager->flush();
+                $entityManager->clear();
+            }
+
         }
 
+        // Catch the rest of them
         $entityManager->flush();
+        $entityManager->clear();
     }
 }

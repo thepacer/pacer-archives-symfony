@@ -1,0 +1,50 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Admin - Articles{% endblock %}
+
+{% block body %}
+    <div class="float-right">
+      {{ knp_pagination_render(pagination) }}
+    </div>
+    <h1>Articles</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Section</th>
+                <th>Headline</th>
+                <th>Author</th>
+                <th>Created</th>
+                <th>Published</th>
+                <th>Modified</th>
+                <th width="10"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for article in pagination %}
+            <tr>
+                <td><a href="{{ path('admin_article_show', {'id': article.id}) }}">{{ article.id }}</a></td>
+                <td>{{ article.printSection }}</td>
+                <td>{{ article.headline }}</td>
+                <td>{{ article.authorByline }}</td>
+                <td>{{ article.dateCreated ? article.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.datePublished ? article.datePublished|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ article.dateModified ? article.dateModified|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('admin_article_edit', {'id': article.id}) }}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="99">No records found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="float-right">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
+    <a href="{{ path('admin_article_new') }}" class="btn btn-secondary"><i class="fas fa-plus"></i> Create Article</a>
+{% endblock %}

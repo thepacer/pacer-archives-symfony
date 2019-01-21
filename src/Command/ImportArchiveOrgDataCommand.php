@@ -19,6 +19,7 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
+            ->addOption('create-volumes', null, InputOption::VALUE_NONE, 'Create volumes.')
             ->setDescription('Imports data from Archive.org')
         ;
     }
@@ -28,23 +29,25 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
         $io = new SymfonyStyle($input, $output);
         $entityManager = $this->getContainer()->get('doctrine')->getEntityManager();
 
-        // Create 100 Years of Volumes
-        $v = 0;
-        do {
-            $start_year = $v + 1928;
-            $end_year = $start_year + 1;
+        if ($input->getOption('create-volumes')) {
+            // Create 100 Years of Volumes
+            $v = 0;
+            do {
+                $start_year = $v + 1928;
+                $end_year = $start_year + 1;
 
-            $volume = new Volume();
-            $volume->setVolumeNumber($v + 1);
-            $volume->setVolumeStartDate(new \DateTime("$start_year-08-01"));
-            $volume->setVolumeEndDate(new \DateTime("$end_year-07-31"));
-            $volume->setNameplateKey('volette');
-            if ($volume->getVolumeNumber() >= 54) {
-                $volume->setNameplateKey('pacer');
-            }
-            $entityManager->persist($volume);
-            $v++;
-        } while ($v <= 99);
+                $volume = new Volume();
+                $volume->setVolumeNumber($v + 1);
+                $volume->setVolumeStartDate(new \DateTime("$start_year-08-01"));
+                $volume->setVolumeEndDate(new \DateTime("$end_year-07-31"));
+                $volume->setNameplateKey('volette');
+                if ($volume->getVolumeNumber() >= 54) {
+                    $volume->setNameplateKey('pacer');
+                }
+                $entityManager->persist($volume);
+                $v++;
+            } while ($v <= 99);
+        }
 
         $entityManager->flush();
 
@@ -73,9 +76,21 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
         $json = json_decode($result->getBody());
 
         foreach ($json->response->docs as $doc) {
-            $io->writeln($doc->title);
+            // Find existing volume
+            $volume = $entityManager->getRepository(Volume::class)->findOneBy([
+                'volumeNumber' => (int) $doc->volume
+            ]);
 
-            // Find or insert based on issue date
+            if (!$volume) {
+                $io->error(sprintf('No matching volume for %s', $doc->volume));
+                continue;
+            }
+
+            // Find existing match based on identifer
+            $issue = $entityManager->getRepository(Issue::class)->findOneBy([
+                'archiveKey' => $doc->identifier
+            ]);
+            // Find existing match based on issue date
             $issue = $entityManager->getRepository(Issue::class)->findOneBy([
                 'issueDate' => new \DateTime($doc->date)
             ]);
@@ -84,9 +99,7 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
             }
 
             $issue->setIssueNumber($doc->issue);
-            $issue->setVolume($entityManager->getRepository(Volume::class)->findOneBy([
-                'volumeNumber' => (int) $doc->volume
-            ]));
+            $issue->setVolume($volume);
             $issue->setIssueDate(new \DateTime($doc->date));
             $issue->setArchiveKey($doc->identifier);
             $issue->setPageCount(isset($doc->pages) ? $doc->pages : 0);
