@@ -13,14 +13,14 @@
     <body>
         <div class="container">
 
-          <header class="blog-header py-3">
+          <header class="site-header py-3">
           <div class="row align-items-center">
             <div class="col-md-4 text-center text-md-left pt-1">
               <a class="text-muted" href="{{ path('donate') }}">Support <em>The Pacer</em></a>
             </div>
             <div class="col-md-4 text-center">
               <div class="py-3 py-lg-0">
-                <a class="h3 blog-header-logo text-dark" href="{{ path('home') }}"><img src="{{ asset('assets/images/nameplates/nameplate-2004-0.png') }}" class="img-fluid" style="max-height:80px" /></a>
+                <a class="h3 site-header-logo text-dark" href="{{ path('home') }}"><img src="{{ asset('assets/images/nameplates/nameplate-2004-0.png') }}" class="img-fluid" style="max-height:80px" /></a>
               </div>
             </div>
             <div class="col-md-4 text-center text-md-right align-items-center">
@@ -28,20 +28,24 @@
             </div>
           </div>
           </header>
-          <!-- <div class="nav-scroller py-1 mb-2">
-            <nav class="nav d-flex justify-content-between">
-              <a class="p-2 text-muted" href="{{ path('home') }}">Home</a></a>
-              <a class="p-2 text-muted" href="{{ path('archive') }}">Archives</a></a>
-              <a class="p-2 text-muted" href="{{ path('missing_issues') }}">Missing Issues</a>
-              <a class="p-2 text-muted" href="{{ path('about') }}">About</a>
-            </nav>
-          </div> -->
         </div>
         {% block body %}{% endblock %}
-        <div class="container">
+        <footer class="container my-5">
           <hr />
-          <a href="{{ path('about') }}">About</a>
-        </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <nav class="nav d-flex justify-content-between">
+                <a class="px-2" href="{{ path('home') }}">Home</a></a>
+                <a class="px-2" href="{{ path('archive') }}">Archives</a></a>
+                <a class="px-2" href="{{ path('missing_issues') }}">Missing Issues</a>
+                <a class="px-2" href="{{ path('about') }}">About</a>
+              </nav>
+            </div>
+            <div class="col-lg-8 text-right">
+              &copy; {{ 'now'|date('Y') }} <em>The Pacer</em>
+            </div>
+          </div>
+        </footer>
         {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
         {% endblock %}

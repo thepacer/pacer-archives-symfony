@@ -32,34 +32,44 @@
     <li class="list-inline-item"><cite>{{ article.contributorByline }}</cite></li>
     {% endif %}
   </ul>
-    
-  <hr />
-  
-  {% if article.images.count > 0 %}
-  <div class="float-right w-25 ml-3">
-    {% for image in article.images %}
-    <div class="card mb-3">
-      <img src="{{ path('s3_proxy', {image_id: image.id}) }}" class="card-img-top" alt="Article Image" />
-      <div class="card-body">
-        {{ image.caption | markdown }}
-      </div>
-      <div class="card-body text-right text-muted">
-        <cite>{{ image.credit }}</cite>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-  {% endif %}
-  
-  {{ article.articleBody | markdown }}
-
-  <hr />
 
   <ul class="list-inline text-muted small">
-    <li class="list-inline-item">Section: {{ article.printSection }}</li>
-    <li class="list-inline-item">Page: {{ article.printPage }}</li>
-    <li class="list-inline-item">Column: {{ article.printColumn }}</li>
+    <li class="list-inline-item"><i class="far fa-newspaper"></i> <strong>Section:</strong> {{ article.printSection }}</li>
+    {% if article.printPage %}
+    <li class="list-inline-item"><strong>Page:</strong> {{ article.printPage }}</li>
+    {% endif %}
+    {% if article.printColumn %}
+    <li class="list-inline-item"><strong>Column:</strong> {{ article.printColumn }}</li>
+    {% endif %}
   </ul>
+
+  <hr />
+
+  <div class="row">
+    <div class="col-lg-7 text-justify">
+      {{ article.articleBody | markdown }}
+    </div>
+
+    {% if article.images.count > 0 %}
+    <div class="col-lg-5">
+      {% for image in article.images %}
+      <div class="card mb-3">
+        <img src="{{ path('s3_proxy', {image_id: image.id}) }}" class="card-img-top" alt="Article Image" />
+        {% if image.credit %}
+        <div class="card-body small text-right text-muted">
+          <cite>{{ image.credit }}</cite>
+        </div>
+        {% endif %}
+        {% if image.caption %}
+        <div class="card-body small">
+          {{ image.caption | markdown }}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
 
 </div>
 

@@ -22,6 +22,8 @@ class VolumeRepository extends ServiceEntityRepository
     public function findAllCurrentVolumes()
     {
         return $this->createQueryBuilder('v')
+            ->leftJoin('v.issues', 'i')
+            ->addSelect('i')
             ->andWhere('v.volumeEndDate < :today')
             ->setParameter('today', new \DateTime())
             ->orderBy('v.volumeStartDate', 'ASC')

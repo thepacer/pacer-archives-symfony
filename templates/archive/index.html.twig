@@ -68,11 +68,13 @@
       {% for volume in volumes %}
       <div class="col-lg-4">
         <div class="card mb-2">
-          <div class="card-body" style="min-height:14rem;">
+          <div class="card-body" style="min-height:15rem;">
             <div class="row">
+              {% if volume.issues.count > 0 %}
               <div class="col-5">
                 <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}" style="display:block;min-height:100px;"><img src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}" class="img-fluid"></a>
               </div>
+              {% endif %}
               <div class="col-7">
                 <p class="small">
                   {% if volume.nameplateKey == 'volette' %}<em>The Volette</em>{% endif %}
@@ -93,13 +95,5 @@
 
 {% block javascripts %}
 {{ parent() }}
-<script>
-$(document).ready(function () {
-  $('input[name="viewOptions"]').on('change', function(el) {
-    var view = $(el.target).data('target')
-    $('.collapse').collapse('hide')
-    $('#' + view).collapse('toggle')
-  })
-})
-</script>
+{{ encore_entry_script_tags('archive') }}
 {% endblock %}
