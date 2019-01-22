@@ -1,7 +1,4 @@
 {
-    "aptoma/twig-markdown": {
-        "version": "3.0.0"
-    },
     "aws/aws-sdk-php": {
         "version": "3.86.2"
     },

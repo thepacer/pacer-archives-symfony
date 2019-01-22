@@ -32,6 +32,7 @@ PLATFORMS
 
 DEPENDENCIES
   capistrano (~> 3.11)
+  capistrano-composer
   capistrano-symfony (~> 2.0.0.pre.alfa2)
 
 BUNDLED WITH
