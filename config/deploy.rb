@@ -4,6 +4,9 @@ lock "~> 3.11.0"
 set :application, "PacerArchives"
 set :repo_url, "git@github.com:stephenyeargin/pacer-archives-symfony.git"
 
+# Use package.lock.json
+set :npm_method, 'ci'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
