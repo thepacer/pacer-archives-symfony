@@ -16,6 +16,8 @@ GEM
       capistrano (~> 3.1)
       capistrano-composer (~> 0.0.3)
       capistrano-file-permissions (~> 1.0)
+    capistrano-webpack-encore (0.1.3)
+      capistrano (~> 3.0, >= 3.0.0)
     concurrent-ruby (1.1.4)
     i18n (1.4.0)
       concurrent-ruby (~> 1.0)
@@ -34,6 +36,7 @@ DEPENDENCIES
   capistrano (~> 3.11)
   capistrano-composer
   capistrano-symfony (~> 2.0.0.pre.alfa2)
+  capistrano-webpack-encore
 
 BUNDLED WITH
    1.16.2

@@ -4,14 +4,6 @@ lock "~> 3.11.0"
 set :application, "PacerArchives"
 set :repo_url, "git@github.com:stephenyeargin/pacer-archives-symfony.git"
 
-# Install composer if it does not exist
-SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
-
-namespace :deploy do
-  after :starting, 'composer:install_executable'
-end
-
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
