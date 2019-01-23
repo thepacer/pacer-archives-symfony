@@ -29,6 +29,7 @@ install_plugin Capistrano::SCM::Git
 require "capistrano/symfony"
 require "capistrano/composer"
 require "capistrano/npm"
+require 'capistrano/webpack_encore'
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob("lib/capistrano/tasks/*.rake").each { |r| import r }
