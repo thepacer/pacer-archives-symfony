@@ -126,8 +126,8 @@ class Volume
             return new Issue();
         }
 
-        // Default to grabbing the first cover issue
-        $issue = $this->issues->first();
+        // Grab a random issue from the volume
+        $issue = $this->issues->get(array_rand($this->issues->toArray()));
         return $issue;
     }
 
