@@ -18,15 +18,15 @@
   <h2>{{ issue.issueDate | date('F j, Y') }}</h2>
 
   <div class="row mb-4">
-    <div class="col-lg-4">
+    <div class="col-4">
       {% if previousIssue %}
       <a href="{{ path('issue', {issueDate: previousIssue.issueDate|date('Y-m-d')} ) }}" class="btn btn-link"><i class="fas fa-backward"></i> {{ previousIssue.issueDate|date('F j, Y') }}</a>
       {% endif %}
     </div>
-    <div class="col-lg-4 text-center">
+    <div class="col-4 text-center">
       <a class="btn btn-disabled"><strong>{{ issue.issueDate|date('F j, Y') }}</strong></a>
     </div>
-    <div class="col-lg-4 text-right">
+    <div class="col-4 text-right">
       {% if nextIssue %}
       <a href="{{ path('issue', {issueDate: nextIssue.issueDate|date('Y-m-d')} ) }}" class="btn btn-link">{{ nextIssue.issueDate|date('F j, Y') }} <i class="fas fa-forward"></i></a>
       {% endif %}

@@ -18,15 +18,15 @@
   <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y') }}-{{ volume.volumeEndDate | date('Y') }})</h2>
 
   <div class="row mb-4">
-    <div class="col-lg-4">
+    <div class="col-4">
       {% if previousVolume %}
       <a href="{{ path('volume', {volumeNumber: previousVolume.volumeNumber} ) }}" class="btn btn-link"><i class="fas fa-backward"></i> Volume {{ previousVolume.volumeNumber }}</a>
       {% endif %}
     </div>
-    <div class="col-lg-4 text-center">
+    <div class="col-4 text-center">
       <a class="btn btn-disabled"><strong>Volume {{ volume.volumeNumber }}</strong></a>
     </div>
-    <div class="col-lg-4 text-right">
+    <div class="col-4 text-right">
       {% if nextVolume %}
       <a href="{{ path('volume', {volumeNumber: nextVolume.volumeNumber} ) }}" class="btn btn-link">Volume {{ nextVolume.volumeNumber }} <i class="fas fa-forward"></i></a>
       {% endif %}
