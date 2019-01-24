@@ -81,7 +81,7 @@
                   {% if volume.nameplateKey == 'pacer' %}<em>The Pacer</em>{% endif %}
                 </p>
                 <h5 class="mt-2"><a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }})</a></h5>
-                <p>{{ pluralize(volume.issues.count, '1 issue', '%d issues', 'No issues') }}.</p>
+                <p>{{ pluralize(volume.issues.count, '1 issue', '%d issues', 'No issues available') }}.</p>
               </div>
             </div>
           </div>
