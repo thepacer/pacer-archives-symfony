@@ -54,7 +54,7 @@
     <div class="col-lg-5">
       {% for image in article.images %}
       <div class="card mb-3">
-        <img src="{{ path('s3_proxy', {image_id: image.id}) }}" class="card-img-top" alt="Article Image" />
+        <img src="{{ path('s3_proxy', {id: image.id}) }}" class="card-img-top" alt="Article Image" />
         {% if image.credit %}
         <div class="card-body small text-right text-muted">
           <cite>{{ image.credit }}</cite>
