@@ -1,40 +1,41 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Archive Admin{% endblock %}</title>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
-        <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
-        {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Archive Admin{% endblock %}</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% include '_includes/ga_tracking.html.twig' %}
-    </head>
-    <body>
-        <div class="container mt-4">
-          {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-          <div class="float-right">
-            <i class="fas fa-user"></i> {{ app.user.email }} | <a href="{{ path('app_logout') }}">Logout</a>
-          </div>
-          <h1>Archive Admin</h1>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="{{ path('admin_volume_index') }}">Volumes</a></li>
-            <li class="list-inline-item"><a href="{{ path('admin_issue_index') }}">Issues</a></li>
-            <li class="list-inline-item"><a href="{{ path('admin_article_index') }}">Articles</a></li>
-          </ul>
-          <hr />
-          {% endif %}
-        </div>
-        <div class="container">
-          {% block body %}{% endblock %}
-        </div>
-        <footer class="container my-5">
-          <a href="{{ path('home') }}">Return to Site</a>
-        </footer>
-        {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </body>
+    {% include '_includes/ga_tracking.html.twig' %}
+  </head>
+  <body>
+    <div class="container mt-4">
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+      <div class="float-right">
+        <i class="fas fa-user"></i> {{ app.user.email }} | <a href="{{ path('app_logout') }}">Logout</a>
+      </div>
+      <h1>Archive Admin</h1>
+      <ul class="list-inline">
+        <li class="list-inline-item"><a href="{{ path('admin_volume_index') }}">Volumes</a></li>
+        <li class="list-inline-item"><a href="{{ path('admin_issue_index') }}">Issues</a></li>
+        <li class="list-inline-item"><a href="{{ path('admin_article_index') }}">Articles</a></li>
+      </ul>
+      <hr />
+      {% endif %}
+    </div>
+    <div class="container">
+      {% block body %}{% endblock %}
+    </div>
+    <footer class="container my-5">
+      <a href="{{ path('home') }}">Return to Site</a>
+    </footer>
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+  </body>
 </html>
