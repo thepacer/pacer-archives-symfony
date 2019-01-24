@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Cache\Simple\FilesystemCache;
 
+use App\Entity\Issue;
 use GuzzleHttp\Client as Client;
 
 class PublicController extends AbstractController
@@ -26,10 +27,7 @@ class PublicController extends AbstractController
         }
 
         if (!$cache->has('public.archived_issue_count')) {
-            $qb = $entityManager->createQueryBuilder();
-            $qb->select('count(issue.id)');
-            $qb->from('App\Entity\Issue', 'issue');
-            $cache->set('public.archived_issue_count', $qb->getQuery()->getSingleScalarResult());
+            $cache->set('public.archived_issue_count', $entityManager->getRepository(Issue::class)->countIssues());
         }
 
         $feed = $cache->get('public.pacer_site_feed');
