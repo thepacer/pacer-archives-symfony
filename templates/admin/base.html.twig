@@ -9,12 +9,14 @@
         {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         {% endblock %}
+
+        {% include '_includes/ga_tracking.html.twig' %}
     </head>
     <body>
         <div class="container mt-4">
           {% if is_granted('IS_AUTHENTICATED_FULLY') %}
           <div class="float-right">
-            <a class="btn btn-secondary" href="{{ path('app_logout') }}">Logout</a>
+            <i class="fas fa-user"></i> {{ app.user.email }} | <a href="{{ path('app_logout') }}">Logout</a>
           </div>
           <h1>Archive Admin</h1>
           <ul class="list-inline">
@@ -28,6 +30,9 @@
         <div class="container">
           {% block body %}{% endblock %}
         </div>
+        <footer class="container my-5">
+          <a href="{{ path('home') }}">Return to Site</a>
+        </footer>
         {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
         {% endblock %}

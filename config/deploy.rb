@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.11.0"
 
-set :application, "PacerArchives"
+set :application, "ThePacerOrg"
 set :repo_url, "git@github.com:stephenyeargin/pacer-archives-symfony.git"
 
 # Use package.lock.json

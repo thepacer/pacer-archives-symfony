@@ -9,6 +9,8 @@
         {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
         {% endblock %}
+
+        {% include '_includes/ga_tracking.html.twig' %}
     </head>
     <body>
         <div class="container">
@@ -33,15 +35,15 @@
         <footer class="container my-5">
           <hr />
           <div class="row">
-            <div class="col-lg-4">
-              <nav class="nav d-flex justify-content-between">
-                <a class="px-2" href="{{ path('home') }}">Home</a></a>
-                <a class="px-2" href="{{ path('archive') }}">Archives</a></a>
-                <a class="px-2" href="{{ path('missing_issues') }}">Missing Issues</a>
-                <a class="px-2" href="{{ path('about') }}">About</a>
-              </nav>
+            <div class="col-lg-8">
+              <ul class="list-inline">
+                <li class="list-inline-item px-2"><a href="{{ path('home') }}">Home</a></a></li>
+                <li class="list-inline-item px-2"><a href="{{ path('archive') }}">Archives</a></a></li>
+                <li class="list-inline-item px-2"><a href="{{ path('missing_issues') }}">Missing Issues</a></li>
+                <li class="list-inline-item px-2"><a href="{{ path('about') }}">About</a></li>
+              </ul>
             </div>
-            <div class="col-lg-8 text-right">
+            <div class="col-lg-4 text-right">
               &copy; {{ 'now'|date('Y') }} <em>The Pacer</em>
             </div>
           </div>
