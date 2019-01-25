@@ -9,6 +9,6 @@ admin_index:
 app_logout:
     path: /logout
 
-legacy_article:
-    path: /article/{slug}/{legacy_id}
+legacy_article_redirect:
+    path: /article/{slug}/{id}
     controller: App\Controller\ArchiveController::legacyArticle
