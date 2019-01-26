@@ -7,15 +7,26 @@
       {{ knp_pagination_render(pagination) }}
     </div>
     <h1>Articles</h1>
-
+    {% for label, flashes in app.flashes %}
+        {% for flash in flashes %}
+            {% if ( label == 'success' ) %}
+                <div class="alert alert-success alert-dismissible fade show">
+                    {{ flash }}
+                </div>
+            {% elseif ( label == 'error' ) %}
+                <div class="alert alert-danger alert-dismissible fade show">
+                    {{ flash }}
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
     <table class="table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Section</th>
                 <th>Headline</th>
-                <th>Author</th>
-                <th>Created</th>
+                <th>Issue</th>
                 <th>Published</th>
                 <th>Modified</th>
                 <th width="10"></th>
@@ -26,11 +37,17 @@
             <tr>
                 <td><a href="{{ path('admin_article_show', {'id': article.id}) }}">{{ article.id }}</a></td>
                 <td>{{ article.printSection }}</td>
-                <td>{{ article.headline }}</td>
-                <td>{{ article.authorByline }}</td>
-                <td>{{ article.dateCreated ? article.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.datePublished ? article.datePublished|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ article.dateModified ? article.dateModified|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                  {{ article.headline }}<br />
+                  <cite class="small">{{ article.authorByline }}</cite>
+                </td>
+                {% if article.issue %}
+                <td><a href="{{ path('admin_issue_show', {id: article.issue.id} ) }}">{{ article.issue }}</a></td>
+                {% else %}
+                <td class="text-muted">No paired issue.</th>
+                {% endif %}
+                <td>{{ article.datePublished ? article.datePublished|date('n/j/Y') : '' }}</td>
+                <td>{{ article.dateModified ? article.dateModified|date('n/j/Y') : '' }}</td>
                 <td>
                     <a href="{{ path('admin_article_edit', {'id': article.id}) }}" class="btn btn-link"><i class="fas fa-pencil-alt"></i></a>
                 </td>

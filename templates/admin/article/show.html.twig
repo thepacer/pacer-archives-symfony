@@ -3,56 +3,55 @@
 {% block title %}Admin - Article{% endblock %}
 
 {% block body %}
+    <div class="float-right">
+      <a href="{{ path('admin_article_edit', {'id': article.id}) }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
+    </div>
     <h1>Article</h1>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <td>{{ article.id }}</td>
             </tr>
             <tr>
-                <th>PrintColumn</th>
-                <td>{{ article.printColumn }}</td>
-            </tr>
-            <tr>
-                <th>PrintPage</th>
-                <td>{{ article.printPage }}</td>
-            </tr>
-            <tr>
-                <th>PrintSection</th>
-                <td>{{ article.printSection }}</td>
-            </tr>
-            <tr>
-                <th>ArticleBody</th>
-                <td>{{ article.articleBody | markdown }}</td>
+                <th>Issue</th>
+                {% if article.issue %}
+                <td><a href="{{ path('admin_issue_show', {id: article.issue.id} ) }}">{{ article.issue }}</a></td>
+                {% else %}
+                <td class="text-muted">No paired issue.</th>
+                {% endif %}
             </tr>
             <tr>
                 <th>Headline</th>
                 <td>{{ article.headline }}</td>
             </tr>
             <tr>
-                <th>AlternativeHeadline</th>
+                <th>Subheadline / Alternative Headline</th>
                 <td>{{ article.alternativeHeadline }}</td>
             </tr>
             <tr>
-                <th>Author_byline</th>
+                <th>Author Byline</th>
                 <td>{{ article.authorByline }}</td>
             </tr>
             <tr>
-                <th>Contributor_byline</th>
+                <th>Co-author / Contributor Byline</th>
                 <td>{{ article.contributorByline }}</td>
             </tr>
             <tr>
-                <th>DateCreated</th>
+                <th>Body</th>
+                <td>{{ article.articleBody | markdown }}</td>
+            </tr>
+            <tr>
+                <th>Created</th>
                 <td>{{ article.dateCreated ? article.dateCreated|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>DatePublished</th>
+                <th>Published</th>
                 <td>{{ article.datePublished ? article.datePublished|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>DateModified</th>
+                <th>Modified</th>
                 <td>{{ article.dateModified ? article.dateModified|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
@@ -60,21 +59,27 @@
                 <td>{{ article.keywords }}</td>
             </tr>
             <tr>
-                <th>ModifiedBy</th>
-                <td>{{ article.modifiedBy }}</td>
-            </tr>
-            <tr>
-                <th>LegacyId</th>
+                <th>Legacy CMS ID</th>
                 <td>{{ article.legacyId }}</td>
             </tr>
             <tr>
                 <th>Slug</th>
                 <td>{{ article.slug }}</td>
             </tr>
+            <tr>
+                <th>Print Section</th>
+                <td>{{ article.printSection }}</td>
+            </tr>
+            <tr>
+                <th>Print Page(s)</th>
+                <td>{{ article.printPage }}</td>
+            </tr>
+            <tr>
+                <th>Print Column</th>
+                <td>{{ article.printColumn }}</td>
+            </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('admin_article_edit', {'id': article.id}) }}">edit</a>
 
     {{ include('admin/article/_delete_form.html.twig') }}
 {% endblock %}

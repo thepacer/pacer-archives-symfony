@@ -10,8 +10,7 @@
             <tr>
                 <th>ID</th>
                 <th>Volume #</th>
-                <th>Start Date</th>
-                <th>End Date</th>
+                <th>Year</th>
                 <th>Nameplate Key</th>
                 <th>Issues</th>
                 <th width="10"></th>
@@ -22,8 +21,7 @@
             <tr>
                 <td><a href="{{ path('admin_volume_show', {'id': volume.id}) }}">{{ volume.id }}</a></td>
                 <td>{{ volume.volumeNumber }}</td>
-                <td>{{ volume.volumeStartDate ? volume.volumeStartDate|date('Y-m-d') : '' }}</td>
-                <td>{{ volume.volumeEndDate ? volume.volumeEndDate|date('Y-m-d') : '' }}</td>
+                <td>{{ volume.volumeStartDate ? volume.volumeStartDate|date('Y') : '' }}-{{ volume.volumeEndDate ? volume.volumeEndDate|date('Y') : '' }}</td>
                 <td>{{ volume.nameplateKey }}</td>
                 <td>{{ volume.issues.count }}</td>
                 <td>

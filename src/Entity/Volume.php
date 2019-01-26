@@ -143,8 +143,15 @@ class Volume
         return $this;
     }
 
+    /* model methods */
+
     public function __toString()
     {
-        return sprintf('Volume %s', $this->volumeNumber);
+        return sprintf(
+            'Volume %s (%d-%d)',
+            $this->volumeNumber,
+            $this->volumeStartDate->format('Y'),
+            $this->volumeEndDate->format('Y')
+        );
     }
 }

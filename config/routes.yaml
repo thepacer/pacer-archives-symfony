@@ -4,7 +4,7 @@
 
 admin_index:
     path: /admin
-    controller: App\Controller\Admin\VolumeController::index
+    controller: App\Controller\Admin\IssueController::index
 
 app_logout:
     path: /logout

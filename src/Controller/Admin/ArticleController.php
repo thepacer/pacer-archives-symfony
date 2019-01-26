@@ -28,7 +28,7 @@ class ArticleController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1) /*page number*/,
-            25 /*limit per page*/
+            50 /*limit per page*/
         );
 
         return $this->render('admin/article/index.html.twig', ['pagination' => $pagination]);
@@ -48,6 +48,7 @@ class ArticleController extends Controller
             $entityManager->persist($article);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Article created!');
             return $this->redirectToRoute('admin_article_index');
         }
 
@@ -76,6 +77,7 @@ class ArticleController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Article updated!');
             return $this->redirectToRoute('admin_article_index', ['id' => $article->getId()]);
         }
 
@@ -96,6 +98,7 @@ class ArticleController extends Controller
             $entityManager->flush();
         }
 
+        $this->addFlash('success', 'Article deleted!');
         return $this->redirectToRoute('admin_article_index');
     }
 }

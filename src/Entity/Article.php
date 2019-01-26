@@ -40,12 +40,12 @@ class Article
     private $articleBody;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255)
      */
     private $headline;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $alternativeHeadline;
 
@@ -61,6 +61,7 @@ class Article
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
      */
     private $dateCreated;
 
@@ -71,6 +72,7 @@ class Article
 
     /**
      * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
      */
     private $dateModified;
 

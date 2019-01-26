@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Issue;
 use App\Form\IssueType;
 use App\Repository\IssueRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,14 +13,25 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/admin/issue")
  */
-class IssueController extends AbstractController
+class IssueController extends Controller
 {
     /**
      * @Route("/", name="admin_issue_index", methods={"GET"})
      */
-    public function index(IssueRepository $issueRepository): Response
+    public function index(IssueRepository $issueRepository, Request $request): Response
     {
-        return $this->render('admin/issue/index.html.twig', ['issues' => $issueRepository->findBy([], ['issueDate' => 'asc'])]);
+        $entityManager = $this->getDoctrine()->getManager();
+        $dql   = "SELECT i FROM App:Issue i";
+        $query = $entityManager->createQuery($dql);
+
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1) /*page number*/,
+            50 /*limit per page*/
+        );
+
+        return $this->render('admin/issue/index.html.twig', ['pagination' => $pagination]);
     }
 
     /**

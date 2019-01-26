@@ -3,6 +3,9 @@
 {% block title %}Admin - Issue{% endblock %}
 
 {% block body %}
+    <div class="float-right">
+      <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
+    </div>
     <h1>Issue</h1>
 
     <table class="table">
@@ -38,7 +41,12 @@
         </tbody>
     </table>
 
-    <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
+    <h4>Articles</h4>
+    <ul>
+      {% for article in issue.articles %}
+      <li><a href="{{ path('admin_article_show', { id: article.id } )}}">{{ article.headline }}</a></li>
+      {% endfor %}
+    </ul>
 
     {{ include('admin/issue/_delete_form.html.twig') }}
 {% endblock %}

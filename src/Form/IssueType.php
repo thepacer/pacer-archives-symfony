@@ -14,14 +14,22 @@ class IssueType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('volume')
             ->add('issueDate', DateType::class, [
                 'years' => range(1928, date('Y') + 5)
             ])
-            ->add('issueNumber')
-            ->add('pageCount')
-            ->add('archiveKey')
-            ->add('archiveNotes')
-            ->add('volume')
+            ->add('issueNumber', null, [
+                'label' => 'Displayed Issue Number'
+            ])
+            ->add('pageCount', null, [
+                'label' => 'Page Count'
+            ])
+            ->add('archiveKey', null, [
+                'label' => 'Archive.org Identifier'
+            ])
+            ->add('archiveNotes', null, [
+                'label' => 'Archive Notes'
+            ])
         ;
     }
 
