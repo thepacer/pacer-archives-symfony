@@ -7,6 +7,9 @@ set :repo_url, "git@github.com:stephenyeargin/pacer-archives-symfony.git"
 # Use package.lock.json
 set :npm_method, 'ci'
 
+# Link local configuration
+set :linked_files, [".env.local"]
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
