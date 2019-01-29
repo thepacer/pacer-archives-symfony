@@ -115,10 +115,14 @@ class ArchiveController extends AbstractController
             return $this->createNotFoundException('No matching image found.');
         }
 
-        $object = $s3Client->getObject([
-            'Bucket' => 'pacer-archives',
-            'Key'    => $image->getPath()
-        ]);
+        try {
+            $object = $s3Client->getObject([
+                'Bucket' => 'pacer-archives',
+                'Key'    => $image->getPath()
+            ]);
+        } catch (\Aws\S3\Exception\S3Exception $e) {
+            $this->createNotFoundException('Unable to load image.');
+        }
 
         $disposition = HeaderUtils::makeDisposition(
             HeaderUtils::DISPOSITION_INLINE,
