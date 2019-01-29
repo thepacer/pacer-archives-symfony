@@ -121,7 +121,7 @@ class ArchiveController extends AbstractController
                 'Key'    => $image->getPath()
             ]);
         } catch (\Aws\S3\Exception\S3Exception $e) {
-            $this->createNotFoundException('Unable to load image.');
+            return $this->createNotFoundException('Unable to load image.');
         }
 
         $disposition = HeaderUtils::makeDisposition(
