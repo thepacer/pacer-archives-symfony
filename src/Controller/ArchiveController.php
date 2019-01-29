@@ -104,7 +104,7 @@ class ArchiveController extends AbstractController
      *
      * @Route("/image/{id}", name="s3_proxy", requirements={"id"="\d+"})
      */
-    public function s3Proxy($id)
+    public function s3Proxy(S3Client $s3Client, $id)
     {
         $entityManager = $this->getDoctrine()->getManager();
         $image = $entityManager->getRepository(Image::class)->find($id);
@@ -113,14 +113,9 @@ class ArchiveController extends AbstractController
             return $this->createNotFoundException('No matching image found.');
         }
 
-        $s3Client = new S3Client([
-            'version' => 'latest',
-            'region' => 'us-east-1'
-        ]);
-
         $cmd = $s3Client->getCommand('GetObject', [
             'Bucket' => 'pacer-archives',
-            'Key'    => $image->getPath(),
+            'Key'    => $image->getPath()
         ]);
 
         $request = $s3Client->createPresignedRequest($cmd, '+20 minutes');
