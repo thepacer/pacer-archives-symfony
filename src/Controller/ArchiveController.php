@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 use Aws\S3\S3Client;
@@ -113,17 +115,21 @@ class ArchiveController extends AbstractController
             return $this->createNotFoundException('No matching image found.');
         }
 
-        $cmd = $s3Client->getCommand('GetObject', [
+        $object = $s3Client->getObject([
             'Bucket' => 'pacer-archives',
             'Key'    => $image->getPath()
         ]);
 
-        $request = $s3Client->createPresignedRequest($cmd, '+20 minutes');
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_INLINE,
+            basename($image->getPath())
+        );
 
-        // Get the actual presigned-url
-        $presignedUrl = (string)$request->getUri();
+        $response = new Response($object['Body']);
+        $response->headers->set('Content-Type', $object['ContentType']);
+        $response->headers->set('Content-Disposition', $disposition);
 
-        return $this->redirect($presignedUrl);
+        return $response;
     }
 
     /**
