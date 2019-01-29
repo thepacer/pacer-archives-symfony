@@ -332,4 +332,12 @@ class Article
 
         return $this;
     }
+
+    /* Model Methods */
+
+    public function __toString()
+    {
+        return $this->datePublished->format('n/j/Y') . ': ' . $this->headline;
+    }
+
 }

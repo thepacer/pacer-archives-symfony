@@ -18,7 +18,7 @@ class IssueController extends Controller
     /**
      * @Route("/", name="admin_issue_index", methods={"GET"})
      */
-    public function index(IssueRepository $issueRepository, Request $request): Response
+    public function index(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $dql   = "SELECT i FROM App:Issue i";

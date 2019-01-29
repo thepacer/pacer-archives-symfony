@@ -25,11 +25,25 @@
         <li class="list-inline-item"><a href="{{ path('admin_volume_index') }}">Volumes</a></li>
         <li class="list-inline-item text-muted">|</li>
         <li class="list-inline-item"><a href="{{ path('admin_article_index') }}">Articles</a></li>
+        <li class="list-inline-item"><a href="{{ path('admin_image_index') }}">Images</a></li>
       </ul>
       <hr />
       {% endif %}
     </div>
     <div class="container">
+      {% for label, flashes in app.flashes %}
+          {% for flash in flashes %}
+              {% if ( label == 'success' ) %}
+                  <div class="alert alert-success alert-dismissible fade show">
+                      {{ flash }}
+                  </div>
+              {% elseif ( label == 'error' ) %}
+                  <div class="alert alert-danger alert-dismissible fade show">
+                      {{ flash }}
+                  </div>
+              {% endif %}
+          {% endfor %}
+      {% endfor %}
       {% block body %}{% endblock %}
     </div>
     <footer class="container my-5 text-center">

@@ -18,7 +18,7 @@ class ArticleController extends Controller
     /**
      * @Route("/", name="admin_article_index", methods={"GET"})
      */
-    public function index(ArticleRepository $articleRepository, Request $request): Response
+    public function index(Request $request): Response
     {
         $entityManager = $this->getDoctrine()->getManager();
         $dql   = "SELECT a FROM App:Article a";
