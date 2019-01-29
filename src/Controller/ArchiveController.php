@@ -41,7 +41,7 @@ class ArchiveController extends AbstractController
         $volume = $entityManager->getRepository(Volume::class)->findOneBy(['volumeNumber' => $volumeNumber]);
 
         if (!$volume) {
-            return $this->createNotFoundException('No matching volume found.');
+            throw $this->createNotFoundException('No matching volume found.');
         }
 
         $previousVolume = $entityManager->getRepository(Volume::class)->findPreviousVolume($volume);
@@ -63,7 +63,7 @@ class ArchiveController extends AbstractController
         $issue = $entityManager->getRepository(Issue::class)->findOneBy(['issueDate' => new \DateTime($issueDate)]);
 
         if (!$issue) {
-            return $this->createNotFoundException('No matching issue found.');
+            throw $this->createNotFoundException('No matching issue found.');
         }
 
         $previousIssue = $entityManager->getRepository(Issue::class)->findPreviousIssue($issue);
@@ -85,7 +85,7 @@ class ArchiveController extends AbstractController
         $article = $entityManager->getRepository(Article::class)->find($id);
 
         if (!$article) {
-            return $this->createNotFoundException('No matching article found.');
+            throw $this->createNotFoundException('No matching article found.');
         }
 
         // Prevent slug manipulation
@@ -112,7 +112,7 @@ class ArchiveController extends AbstractController
         $image = $entityManager->getRepository(Image::class)->find($id);
 
         if (!$image) {
-            return $this->createNotFoundException('No matching image found.');
+            throw $this->createNotFoundException('No matching image found.');
         }
 
         try {
@@ -147,7 +147,7 @@ class ArchiveController extends AbstractController
         $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $id]);
 
         if (!$article) {
-            return $this->createNotFoundException('Could not locate legacy article');
+            throw $this->createNotFoundException('Could not locate legacy article');
         }
 
         // Redirect to new route
