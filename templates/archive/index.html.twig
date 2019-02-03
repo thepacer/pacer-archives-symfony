@@ -3,8 +3,21 @@
 {% block title %}Archives - {{ parent() }}{% endblock %}
 
 {% block body %}
-
 <div class="container mt-3">
+
+  <h2>Archives</h2>
+  <p class="lead">The newspaper is published periodically throughout the academic year, which begins in August. Volumes numbers correspond to academic years and are counted from 1928 to the present day.</p>
+
+  <h3>By Calendar Year</h3>
+  <div class="row mb-5">
+    <div class="col-12">
+      {% set endYear = date().format('Y') %}
+      {% for year in range(1928,endYear) %}
+      <div class="float-left text-center mx-1 my-1"><a href="{{ path('year', {year: year}) }}" class="btn btn-light btn-lg" style="width:125px">{{ year }}</a></div>
+      {% endfor %}
+    </div>
+  </div>
+
   <div class="float-right">
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
       <label class="btn btn-light active">
@@ -15,7 +28,7 @@
       </label>
     </div>
   </div>
-  <h2>Archives</h2>
+  <h3>By Academic Year</h3>
 
   <!-- Table View -->
   <div id="tableViewContent" class="collapse show">

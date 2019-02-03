@@ -48,4 +48,16 @@ class IssueRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function getIssuesByYear(int $year)
+    {
+        return $this->createQueryBuilder('i')
+            ->where('i.issueDate >= :start')
+            ->andWhere('i.issueDate <= :end')
+            ->setParameter('start', date('Y-m-d', strtotime("january 1 $year")))
+            ->setParameter('end', date('Y-m-d', strtotime("december 31 $year")))
+            ->orderBy('i.issueDate', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }

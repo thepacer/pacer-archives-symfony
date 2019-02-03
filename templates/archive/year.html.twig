@@ -1,49 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate|date('Y')}}-{{ volume.volumeEndDate|date('Y') }}) - {{ parent() }}{% endblock %}
+{% block title %}Issues Published in {{ year }} - {{ parent() }}{% endblock %}
 
 {% block body %}
 <div class="container mt-3">
   <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><a href="{{ path('archive') }}">Archives</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Volume {{volume.volumeNumber}}</li>
+      <li class="breadcrumb-item active" aria-current="page">Year {{ year }}</li>
     </ol>
   </nav>
 
   <div class="float-right">
-    <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-link">Browse on Archive.org</a>
+    <a href="https://archive.org/details/thepacer?and[]=year:{{ year }}&sort=date" target="_blank" class="btn btn-link">Browse on Archive.org</a>
   </div>
   
-  <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate|date('Y') }}-{{ volume.volumeEndDate|date('Y') }})</h2>
+  <h2 class="mb-4">Issues Published in {{ year }}</h2>
 
   <div class="row mb-4">
     <div class="col-4">
-      {% if previousVolume %}
-      <a href="{{ path('volume', {volumeNumber: previousVolume.volumeNumber} ) }}" class="btn btn-link"><i class="fas fa-backward"></i> Volume {{ previousVolume.volumeNumber }}</a>
+      {% if previousYear %}
+      <a href="{{ path('year', {year: previousYear} ) }}" class="btn btn-link"><i class="fas fa-backward"></i> {{ previousYear }}</a>
       {% endif %}
     </div>
     <div class="col-4 text-center">
-      <strong>
-      {% if volume.nameplateKey == 'volette' %}<em>The Volette</em>{% endif %}
-      {% if volume.nameplateKey == 'pacer' %}<em>The Pacer</em>{% endif %}
-      - Volume {{ volume.volumeNumber }}</strong>
+      <strong>{{ year }}</strong>
     </div>
     <div class="col-4 text-right">
-      {% if nextVolume %}
-      <a href="{{ path('volume', {volumeNumber: nextVolume.volumeNumber} ) }}" class="btn btn-link">Volume {{ nextVolume.volumeNumber }} <i class="fas fa-forward"></i></a>
+      {% if nextYear %}
+      <a href="{{ path('year', {year: nextYear} ) }}" class="btn btn-link">{{ nextYear }} <i class="fas fa-forward"></i></a>
       {% endif %}
     </div>
   </div>
 
-  {% if volume.issues.count > 0 %}
+  {% if issues|length > 0 %}
   <div class="calendar-container mb-4">
     <div class="row">
-      <div class="col-lg-3"><div class="text-center calendar calendar-august"></div></div>
-      <div class="col-lg-3"><div class="text-center calendar calendar-september"></div></div>
-      <div class="col-lg-3"><div class="text-center calendar calendar-october"></div></div>
-      <div class="col-lg-3"><div class="text-center calendar calendar-november"></div></div>
-      <div class="col-lg-3"><div class="text-center calendar calendar-december"></div></div>
       <div class="col-lg-3"><div class="text-center calendar calendar-january"></div></div>
       <div class="col-lg-3"><div class="text-center calendar calendar-february"></div></div>
       <div class="col-lg-3"><div class="text-center calendar calendar-march"></div></div>
@@ -51,11 +43,16 @@
       <div class="col-lg-3"><div class="text-center calendar calendar-may"></div></div>
       <div class="col-lg-3"><div class="text-center calendar calendar-june"></div></div>
       <div class="col-lg-3"><div class="text-center calendar calendar-july"></div></div>
+      <div class="col-lg-3"><div class="text-center calendar calendar-august"></div></div>
+      <div class="col-lg-3"><div class="text-center calendar calendar-september"></div></div>
+      <div class="col-lg-3"><div class="text-center calendar calendar-october"></div></div>
+      <div class="col-lg-3"><div class="text-center calendar calendar-november"></div></div>
+      <div class="col-lg-3"><div class="text-center calendar calendar-december"></div></div>
     </div>
   </div>
 
   <div class="row">
-    {% for issue in volume.issues %}
+    {% for issue in issues %}
     <div class="col-lg-2">
       <div class="card mb-2">
         <div class="card-img-top text-center">
@@ -78,7 +75,7 @@
   <div class="col-lg-12">
     <div class="card">
       <div class="card-body">
-        <h3>There are no issues archived yet for this volume.</h3>
+        <h3>There are no issues archived yet for this year.</h3>
         {% include '_includes/no-issues-message.html.twig' %}
       </div>
     </div>
@@ -86,21 +83,13 @@
   {% endif %}
 </div>
 
-{% if is_granted('ROLE_ADMIN') %}
-<div class="fixed-top">
-  <div class="float-right p-1">
-    <a href="{{ path('admin_volume_edit', {id: volume.id}) }}" class="btn btn-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
-  </div>
-</div>
-{% endif %}
-
 {% endblock %}
 
 {% block javascripts %}
 {{ parent() }}
 <script>
   var volumeIssues = []
-  {% for issue in volume.issues %}
+  {% for issue in issues %}
   volumeIssues.push({
     date: '{{ issue.issueDate.format('Y-m-d') }}',
     title: 'Issue',
@@ -137,18 +126,14 @@
         "</tbody>" +
     "</table>";
 
-    var academicMonths = [7,8,9,10,11,0,1,2,3,4,5,6]
+    var academicMonths = [0,1,2,3,4,5,6,7,8,9,10,11]
     $('.calendar').each(function (i, e) {
       var cal = $(e).clndr({
         template: clndrTemplate,
         events: volumeIssues,
         showAdjacentMonths: false
       });
-      if (academicMonths[i]<7) {
-        cal.setYear({{ volume.volumeEndDate.format('Y') }});
-      } else {
-        cal.setYear({{ volume.volumeStartDate.format('Y') }})
-      }
+      cal.setYear({{ year }});
       cal.setMonth(academicMonths[i]);
       if (cal.eventsThisInterval.length == 0) {
         $(cal.calendarContainer).css({opacity: 0.25})

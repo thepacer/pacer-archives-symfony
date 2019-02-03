@@ -19,6 +19,9 @@ use App\Entity\Article;
  */
 class ArchiveController extends AbstractController
 {
+
+    const START_YEAR = 1928;
+
     /**
      * @Route("/", name="archive")
      */
@@ -51,6 +54,26 @@ class ArchiveController extends AbstractController
             'volume' => $volume,
             'previousVolume' => $previousVolume,
             'nextVolume' => $nextVolume
+        ]);
+    }
+
+    /**
+     * @Route("/year-{year}", name="year", requirements={"year"="[1|2][0|9][0-9][0-9]"})
+     */
+    public function year(int $year)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $issues = $entityManager->getRepository(Issue::class)->getIssuesByYear($year);
+
+        if ($year < self::START_YEAR || $year > (date('Y'))) {
+            return $this->createNotFoundException('No matching year found.');
+        }
+
+        return $this->render('archive/year.html.twig', [
+            'issues' => $issues,
+            'year' => $year,
+            'previousYear' => ($year > self::START_YEAR) ? $year - 1 : false,
+            'nextYear' => ($year < date('Y')) ? $year + 1 : false
         ]);
     }
 
