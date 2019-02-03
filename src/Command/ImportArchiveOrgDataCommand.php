@@ -60,7 +60,8 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
                 'title',
                 'volume',
                 'issue',
-                'pages'
+                'pages',
+                'notes'
             ],
             'sort' => [
                 'date asc'
@@ -91,9 +92,11 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
                 'archiveKey' => $doc->identifier
             ]);
             // Find existing match based on issue date
-            $issue = $entityManager->getRepository(Issue::class)->findOneBy([
-                'issueDate' => new \DateTime($doc->date)
-            ]);
+            if ($issue === null) {
+                $issue = $entityManager->getRepository(Issue::class)->findOneBy([
+                    'issueDate' => new \DateTime($doc->date)
+                ]);
+            }
             if ($issue === null) {
                 $issue = new Issue();
             }
@@ -103,6 +106,7 @@ class ImportArchiveOrgDataCommand extends ContainerAwareCommand
             $issue->setIssueDate(new \DateTime($doc->date));
             $issue->setArchiveKey($doc->identifier);
             $issue->setPageCount(isset($doc->pages) ? $doc->pages : 0);
+            $issue->setArchiveNotes(isset($doc->notes) ? $doc->notes : '');
             $entityManager->persist($issue);
         }
 

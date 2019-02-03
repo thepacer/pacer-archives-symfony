@@ -4,6 +4,8 @@
 
 {% block body %}
     <h1>Edit Issue</h1>
-
+    <div class="alert alert-info">
+      <p class="m-0"><strong>Note:</strong> Values will be overwritten the next time <code>app:import-archive-org-data</code> is run. Edit archive record instead.</p>
+    </div>
     {{ include('admin/issue/_form.html.twig', {'button_label': 'Update'}) }}
 {% endblock %}

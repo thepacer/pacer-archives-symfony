@@ -42,14 +42,20 @@
     <iframe class="embed-responsive-item" src="https://archive.org/embed/{{ issue.archiveKey }}" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen></iframe>
   </div>
 
+  {% if issue.archiveNotes %}
+  <h3>Notes</h3>
+  
+  {{ issue.archiveNotes|markdown }}
+  {% endif %}
+
   <h3>Other Issues in This Volume</h3>
 
   <div class="issue-browser mb-5">
     <div class="row text-center">
       {% for volumeIssue in issue.volume.issues %}
-      <div class="col-1">
-        <div class="p-1 {% if issue == volumeIssue %}bg-info{% endif %}">
-          <a href="{{ path('issue', { issueDate: volumeIssue.issueDate.format('Y-m-d')} ) }}" data-toggle="tooltip" title="{{ volumeIssue.issueDate.format('F j, Y') }}"><img class="img-fluid" src="https://archive.org/services/img/{{ volumeIssue.archiveKey }}" alt="{{ volumeIssue.archiveKey }}"></a>
+      <div class="float-left">
+        <div class="p-2 {% if issue == volumeIssue %}bg-info{% endif %}">
+          <a href="{{ path('issue', { issueDate: volumeIssue.issueDate.format('Y-m-d')} ) }}" data-toggle="tooltip" title="{{ volumeIssue.issueDate.format('F j, Y') }}"><img width="100" src="https://archive.org/services/img/{{ volumeIssue.archiveKey }}" alt="{{ volumeIssue.archiveKey }}"></a>
         </div>
       </div>
       {% endfor %}
@@ -70,13 +76,14 @@
     {% endfor %}
   </div>
   {% endif %}
-
-  {% if is_granted('ROLE_ADMIN') %}
-  <div class="">
-    <strong>Admin:</strong> <a href="{{ path('admin_issue_edit', {id: issue.id}) }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
-  </div>
-  {% endif %}
-
 </div>
+
+{% if is_granted('ROLE_ADMIN') %}
+<div class="fixed-top">
+  <div class="float-right p-1">
+    <a href="{{ path('admin_issue_edit', {id: issue.id}) }}" class="btn btn-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+  </div>
+</div>
+{% endif %}
 
 {% endblock %}
