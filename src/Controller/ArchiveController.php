@@ -73,7 +73,7 @@ class ArchiveController extends AbstractController
             'issues' => $issues,
             'year' => $year,
             'previousYear' => ($year > self::START_YEAR) ? $year - 1 : false,
-            'nextYear' => ($year < date('Y')) ? $year + 1 : false
+            'nextYear' => ($year < (int) date('Y')) ? $year + 1 : false
         ]);
     }
 

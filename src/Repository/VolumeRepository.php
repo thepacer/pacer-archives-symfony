@@ -24,7 +24,7 @@ class VolumeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('v')
             ->leftJoin('v.issues', 'i')
             ->addSelect('i')
-            ->andWhere('v.volumeEndDate < :today')
+            ->andWhere('v.volumeStartDate < :today')
             ->setParameter('today', new \DateTime())
             ->orderBy('v.volumeStartDate', 'ASC')
             ->getQuery()
@@ -47,7 +47,9 @@ class VolumeRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('v')
             ->where('v.volumeStartDate > :volumeStartDate')
+            ->andWhere('v.volumeStartDate < :today')
             ->setParameter('volumeStartDate', $volume->getVolumeEndDate())
+            ->setParameter('today', new \DateTime())
             ->orderBy('v.volumeStartDate', 'ASC')
             ->setMaxResults(1)
             ->getQuery()
