@@ -81,5 +81,14 @@
         </tbody>
     </table>
 
+    {% if article.images %}
+    <h4>Images</h4>
+    <ul>
+      {% for image in article.images %}
+      <li><a href="{{ path('admin_image_show', {'id': image.id}) }}">{{ image.path }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
     {{ include('admin/article/_delete_form.html.twig') }}
 {% endblock %}

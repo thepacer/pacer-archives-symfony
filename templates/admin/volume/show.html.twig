@@ -33,12 +33,14 @@
         </tbody>
     </table>
 
+    {% if volume.issues %}
     <h4>Issues</h4>
     <ul>
       {% for issue in volume.issues %}
       <li><a href="{{ path('admin_issue_show', {'id': issue.id}) }}">{{ issue }}</a></li>
       {% endfor %}
     </ul>
+    {% endif %}
 
     {{ include('admin/volume/_delete_form.html.twig') }}
 {% endblock %}

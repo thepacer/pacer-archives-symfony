@@ -23,8 +23,20 @@
                 <td>{{ image.credit }}</td>
             </tr>
             <tr>
+                <th>Preview</th>
+                <td><img src="{{ path('s3_proxy', {id: image.id} ) }}"></td>
+            </tr>
+            <tr>
                 <th>Path</th>
                 <td>{{ image.path }}</td>
+            </tr>
+            <tr>
+                <th>Article</th>
+                {% if image.article %}
+                <td><a href="{{ path('admin_article_show', {id: image.article.id} ) }}">{{ image.article }}</a></td>
+                {% else %}
+                <td class="text-muted">No paired article.</td>
+                {% endif %}
             </tr>
         </tbody>
     </table>

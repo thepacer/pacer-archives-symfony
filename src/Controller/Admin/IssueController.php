@@ -48,6 +48,7 @@ class IssueController extends Controller
             $entityManager->persist($issue);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Issue created!');
             return $this->redirectToRoute('admin_issue_index');
         }
 
@@ -76,7 +77,8 @@ class IssueController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_issue_index', ['id' => $issue->getId()]);
+            $this->addFlash('success', 'Issue updated!');
+            return $this->redirectToRoute('admin_issue_index');
         }
 
         return $this->render('admin/issue/edit.html.twig', [
@@ -95,7 +97,7 @@ class IssueController extends Controller
             $entityManager->remove($issue);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Issue deleted!');
         return $this->redirectToRoute('admin_issue_index');
     }
 }

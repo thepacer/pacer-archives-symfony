@@ -24,7 +24,12 @@
       {% endif %}
     </div>
     <div class="col-4 text-center">
-      <a class="btn btn-disabled"><strong>{{ issue.issueDate|date('F j, Y') }}</strong></a>
+      <strong>
+      {% if issue.volume.nameplateKey == 'volette' %}<em>The Volette</em>{% endif %}
+      {% if issue.volume.nameplateKey == 'pacer' %}<em>The Pacer</em>{% endif %}
+      -
+      {{ issue.issueDate|date('F j, Y') }}
+      </strong>
     </div>
     <div class="col-4 text-right">
       {% if nextIssue %}
@@ -63,6 +68,12 @@
       </div>
     </div>
     {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="">
+    <strong>Admin:</strong> <a href="{{ path('admin_issue_edit', {id: issue.id}) }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
   </div>
   {% endif %}
 

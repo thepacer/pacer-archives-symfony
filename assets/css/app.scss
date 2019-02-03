@@ -45,6 +45,13 @@ ol.user-steps > li:before {
   left: 0;
 }
 
+/* Volume Calendar */
+.calendar {
+  td.event {
+    background-color: #efefef
+  }
+}
+
 /* Site Header */
 .site-header {
   line-height: 1;

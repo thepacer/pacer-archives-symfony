@@ -10,6 +10,8 @@ const $ = require('jquery')
 global.$ = global.jQuery = $
 require('popper.js')
 require('bootstrap')
+global._ = require('underscore')
+require('clndr')
 
 // CSS
 require('../../node_modules/bootstrap/dist/css/bootstrap.css')

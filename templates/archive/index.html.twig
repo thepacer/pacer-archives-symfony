@@ -19,22 +19,22 @@
 
   <!-- Table View -->
   <div id="tableViewContent" class="collapse show">
-    <table class="table table-hover">
+    <table class="table table-sm">
       <thead>
         <tr>
-          <th scope="col" width="100"></th>
+          <th scope="col" class="d-none d-lg-table-cell">&nbsp;</th>
           <th scope="col">Volume Number</th>
           <th scope="col">Years</th>
           <th scope="col">Nameplate</th>
-          <th scope="col">Issues</th>
+          <th class="text-center" scope="col">Issues</th>
         </tr>
       </thead>
       <tbody>
         {% for volume in volumes %}
         <tr class="{% if volume.issues.count == 0 %}text-muted{% endif %}">
-          <td class="align-middle">
+          <td class="text-center align-middle d-none d-lg-table-cell">
             {% if volume.issues.count > 0 %}
-            <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}"><img src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}" class="img-fluid img-thumbnail"></a>
+            <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}"><img src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="Cover" title="{{ volume.coverIssue.archiveKey }}" height="125" class=""></a>
             {% else %}
             &nbsp;
             {% endif %}
@@ -49,11 +49,11 @@
             {% if volume.nameplateKey == 'volette' %}<em>The Volette</em>{% endif %}
             {% if volume.nameplateKey == 'pacer' %}<em>The Pacer</em>{% endif %}
           </td>
-          <td class="align-middle">
+          <td class="text-center align-middle">
             {% if volume.issues.count %}
             <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">{{ pluralize(volume.issues.count, '<strong>1</strong> issue', '<strong>%d</strong> issues') | raw }}</a>
             {% else %}
-            <span class="text-muted">No issues available.</span>
+            <span class="text-center text-muted">No issues available.</span>
             {% endif %}
           </td>
         </tr>
