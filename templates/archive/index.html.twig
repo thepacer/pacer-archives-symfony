@@ -11,9 +11,14 @@
   <h3>By Calendar Year</h3>
   <div class="row mb-5">
     <div class="col-12">
-      {% set endYear = date().format('Y') %}
-      {% for year in range(1928,endYear) %}
-      <div class="float-left text-center mx-1 my-1"><a href="{{ path('year', {year: year}) }}" class="btn btn-light btn-lg" style="width:125px">{{ year }}</a></div>
+      {% for year in years %}
+      <div class="float-left text-center mx-1 my-1">
+        {% if issue_counts_by_year[year] > 0 %}
+        <a href="{{ path('year', {year: year}) }}" data-toggle="tooltip" title="{{ pluralize(issue_counts_by_year[year], '1 issue', '%d issues', 'No issues available') }}" class="btn btn-light" style="width:125px">{{ year }}</a>
+        {% else %}
+        <a href="{{ path('year', {year: year}) }}" data-toggle="tooltip" title="{{ pluralize(issue_counts_by_year[year], '1 issue', '%d issues', 'No issues available') }}" class="btn btn-light" style="opacity:0.25; width:125px">{{ year }}</a>
+        {% endif %}
+      </div>
       {% endfor %}
     </div>
   </div>
@@ -66,7 +71,7 @@
             {% if volume.issues.count %}
             <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">{{ pluralize(volume.issues.count, '<strong>1</strong> issue', '<strong>%d</strong> issues') | raw }}</a>
             {% else %}
-            <span class="text-center text-muted">No issues available.</span>
+            <span class="text-center text-muted">No issues available</span>
             {% endif %}
           </td>
         </tr>
@@ -80,12 +85,12 @@
     <div class="row">
       {% for volume in volumes %}
       <div class="col-lg-4">
-        <div class="card mb-2">
+        <div class="card mb-2 {% if volume.issues.count == 0 %}text-muted{% endif %}">
           <div class="card-body" style="min-height:15rem;">
             <div class="row">
               {% if volume.issues.count > 0 %}
               <div class="col-5">
-                <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}" style="display:block;min-height:100px;"><img src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}" class="img-fluid"></a>
+                <a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}" class="d-block" style="min-height:100px;"><img src="https://archive.org/services/img/{{ volume.coverIssue.archiveKey }}" alt="{{ volume.coverIssue.archiveKey }}" class="img-fluid"></a>
               </div>
               {% endif %}
               <div class="col-7">
@@ -94,7 +99,7 @@
                   {% if volume.nameplateKey == 'pacer' %}<em>The Pacer</em>{% endif %}
                 </p>
                 <h5 class="mt-2"><a href="{{ path('volume', { volumeNumber: volume.volumeNumber } )}}">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate | date('Y')}}-{{ volume.volumeEndDate | date('Y') }})</a></h5>
-                <p>{{ pluralize(volume.issues.count, '1 issue', '%d issues', 'No issues available') }}.</p>
+                <p>{{ pluralize(volume.issues.count, '1 issue', '%d issues', 'No issues available') }}</p>
               </div>
             </div>
           </div>

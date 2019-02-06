@@ -29,9 +29,21 @@ class ArchiveController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
         $volumes = $entityManager->getRepository(Volume::class)->findAllCurrentVolumes();
+        $issues = $entityManager->getRepository(Issue::class)->findAll();
+
+        $years = range(self::START_YEAR, date('Y'));
+        $issue_counts_by_year = [];
+        foreach ($years as $year) {
+            $issue_counts_by_year[$year] = 0;
+        }
+        foreach ($issues as $issue) {
+            $issue_counts_by_year[$issue->getIssueDate()->format('Y')]++;
+        }
 
         return $this->render('archive/index.html.twig', [
-            'volumes' => $volumes
+            'issue_counts_by_year' => $issue_counts_by_year,
+            'volumes' => $volumes,
+            'years' => $years
         ]);
     }
 

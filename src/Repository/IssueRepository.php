@@ -19,7 +19,7 @@ class IssueRepository extends ServiceEntityRepository
         parent::__construct($registry, Issue::class);
     }
 
-    public function countIssues()
+    public function getTotalIssueCount()
     {
         return $this->createQueryBuilder('i')
             ->select('COUNT(i.id) as issueCount')

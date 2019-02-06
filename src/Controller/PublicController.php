@@ -33,7 +33,7 @@ class PublicController extends AbstractController
         }
 
         if (!$cache->has('public.issue_count')) {
-            $cache->set('public.issue_count', $entityManager->getRepository(Issue::class)->countIssues(), 300);
+            $cache->set('public.issue_count', $entityManager->getRepository(Issue::class)->getTotalIssueCount(), 300);
         }
 
         $feed = $cache->get('public.pacer_site_feed');
