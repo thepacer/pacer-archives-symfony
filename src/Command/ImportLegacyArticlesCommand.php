@@ -2,7 +2,8 @@
 
 namespace App\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -14,11 +15,17 @@ use App\Entity\Image;
 use App\Entity\Issue;
 use App\Entity\LegacyArticle;
 
-class ImportLegacyArticlesCommand extends ContainerAwareCommand
+class ImportLegacyArticlesCommand extends Command
 {
     const BATCH_SIZE = 1000;
 
     protected static $defaultName = 'app:import-legacy-articles';
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        parent::__construct();
+        $this->entityManager = $entityManager;
+    }
 
     protected function configure()
     {
@@ -29,13 +36,12 @@ class ImportLegacyArticlesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $entityManager = $this->getContainer()->get('doctrine')->getEntityManager();
-        $legacyArticles = $entityManager->getRepository(LegacyArticle::class)->findAll();
+        $legacyArticles = $this->entityManager->getRepository(LegacyArticle::class)->findAll();
 
         $io = new SymfonyStyle($input, $output);
 
         foreach ($legacyArticles as $i => $row) {
-            $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $row->getArticleId()]);
+            $article = $this->entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $row->getArticleId()]);
             if ($article === null) {
                 $article = new Article();
             }
@@ -83,12 +89,12 @@ class ImportLegacyArticlesCommand extends ContainerAwareCommand
                 }
             }
 
-            $entityManager->persist($article);
+            $this->entityManager->persist($article);
 
             // Batch inserts
             if (($i%self::BATCH_SIZE) === 0) {
-                $entityManager->flush();
-                $entityManager->clear();
+                $this->entityManager->flush();
+                $this->entityManager->clear();
             }
 
         }
