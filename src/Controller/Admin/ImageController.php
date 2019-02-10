@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Image;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("admin/image")
  */
-class ImageController extends Controller
+class ImageController extends AbstractController
 {
     /**
      * @Route("/", name="admin_image_index", methods={"GET"})
