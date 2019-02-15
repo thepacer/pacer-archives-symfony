@@ -68,7 +68,7 @@ class ImportLegacyArticlesCommand extends Command
             $article->setDateModified(new \DateTime($modified[0]));
             $article->setModifiedBy($modified[1]);
             $article->setKeywords((string) $row->getKeywords());
-            $issue = $entityManager->getRepository(Issue::class)->findOneBy([
+            $issue = $this->entityManager->getRepository(Issue::class)->findOneBy([
                 'issueDate' => new \DateTime($row->getIssueId())
             ]);
             $article->setIssue($issue);
@@ -100,7 +100,7 @@ class ImportLegacyArticlesCommand extends Command
         }
 
         // Catch the rest of them
-        $entityManager->flush();
-        $entityManager->clear();
+        $this->entityManager->flush();
+        $this->entityManager->clear();
     }
 }
