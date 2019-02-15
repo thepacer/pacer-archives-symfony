@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "webpack-notifier": "^1.6.0"
+        "webpack-notifier": "^1.7.0"
     },
     "license": "UNLICENSED",
     "private": true,
@@ -11,13 +11,13 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@symfony/webpack-encore": "^0.22.0",
-        "bootstrap": "^4.2.1",
+        "@symfony/webpack-encore": "^0.23.0",
+        "bootstrap": "^4.3.1",
         "clndr": "^1.4.7",
-        "fullcalendar": "^3.9.0",
+        "fullcalendar": "^3.10.0",
         "jquery": "^3.3.1",
         "node-sass": "^4.11.0",
-        "popper.js": "^1.14.6",
+        "popper.js": "^1.14.7",
         "sass-loader": "^7.1.0",
         "underscore": "^1.9.1"
     }

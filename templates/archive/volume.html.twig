@@ -57,20 +57,7 @@
   <div class="row">
     {% for issue in volume.issues %}
     <div class="col-lg-2">
-      <div class="card mb-2">
-        <div class="card-img-top text-center">
-          <a href="{{ path('issue', { issueDate: issue.issueDate.format('Y-m-d')} ) }}"><img class="img-fluid" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
-        </div>
-        <div class="card-body text-center small">
-          <a href="{{ path('issue', { issueDate: issue.issueDate.format('Y-m-d')} ) }}">{{ issue.issueDate | date('F j, Y')}}</a>
-        </div>
-        <div class="card-footer small">
-          <ul class="list-inline mb-0">
-            <li class="list-inline-item"><span data-toggle="tooltip" title="Total newsprint pages. May not include inserts or other material.">{{ pluralize(issue.pageCount, '1 page.', '%d pages', 'Unknown') }}</span></li>
-            <li class="list-inline-item"><span data-toggle="tooltip" title="Displayed issue, may vary from actual sequence of issues.">Issue {{ issue.issueNumber }}</span></li>
-          </ul>
-        </div>
-      </div>
+      {% include '_includes/issue-card.html.twig' %}
     </div>
     {% endfor %}
   </div>
