@@ -21,7 +21,9 @@ class VolumeController extends AbstractController
      */
     public function index(VolumeRepository $volumeRepository): Response
     {
-        return $this->render('admin/volume/index.html.twig', ['volumes' => $volumeRepository->findAll()]);
+        return $this->render('admin/volume/index.html.twig', [
+            'volumes' => $volumeRepository->findAll()
+        ]);
     }
 
     /**
