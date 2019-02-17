@@ -12,3 +12,7 @@ app_logout:
 legacy_article_redirect:
     path: /article/{slug}/{id}
     controller: App\Controller\ArchiveController::legacyArticle
+
+legacy_issue_redirect:
+    path: /issue/{issueDate}
+    controller: App\Controller\ArchiveController::legacyIssue

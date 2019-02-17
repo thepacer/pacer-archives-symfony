@@ -172,6 +172,24 @@ class ArchiveController extends AbstractController
     }
 
     /**
+     * @Route("/legacy-issue/{issueDate}", name="legacy_issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
+     */
+    public function legacyIssue(string $issueDate)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $issue = $entityManager->getRepository(Issue::class)->findOneBy(['issueDate' => new \DateTime($issueDate)]);
+
+        if (!$issue) {
+            throw $this->createNotFoundException('Could not locate legacy issue.');
+        }
+
+        // Redirect to new route
+        return $this->redirectToRoute('issue', [
+            'issueDate' => $issue->getIssueDate()->format('Y-m-d')
+        ], 301);
+    }
+
+    /**
      * Handle PacerCMS (Legacy) Article Links
      *
      * @Route("/legacy-article/{id}", name="legacy_article", requirements={"id"="\d+"})
@@ -182,7 +200,7 @@ class ArchiveController extends AbstractController
         $article = $entityManager->getRepository(Article::class)->findOneBy(['legacyId' => $id]);
 
         if (!$article) {
-            throw $this->createNotFoundException('Could not locate legacy article');
+            throw $this->createNotFoundException('Could not locate legacy article.');
         }
 
         // Redirect to new route
