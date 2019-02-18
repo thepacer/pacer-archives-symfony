@@ -22,12 +22,12 @@
 <div class="row">
 <div class="col-md-8 blog-main">
 
-  <div class="card bg-info text-light mb-3">
+  <div class="card border-light bg-light mb-3">
     <div class="card-body">
       <div class="float-right d-none d-sm-block">
         <a href="{{ path('archive') }}"><img src="{{ asset('assets/images/noun-project/newspaper.svg') }}" alt="Newspaper Icon"/></a>
       </div>
-      <h3><a href="{{ path('archive') }}" class="text-light">The Archives</a></h3>
+      <h3><a href="{{ path('archive') }}">The Archives</a></h3>
       <p>We have collected {{ issue_count|number_format }} issues of <em>The Volette</em> and <em>The Pacer</em> and are continuing to expand the archives.</p>
       <div>
         <a href="{{ path('archive') }}" class="btn btn-dark">Browse the Archives</a>
@@ -35,12 +35,12 @@
     </div>
   </div>
 
-  <div class="card bg-info text-light mb-3">
+  <div class="card border-light bg-light mb-3">
     <div class="card-body">
       <div class="float-right d-none d-sm-block">
         <a href="{{ path('missing_issues') }}"><img src="{{ asset('assets/images/noun-project/browse.svg') }}" alt="Browse Icon"/></a>
       </div>
-      <h3><a href="{{ path('missing_issues') }}" class="text-light">Missing Issues</a></h3>
+      <h3><a href="{{ path('missing_issues') }}">Missing Issues</a></h3>
       <p>Help us locate print copies of these issues so we can make them available online.</p>
       <div>
         <a href="{{ path('missing_issues') }}" class="btn btn-dark">See Missing Issues</a>
@@ -48,12 +48,12 @@
     </div>
   </div>
 
-  <div class="card bg-info text-light mb-3">
+  <div class="card border-light bg-light mb-3">
     <div class="card-body">
       <div class="float-right d-none d-sm-block">
         <a href="{{ path('donate') }}"><img src="{{ asset('assets/images/noun-project/harmonious.svg') }}" alt="Harmonious Icon"/></a>
       </div>
-      <h3><a href="{{ path('donate') }}" class="text-light">Support <em>The Pacer</em></a></h3>
+      <h3><a href="{{ path('donate') }}">Support <em>The Pacer</em></a></h3>
       <p>Your support funds scholarships, equipment and educational opportunities.</p>
       <div>
         <a href="{{ path('donate') }}" class="btn btn-secondary btn-dark">Donate Today</a>

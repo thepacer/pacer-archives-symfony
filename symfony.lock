@@ -11,6 +11,9 @@
             "ref": "d1753f9e2a669c464b2b0618af9b0123426b67b4"
         }
     },
+    "beberlei/doctrineextensions": {
+        "version": "v1.2.0"
+    },
     "behat/transliterator": {
         "version": "v1.2.0"
     },
