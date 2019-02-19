@@ -116,9 +116,6 @@
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
-    "knplabs/knp-components": {
-        "version": "v1.3.10"
-    },
     "knplabs/knp-markdown-bundle": {
         "version": "1.7.1"
     },
@@ -127,9 +124,6 @@
     },
     "knplabs/knp-menu-bundle": {
         "version": "v2.2.1"
-    },
-    "knplabs/knp-paginator-bundle": {
-        "version": "v2.8.0"
     },
     "michelf/php-markdown": {
         "version": "1.8.0"

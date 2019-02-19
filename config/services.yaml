@@ -33,6 +33,8 @@ services:
     admin.volume:
         class: App\Admin\VolumeAdmin
         arguments: [~, App\Entity\Volume, ~]
+        calls:
+            - [setTemplate, ['show', 'Admin/display_volume.html.twig']]
         tags:
             - { group: 'Manage', icon: '<i class="fa fa-wrench"></i>', name: sonata.admin, manager_type: orm, label: Volumes, keep_open: true }
     admin.article:
