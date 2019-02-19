@@ -24,5 +24,24 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    # Sonata Admin
+    admin.issue:
+        class: App\Admin\IssueAdmin
+        arguments: [~, App\Entity\Issue, ~]
+        tags:
+            - { group: 'Manage', icon: '<i class="fa fa-wrench"></i>', name: sonata.admin, manager_type: orm, label: Issues, keep_open: true }
+    admin.volume:
+        class: App\Admin\VolumeAdmin
+        arguments: [~, App\Entity\Volume, ~]
+        tags:
+            - { group: 'Manage', icon: '<i class="fa fa-wrench"></i>', name: sonata.admin, manager_type: orm, label: Volumes, keep_open: true }
+    admin.article:
+        class: App\Admin\ArticleAdmin
+        arguments: [~, App\Entity\Article, ~]
+        tags:
+            - { group: 'Manage', icon: '<i class="fa fa-wrench"></i>', name: sonata.admin, manager_type: orm, label: Articles, keep_open: true }
+    admin.image:
+        class: App\Admin\ImageAdmin
+        arguments: [~, App\Entity\Image, ~]
+        tags:
+            - { group: 'Manage', icon: '<i class="fa fa-wrench"></i>', name: sonata.admin, manager_type: orm, label: Images, keep_open: true }

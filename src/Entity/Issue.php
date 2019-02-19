@@ -56,6 +56,7 @@ class Issue
 
     public function __construct()
     {
+        $this->issueDate = new \DateTime();
         $this->articles = new ArrayCollection();
     }
 

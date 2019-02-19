@@ -89,4 +89,11 @@ class Image
 
         return $this;
     }
+
+    /* Model Methods */
+
+    public function __toString()
+    {
+        return 'Image #' . $this->id;
+    }
 }

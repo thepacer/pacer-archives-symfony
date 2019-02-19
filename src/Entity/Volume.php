@@ -53,6 +53,8 @@ class Volume
     public function __construct()
     {
         $this->issues = new ArrayCollection();
+        $this->volumeStartDate = new \DateTime();
+        $this->volumeEndDate = new \DateTime();
     }
 
     public function getId(): ?int

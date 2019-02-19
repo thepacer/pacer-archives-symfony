@@ -110,6 +110,7 @@ class Article
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->datePublished = new \DateTime();
     }
 
     public function getId(): ?int

@@ -76,7 +76,7 @@
 {% if is_granted('ROLE_ADMIN') %}
 <div class="fixed-top">
   <div class="float-right p-1">
-    <a href="{{ path('admin_volume_edit', {id: volume.id}) }}" class="btn btn-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+    <a href="{{ path('admin_app_issue_edit', {id: volume.id}) }}" class="btn btn-secondary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
   </div>
 </div>
 {% endif %}
