@@ -14,6 +14,7 @@ final class ImageAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('Basics')
             ->add('caption')
             ->add('credit')
             ->add('path')
@@ -39,6 +40,7 @@ final class ImageAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
+                    'show' => []
                 ]
             ]);
     }

@@ -1,32 +1,67 @@
-{% extends 'admin/base.html.twig' %}
 
-{% block title %}Log In{% endblock %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merriweather">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+    {% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-{% block body %}
-<form method="post">
-  <div class="card mt-5">
-    <div class="card-header">
-      <h1 class="h3 mb-0 font-weight-normal">Please sign in</h1>
+    {% include '_includes/favicons.html.twig' %}
+    {% include '_includes/ga_tracking.html.twig' %}
+  </head>
+  <body>
+    <div class="container">
+      {% for label, flashes in app.flashes %}
+          {% for flash in flashes %}
+              {% if ( label == 'success' ) %}
+                  <div class="alert alert-success alert-dismissible fade show">
+                      {{ flash }}
+                  </div>
+              {% elseif ( label == 'error' ) %}
+                  <div class="alert alert-danger alert-dismissible fade show">
+                      {{ flash }}
+                  </div>
+              {% endif %}
+          {% endfor %}
+      {% endfor %}
+      <form method="post">
+        <div class="card mt-5">
+          <div class="card-header">
+            <h1 class="h3 mb-0 font-weight-normal">Please sign in</h1>
+          </div>
+          <div class="card-body">
+            {% if error %}
+              <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+              {% endif %}
+
+            <label for="inputEmail" class="sr-only">Email</label>
+            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}"
+            >
+          </div>
+          <div class="card-footer text-right">
+            <button class="btn btn-lg btn-primary" type="submit">
+              Sign in
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-    <div class="card-body">
-      {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-        {% endif %}
-
-      <label for="inputEmail" class="sr-only">Email</label>
-      <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-
-      <input type="hidden" name="_csrf_token"
-             value="{{ csrf_token('authenticate') }}"
-      >
-    </div>
-    <div class="card-footer text-right">
-      <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-      </button>
-    </div>
-  </div>
-</form>
-{% endblock %}
+    <footer class="container my-5 text-center">
+      <a href="{{ path('home') }}">Return to Site</a>
+    </footer>
+    {% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+  </body>
+</html>

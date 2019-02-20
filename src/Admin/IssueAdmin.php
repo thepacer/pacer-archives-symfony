@@ -14,6 +14,7 @@ final class IssueAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('Basics')
             ->add('volume')
             ->add('issueDate', DateType::class, [
                 'years' => range(1928, date('Y') + 5)
@@ -75,6 +76,7 @@ final class IssueAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
+                    'show' => []
                 ]
             ]);
     }

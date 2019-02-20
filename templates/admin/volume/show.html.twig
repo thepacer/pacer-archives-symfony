@@ -14,11 +14,10 @@
 
 {% block show %}
 <div class="sonata-ba-view">
-    <h1>Volume</h1>
-
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <table class="table">
+  <div class="panel panel-default">
+    <div class="panel-heading">Volume</div>
+    <div class="panel-body">
+      <table class="table">
         <tbody>
             <tr>
                 <th>ID</th>
@@ -41,17 +40,20 @@
                 <td>{{ object.nameplateKey }}</td>
             </tr>
         </tbody>
-        </table>
-      </div>
-    </div>
+      </table>
+  </div>
+</div>
 
-    {% if object.issues %}
-    <h4>Issues</h4>
+{% if object.issues.count %}
+<div class="panel panel-default">
+  <div class="panel-heading">Issues</div>
+  <div class="panel-body">
     <ul>
       {% for issue in object.issues %}
       <li><a href="{{ path('admin_app_issue_edit', {'id': issue.id}) }}">{{ issue }}</a></li>
       {% endfor %}
     </ul>
     {% endif %}
+  </div>
 </div>
 {% endblock %}

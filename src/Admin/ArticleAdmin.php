@@ -2,6 +2,7 @@
 
 namespace App\Admin;
 
+use Doctrine\ORM\EntityRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -14,8 +15,11 @@ final class ArticleAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
-            ->add('issue')
+            ->with('Basics')
             ->add('headline', null, [
+                'attr' => [
+                    'class' => 'input-lg'
+                ]
             ])
             ->add('alternativeHeadline', null, [
                 'label' => 'Subheadline / Alternative Headline',
@@ -30,26 +34,46 @@ final class ArticleAdmin extends AbstractAdmin
                 'label' => 'Co-author / Contributor Byline',
                 'empty_data' => ''
             ])
-            ->add('datePublished', DateType::class, [
-                'label' => 'Date Published',
-                'years' => range(1928, date('Y') + 5)
-            ])
             ->add('articleBody', null, [
                 'label' => 'Article Body',
                 'attr' => [
                     'rows' => 20
                 ]
             ])
+            ->end()
+            ->with('Settings')
+            ->add('issue', null, [
+                'placeholder' => 'No paired issue.',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('i')
+                        ->join('i.volume', 'v')
+                        ->addSelect('v')
+                        ->orderBy('i.issueDate', 'ASC');
+                },
+                'choice_label' => function ($object) {
+                    return sprintf(
+                        '%s (Volume %d)',
+                        $object->getIssueDate()->format('Y-m-d'),
+                        $object->getVolume()->getVolumeNumber()
+                    );
+                }
+            ])
+            ->add('datePublished', DateType::class, [
+                'label' => 'Date Published',
+                'years' => range(1928, date('Y') + 5)
+            ])
             ->add('keywords', null, [
                 'help' => 'Comma-separated list of relevant terms.'
             ])
             ->add('legacyId', null, [
                 'label' => 'Legacy CMS ID',
-                'help' => 'Used in redirects to find new ID'
+                'help' => 'Used in redirects to find new ID.'
             ])
             ->add('slug', null, [
                 'help' => 'Auto-generated string used in the article URL.'
             ])
+            ->end()
+            ->with('Print Location')
             ->add('printSection', null, [
                 'label' => 'Print Section',
                 'help' => 'Section heading of the newspaper. Use "Cover" for Page 1, "News" if unspecified.'
@@ -97,6 +121,7 @@ final class ArticleAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
+                    'show' => []
                 ]
             ]);
     }

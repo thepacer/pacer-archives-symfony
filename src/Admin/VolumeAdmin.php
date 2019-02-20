@@ -15,6 +15,7 @@ final class VolumeAdmin extends AbstractAdmin
     protected function configureFormFields(FormMapper $formMapper)
     {
         $formMapper
+            ->with('Basics')
             ->add('volumeNumber', null, [
                 'label' => 'Volume Number'
             ])
@@ -66,6 +67,7 @@ final class VolumeAdmin extends AbstractAdmin
             ->add('_action', 'actions', [
                 'actions' => [
                     'edit' => [],
+                    'show' => []
                 ]
             ]);
     }

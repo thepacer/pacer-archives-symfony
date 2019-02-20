@@ -1,54 +1,66 @@
-{% extends 'admin/base.html.twig' %}
+{% extends base_template %}
 
-{% block title %}Admin - Issue{% endblock %}
+{% block title %}
+    {{ "title_show"|trans({'%name%': admin.toString(object)|truncate(15) }, 'SonataAdminBundle') }}
+{% endblock %}
 
-{% block body %}
-    <div class="float-right">
-      <a href="{{ path('admin_issue_edit', {'id': issue.id}) }}" class="btn btn-secondary"><i class="fas fa-pencil-alt"></i> Edit</a>
-    </div>
-    <h1>Issue</h1>
+{% block navbar_title %}
+    {{ block('title') }}
+{% endblock %}
 
+{%- block actions -%}
+    {% include '@SonataAdmin/CRUD/action_buttons.html.twig' %}
+{%- endblock -%}
+
+{% block show %}
+<div class="panel panel-default">
+  <div class="panel-heading">Issue</div>
+  <div class="panel-body">
     <table class="table">
         <tbody>
             <tr>
                 <th>ID</th>
-                <td>{{ issue.id }}</td>
+                <td>{{ object.id }}</td>
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}</td>
+                <td>{{ object.issueDate ? object.issueDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
                 <th>Number</th>
-                <td>{{ issue.issueNumber }}</td>
+                <td>{{ object.issueNumber }}</td>
             </tr>
             <tr>
                 <th>Volume</th>
-                <td><a href="{{ path('admin_volume_show', {'id': issue.volume.id}) }}">{{ issue.volume }}</a></td>
+                <td><a href="{{ path('admin_app_volume_edit', {'id': object.volume.id}) }}">{{ object.volume }}</a></td>
             </tr>
             <tr>
                 <th>Pages</th>
-                <td>{{ issue.pageCount }}</td>
+                <td>{{ object.pageCount }}</td>
             </tr>
             <tr>
                 <th>Archive Key</th>
-                <td>{{ issue.archiveKey }}</td>
+                <td>{{ object.archiveKey }}</td>
             </tr>
             <tr>
                 <th>Notes</th>
-                <td>{{ issue.archiveNotes }}</td>
+                <td>{{ object.archiveNotes }}</td>
             </tr>
         </tbody>
     </table>
+  </div>
+</div>
 
-    {% if issue.articles %}
-    <h4>Articles</h4>
+{% if object.articles.count %}
+<div class="panel panel-default">
+  <div class="panel-heading">Articles</div>
+  <div class="panel-body">
     <ul>
-      {% for article in issue.articles %}
-      <li><a href="{{ path('admin_article_show', { id: article.id } )}}">{{ article.headline }}</a></li>
+      {% for article in object.articles %}
+      <li><a href="{{ path('admin_app_article_edit', { id: article.id } )}}">{{ article.headline }}</a></li>
       {% endfor %}
     </ul>
-    {% endif %}
-
-    {{ include('admin/issue/_delete_form.html.twig') }}
+  </div>
+</div>
+{% endif %}
 {% endblock %}
