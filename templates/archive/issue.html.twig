@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ issue.issueDate | date('F j, Y') }} - {{ parent() }}{% endblock %}
+{% block title %}The {{ issue.volume.nameplateKey|title }} - {{ issue.issueDate|date('F j, Y') }} - {{ parent() }}{% endblock %}
 
 {% block body %}
 <div class="container mt-3">
@@ -43,23 +43,19 @@
   </div>
 
   {% if issue.archiveNotes %}
-  <h3>Notes</h3>
+  <h3 class="mb-2">Notes</h3>
   
   {{ issue.archiveNotes|markdown }}
   {% endif %}
 
-  <h3>Other Issues in This Volume</h3>
+  <h3 class="mb-2">Volume Issues</h3>
 
-  <div class="issue-browser mb-5">
-    <div class="row text-center">
-      {% for volumeIssue in issue.volume.issues %}
-      <div class="float-left">
-        <div class="p-2 {% if issue == volumeIssue %}bg-info{% endif %}">
-          <a href="{{ path('issue', { issueDate: volumeIssue.issueDate.format('Y-m-d')} ) }}" data-toggle="tooltip" title="{{ volumeIssue.issueDate.format('F j, Y') }}"><img width="100" src="https://archive.org/services/img/{{ volumeIssue.archiveKey }}" alt="{{ volumeIssue.archiveKey }}"></a>
-        </div>
-      </div>
-      {% endfor %}
+  <div class="row issue-browser mb-5">
+    {% for volumeIssue in issue.volume.issues %}
+    <div class="col-lg-2">
+      {% include '_includes/issue-card.html.twig' with { issue: volumeIssue, active: issue } %}
     </div>
+    {% endfor %}
   </div>
 
   {% if issue.articles.count > 0 %}

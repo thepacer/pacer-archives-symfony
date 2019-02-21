@@ -1,4 +1,4 @@
-<div class="card border-light mb-3">
+<div class="card {% if active is defined and issue == active %}border-info{% else %}border-light{% endif %} mb-3">
   <div class="card-img-top text-center">
     <a href="{{ path('issue', { issueDate: issue.issueDate.format('Y-m-d')} ) }}"><img class="img-fluid" src="https://archive.org/services/img/{{ issue.archiveKey }}" alt="{{ issue.archiveKey }}"></a>
   </div>

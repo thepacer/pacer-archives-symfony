@@ -5,14 +5,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Issue Browser */
-.issue-browser > .row {
+.issue-browser {
   flex-wrap: nowrap;
   overflow-x: auto;
   white-space: nowrap;
-}
-.issue-browser > .row > .col-1 {
-  display: inline-block;
-  float: none;
+  .issue-browser-item {
+    float: left;
+    display: inline-block;
+  }
 }
 
 /* User Steps */

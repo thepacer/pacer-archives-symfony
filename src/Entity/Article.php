@@ -340,5 +340,4 @@ class Article
     {
         return $this->datePublished->format('n/j/Y') . ': ' . $this->headline;
     }
-
 }

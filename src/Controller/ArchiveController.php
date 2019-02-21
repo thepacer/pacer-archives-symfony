@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Aws\S3\S3Client;
 
@@ -65,7 +66,12 @@ class ArchiveController extends AbstractController
         return $this->render('archive/volume.html.twig', [
             'volume' => $volume,
             'previousVolume' => $previousVolume,
-            'nextVolume' => $nextVolume
+            'nextVolume' => $nextVolume,
+            'opengraph' => [
+                'title' => $volume,
+                'description' => 'Issues that appeared in ' . $volume,
+                'image' => 'https://archive.org/services/img/' . $volume->getCoverIssue()->getArchiveKey()
+            ]
         ]);
     }
 
@@ -85,12 +91,17 @@ class ArchiveController extends AbstractController
             'issues' => $issues,
             'year' => $year,
             'previousYear' => ($year > self::START_YEAR) ? $year - 1 : false,
-            'nextYear' => ($year < (int) date('Y')) ? $year + 1 : false
+            'nextYear' => ($year < (int) date('Y')) ? $year + 1 : false,
+            'opengraph' => [
+                'title' => 'The Pacer - ' . $year,
+                'description' => 'Issues of The Pacer from ' . $year . '.'
+            ]
         ]);
     }
 
     /**
      * @Route("/issue/{issueDate}", name="issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
+     * @Route("/issue-{issueDate}", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
      */
     public function issue(string $issueDate)
     {
@@ -107,7 +118,20 @@ class ArchiveController extends AbstractController
         return $this->render('archive/issue.html.twig', [
             'issue' => $issue,
             'previousIssue' => $previousIssue,
-            'nextIssue' => $nextIssue
+            'nextIssue' => $nextIssue,
+            'opengraph' => [
+                'title' => sprintf(
+                    'The %s - %s',
+                    ucwords($issue->getVolume()->getNameplateKey()),
+                    $issue->getIssueDate()->format('F j, Y')
+                ),
+                'description' => sprintf(
+                    'The %s issue of The %s, the student newspaper at the University of Tennessee at Martin.',
+                    $issue->getIssueDate()->format('F j, Y'),
+                    ucwords($issue->getVolume()->getNameplateKey())
+                ),
+                'image' => 'https://archive.org/services/img/' . $issue->getArchiveKey()
+            ]
         ]);
     }
 
@@ -131,8 +155,29 @@ class ArchiveController extends AbstractController
             ], 301);
         }
 
+        if (count($article->getImages())) {
+            $articleImage = $this->generateUrl(
+                's3_proxy',
+                [
+                    'id' => $article->getImages()->first()->getId()
+                ],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+        } else {
+            $articleImage = 'https://archive.org/services/img/' . $article->getIssue()->getArchiveKey();
+        }
+
         return $this->render('archive/article.html.twig', [
-            'article' => $article
+            'article' => $article,
+            'opengraph' => [
+                'title' => sprintf(
+                    '%s - The %s',
+                    $article->getHeadline(),
+                    ucwords($article->getIssue()->getVolume()->getNameplateKey())
+                ),
+                'description' => $article->getArticleBody(), // Truncated in Twig template
+                'image' => $articleImage
+            ]
         ]);
     }
 
