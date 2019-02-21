@@ -48,7 +48,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/volume-{volumeNumber}", name="volume", requirements={"volumeNumber"="\d+"})
+     * @Route("/volume/{volumeNumber}", name="volume", requirements={"volumeNumber"="\d+"})
      */
     public function volume(int $volumeNumber)
     {
@@ -70,7 +70,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/year-{year}", name="year", requirements={"year"="[1|2][0|9][0-9][0-9]"})
+     * @Route("/year/{year}", name="year", requirements={"year"="[1|2][0|9][0-9][0-9]"})
      */
     public function year(int $year)
     {
@@ -90,7 +90,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/issue-{issueDate}", name="issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
+     * @Route("/issue/{issueDate}", name="issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
      */
     public function issue(string $issueDate)
     {
