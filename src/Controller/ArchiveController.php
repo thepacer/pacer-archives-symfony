@@ -164,7 +164,19 @@ class ArchiveController extends AbstractController
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
         } else {
-            $articleImage = 'https://archive.org/services/img/' . $article->getIssue()->getArchiveKey();
+            // No image attached, use issue cover if set
+            if ($article->getIssue()) {
+                $articleImage = 'https://archive.org/services/img/' . $article->getIssue()->getArchiveKey();
+            } else {
+                $articleImage = false;
+            }
+        }
+
+        // Determine nameplateKey to use for opengraph data
+        if ($article->getIssue()) {
+            $nameplateKey = $article->getIssue()->getVolume()->getNameplateKey();
+        } else {
+            $nameplateKey = 'pacer';
         }
 
         return $this->render('archive/article.html.twig', [
@@ -173,7 +185,7 @@ class ArchiveController extends AbstractController
                 'title' => sprintf(
                     '%s - The %s',
                     $article->getHeadline(),
-                    ucwords($article->getIssue()->getVolume()->getNameplateKey())
+                    ucwords($nameplateKey)
                 ),
                 'description' => $article->getArticleBody(), // Truncated in Twig template
                 'image' => $articleImage

@@ -14,40 +14,119 @@ final class Version20190126035854 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return '';
+        return 'Baseline schema.';
     }
 
     public function up(Schema $schema) : void
     {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+        $articleTable = $schema->createTable('article');
+        $articleTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
+        $articleTable->addColumn('issue_id', 'integer', ['notnull' => false]);
+        $articleTable->addColumn('print_column', 'string', ['length' => 255]);
+        $articleTable->addColumn('print_page', 'string', ['length' => 255]);
+        $articleTable->addColumn('print_section', 'string', ['length' => 255]);
+        $articleTable->addColumn('article_body', 'text', ['notnull' => true]);
+        $articleTable->addColumn('headline', 'string', ['length' => 255, 'notnull' => true]);
+        $articleTable->addColumn('alternative_headline', 'string', ['length' => 255]);
+        $articleTable->addColumn('author_byline', 'string', ['length' => 255, 'notnull' => true]);
+        $articleTable->addColumn('contributor_byline', 'string', ['length' => 255]);
+        $articleTable->addColumn('date_created', 'datetime', ['notnull' => true]);
+        $articleTable->addColumn('date_published', 'datetime', ['notnull' => true]);
+        $articleTable->addColumn('date_modified', 'datetime', ['notnull' => true]);
+        $articleTable->addColumn('keywords', 'text', ['notnull' => true]);
+        $articleTable->addColumn('modified_by', 'string', ['length' => 255, 'notnull' => true]);
+        $articleTable->addColumn('legacy_id', 'integer');
+        $articleTable->addColumn('slug', 'string', ['length' => 128, 'notnull' => true]);
+        $articleTable->addIndex(['issue_id'], 'IDX_23A0E665E7AA58C');
+        $articleTable->addUniqueIndex(['slug'], 'UNIQ_23A0E66989D9B62');
+        $articleTable->setPrimaryKey(['id']);
 
-        $this->addSql('CREATE TABLE article (id INT AUTO_INCREMENT NOT NULL, issue_id INT DEFAULT NULL, print_column VARCHAR(255) DEFAULT NULL, print_page VARCHAR(255) DEFAULT NULL, print_section VARCHAR(255) DEFAULT NULL, article_body LONGTEXT NOT NULL, headline VARCHAR(255) NOT NULL, alternative_headline VARCHAR(255) DEFAULT NULL, author_byline VARCHAR(255) NOT NULL, contributor_byline VARCHAR(255) DEFAULT NULL, date_created DATETIME NOT NULL, date_published DATETIME NOT NULL, date_modified DATETIME NOT NULL, keywords LONGTEXT NOT NULL, modified_by VARCHAR(255) NOT NULL, legacy_id INT DEFAULT NULL, slug VARCHAR(128) NOT NULL, UNIQUE INDEX UNIQ_23A0E66989D9B62 (slug), INDEX IDX_23A0E665E7AA58C (issue_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE volume (id INT AUTO_INCREMENT NOT NULL, cover_issue_id INT DEFAULT NULL, volume_number VARCHAR(4) NOT NULL, volume_start_date DATE NOT NULL, volume_end_date DATE NOT NULL, nameplate_key VARCHAR(10) NOT NULL, UNIQUE INDEX UNIQ_B99ACDDE867F63D7 (cover_issue_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE issue (id INT AUTO_INCREMENT NOT NULL, volume_id INT DEFAULT NULL, issue_date DATE NOT NULL, issue_number VARCHAR(255) NOT NULL, page_count INT NOT NULL, archive_key VARCHAR(255) DEFAULT NULL, archive_notes LONGTEXT DEFAULT NULL, UNIQUE INDEX UNIQ_12AD233E1AB9D946 (archive_key), INDEX IDX_12AD233E8FD80EEA (volume_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE legacy_article (article_id INT AUTO_INCREMENT NOT NULL, issue_id VARCHAR(255) NOT NULL, section_id VARCHAR(15) NOT NULL, author_id VARCHAR(40) DEFAULT NULL, co_author_id VARCHAR(40) DEFAULT NULL, author_title VARCHAR(40) DEFAULT NULL, co_author_title VARCHAR(40) DEFAULT NULL, title VARCHAR(200) DEFAULT NULL, subtitle VARCHAR(200) DEFAULT NULL, summary TEXT DEFAULT NULL, full_text TEXT DEFAULT NULL, photo_src VARCHAR(150) DEFAULT NULL, photo_align VARCHAR(15) DEFAULT NULL, photo_border CHAR(2) DEFAULT NULL, priority INT DEFAULT NULL, photo_credit VARCHAR(40) DEFAULT NULL, photo_caption TEXT DEFAULT NULL, keywords TEXT DEFAULT NULL, last_edited VARCHAR(200) DEFAULT \'Unknown\' NOT NULL, PRIMARY KEY(article_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE image (id INT AUTO_INCREMENT NOT NULL, article_id INT NOT NULL, caption LONGTEXT NOT NULL, credit VARCHAR(255) NOT NULL, path VARCHAR(255) NOT NULL, INDEX IDX_C53D045F7294869C (article_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE article ADD CONSTRAINT FK_23A0E665E7AA58C FOREIGN KEY (issue_id) REFERENCES issue (id)');
-        $this->addSql('ALTER TABLE volume ADD CONSTRAINT FK_B99ACDDE867F63D7 FOREIGN KEY (cover_issue_id) REFERENCES issue (id)');
-        $this->addSql('ALTER TABLE issue ADD CONSTRAINT FK_12AD233E8FD80EEA FOREIGN KEY (volume_id) REFERENCES volume (id)');
-        $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045F7294869C FOREIGN KEY (article_id) REFERENCES article (id)');
+        $volumeTable = $schema->createTable('volume');
+        $volumeTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
+        $volumeTable->addColumn('cover_issue_id', 'integer', ['notnull' => false]);
+        $volumeTable->addColumn('volume_number', 'string', ['length' => 4]);
+        $volumeTable->addColumn('volume_start_date', 'date', ['notnull' => true]);
+        $volumeTable->addColumn('volume_end_date', 'date', ['notnull' => true]);
+        $volumeTable->addColumn('nameplate_key', 'string', ['length' => 10, 'notnull' => true]);
+        $volumeTable->addUniqueIndex(['cover_issue_id'], 'UNIQ_B99ACDDE867F63D7');
+        $volumeTable->setPrimaryKey(['id']);
+
+        $issueTable = $schema->createTable('issue');
+        $issueTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
+        $issueTable->addColumn('volume_id', 'integer');
+        $issueTable->addColumn('issue_date', 'date', ['notnull' => true]);
+        $issueTable->addColumn('issue_number', 'string', ['length' => 255, 'notnull' => true]);
+        $issueTable->addColumn('page_count', 'text', ['notnull' => true]);
+        $issueTable->addColumn('archive_key', 'string', ['length' => 255]);
+        $issueTable->addColumn('archive_notes', 'text');
+        $issueTable->addUniqueIndex(['archive_key'], 'UNIQ_12AD233E1AB9D946');
+        $issueTable->addIndex(['volume_id'], 'IDX_12AD233E8FD80EEA');
+        $issueTable->setPrimaryKey(['id']);
+
+        $userTable = $schema->createTable('user');
+        $userTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
+        $userTable->addColumn('email', 'string', ['length' => 180, 'notnull' => true]);
+        $userTable->addColumn('roles', 'text', ['notnull' => true]);
+        $userTable->addColumn('password', 'string', ['length' => 255, 'notnull' => true]);
+        $userTable->addUniqueIndex(['email'], 'UNIQ_8D93D649E7927C74');
+        $userTable->setPrimaryKey(['id']);
+
+        $legacyArticleTable = $schema->createTable('legacy_article');
+        $legacyArticleTable->addColumn('article_id', 'integer', ['autoincrement' => true, 'notnull' => true]);
+        $legacyArticleTable->addColumn('issue_id', 'string', ['length' => 255, 'notnull' => true]);
+        $legacyArticleTable->addColumn('section_id', 'string', ['length' => 15, 'notnull' => true]);
+        $legacyArticleTable->addColumn('author_id', 'string', ['length' => 40]);
+        $legacyArticleTable->addColumn('co_author_id', 'string', ['length' => 40]);
+        $legacyArticleTable->addColumn('author_title', 'string', ['length' => 40]);
+        $legacyArticleTable->addColumn('co_author_title', 'string', ['length' => 40]);
+        $legacyArticleTable->addColumn('title', 'string', ['length' => 200]);
+        $legacyArticleTable->addColumn('subtitle', 'string', ['length' => 200]);
+        $legacyArticleTable->addColumn('summary', 'text');
+        $legacyArticleTable->addColumn('full_text', 'text');
+        $legacyArticleTable->addColumn('photo_src', 'string', ['length' => 150]);
+        $legacyArticleTable->addColumn('photo_align', 'string', ['length' => 15]);
+        $legacyArticleTable->addColumn('photo_border', 'string', ['length' => 2]);
+        $legacyArticleTable->addColumn('priority', 'integer');
+        $legacyArticleTable->addColumn('photo_credit', 'string', ['length' => 40]);
+        $legacyArticleTable->addColumn('photo_caption', 'text');
+        $legacyArticleTable->addColumn('keywords', 'text');
+        $legacyArticleTable->addColumn(
+            'last_edited',
+            'string',
+            [
+                'length' => 200,
+                'notnull' => true,
+                'default' => 'UNKNOWN'
+            ]
+        );
+        $legacyArticleTable->setPrimaryKey(['article_id']);
+
+        $imageTable = $schema->createTable('image');
+        $imageTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
+        $imageTable->addColumn('article_id', 'integer', ['notnull' => true]);
+        $imageTable->addColumn('caption', 'text', ['notnull' => true]);
+        $imageTable->addColumn('credit', 'string', ['length' => 255, 'notnull' => true]);
+        $imageTable->addColumn('path', 'string', ['length' => 255, 'notnull' => true]);
+        $imageTable->addIndex(['article_id'], 'IDX_C53D045F7294869C');
+        $imageTable->setPrimaryKey(['id']);
+
+        $articleTable->addForeignKeyConstraint($issueTable, ['issue_id'], ['id'], [], 'FK_23A0E665E7AA58C');
+        $volumeTable->addForeignKeyConstraint($issueTable, ['cover_issue_id'], ['id'], [], 'FK_B99ACDDE867F63D7');
+        $issueTable->addForeignKeyConstraint($volumeTable, ['volume_id'], ['id'], [], 'FK_12AD233E8FD80EEA');
+        $imageTable->addForeignKeyConstraint($articleTable, ['article_id'], ['id'], [], 'FK_C53D045F7294869C');
     }
 
     public function down(Schema $schema) : void
     {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-
-        $this->addSql('ALTER TABLE image DROP FOREIGN KEY FK_C53D045F7294869C');
-        $this->addSql('ALTER TABLE issue DROP FOREIGN KEY FK_12AD233E8FD80EEA');
-        $this->addSql('ALTER TABLE article DROP FOREIGN KEY FK_23A0E665E7AA58C');
-        $this->addSql('ALTER TABLE volume DROP FOREIGN KEY FK_B99ACDDE867F63D7');
-        $this->addSql('DROP TABLE article');
-        $this->addSql('DROP TABLE volume');
-        $this->addSql('DROP TABLE issue');
-        $this->addSql('DROP TABLE user');
-        $this->addSql('DROP TABLE legacy_article');
-        $this->addSql('DROP TABLE image');
+        $schema->getTable('image')->removeForeignKey('FK_C53D045F7294869C');
+        $schema->getTable('issue')->removeForeignKey('FK_12AD233E8FD80EEA');
+        $schema->getTable('article')->removeForeignKey('FK_23A0E665E7AA58C');
+        $schema->getTable('volume')->removeForeignKey('FK_B99ACDDE867F63D7');
+        $schema->dropTable('article');
+        $schema->dropTable('volume');
+        $schema->dropTable('issue');
+        $schema->dropTable('user');
+        $schema->dropTable('legacy_article');
+        $schema->dropTable('image');
     }
 }

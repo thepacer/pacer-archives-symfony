@@ -12,4 +12,25 @@ class PublicControllerTest extends WebTestCase
         $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+
+    public function testMissingIssues()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/missing-issues');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testAbout()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/about');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testDonate()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/donate');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 }

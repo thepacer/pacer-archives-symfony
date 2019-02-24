@@ -114,7 +114,7 @@ class Volume
     {
         $this->coverIssue = $issue;
 
-        return $self;
+        return $this;
     }
 
     public function getCoverIssue(): ?Issue
