@@ -1,4 +1,4 @@
-language: php
+language: generic
 sudo: false
 
 cache:
@@ -18,9 +18,6 @@ matrix:
     - php: 7.1.18
     - php: 7.2
     - php: 7.3
-    - php: nightly
-  allow_failures:
-    - php: nightly
 
 before_install:
   - '[[ "$TRAVIS_PHP_VERSION" == "nightly" ]] || phpenv config-rm xdebug.ini'
@@ -28,10 +25,12 @@ before_install:
 
 install:
   - composer install
+  - npm ci
   - ./bin/phpunit install
   - ./bin/console doctrine:database:create
   - ./bin/console doctrine:migrations:migrate -n
   - ./bin/console doctrine:fixtures:load -n
+  - npm run-script build
 
 script:
   - ./bin/phpunit
