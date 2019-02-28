@@ -29,7 +29,9 @@ before_install:
 install:
   - composer install
   - ./bin/phpunit install
-  - 
+  - ./bin/console doctrine:database:create
+  - ./bin/console doctrine:migrations:migrate -n
+  - ./bin/console doctrine:fixtures:load -n
 
 script:
   - ./bin/phpunit
