@@ -1,4 +1,5 @@
 language: generic
+dist: trusty
 sudo: false
 
 cache:
@@ -20,7 +21,6 @@ matrix:
     - php: 7.3
 
 before_install:
-  - '[[ "$TRAVIS_PHP_VERSION" == "nightly" ]] || phpenv config-rm xdebug.ini'
   - composer self-update
 
 install:
