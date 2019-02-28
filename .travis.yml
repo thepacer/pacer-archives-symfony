@@ -1,5 +1,5 @@
 language: generic
-dist: trusty
+dist: xenial
 sudo: false
 
 cache:
@@ -16,9 +16,8 @@ env:
 matrix:
   fast_finish: true
   include:
-    - php: 7.1.18
+    - php: 7.1
     - php: 7.2
-    - php: 7.3
 
 before_install:
   - composer self-update
