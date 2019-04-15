@@ -11,11 +11,14 @@
     </ol>
   </nav>
 
-  <div class="float-right">
-    <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-primary"><i class="fas fa-newspaper mr-1"></i> Browse Volume on Archive.org</a>
+  <div class="row mb-4">
+    <div class="col-md-8 text-center text-md-left">
+      <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate|date('Y') }}-{{ volume.volumeEndDate|date('Y') }})</h2>
+    </div>
+    <div class="col-md-4 text-center text-md-right">
+      <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-primary"><i class="fas fa-newspaper mr-1"></i> Browse Volume on Archive.org</a>
+    </div>
   </div>
-  
-  <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate|date('Y') }}-{{ volume.volumeEndDate|date('Y') }})</h2>
 
   <div class="row mb-4">
     <div class="col-4">

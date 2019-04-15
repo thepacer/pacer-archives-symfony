@@ -12,10 +12,14 @@
     </ol>
   </nav>
 
-  <div class="float-right">
-    <a href="https://archive.org/details/{{ issue.archiveKey }}" target="_blank" class="btn btn-primary"><i class="fas fa-search-plus mr-1"></i> Read Issue on Archive.org</a>
+  <div class="row mb-4">
+    <div class="col-md-8 text-center text-md-left">
+      <h2 class="mb-4">{{ issue.issueDate | date('F j, Y') }}</h2>
+    </div>
+    <div class="col-md-4 text-center text-md-right">
+      <a href="https://archive.org/details/{{ issue.archiveKey }}" target="_blank" class="btn btn-primary"><i class="fas fa-search-plus mr-1"></i> Read Issue on Archive.org</a>
+    </div>
   </div>
-  <h2>{{ issue.issueDate | date('F j, Y') }}</h2>
 
   <div class="row mb-4">
     <div class="col-4">
