@@ -41,7 +41,11 @@ class PublicController extends AbstractController
 
         return $this->render('public/index.html.twig', [
             'feed' => $feed,
-            'issue_count' => $issue_count
+            'issue_count' => $issue_count,
+            'opengraph' => [
+                'title' => 'The Pacer',
+                'description' => 'The student newspaper of the University of Tennessee at Martin since 1928.'
+            ]
         ]);
     }
 
@@ -50,7 +54,12 @@ class PublicController extends AbstractController
      */
     public function missingIssues()
     {
-        return $this->render('public/missing-issues.html.twig');
+        return $this->render('public/missing-issues.html.twig', [
+            'opengraph' => [
+                'title' => 'Missing Issues',
+                'description' => 'We have collected a list of issues that are not available in our collection.'
+            ]
+        ]);
     }
 
     /**
@@ -58,7 +67,12 @@ class PublicController extends AbstractController
      */
     public function about()
     {
-        return $this->render('public/about.html.twig');
+        return $this->render('public/about.html.twig', [
+            'opengraph' => [
+                'title' => 'About The Pacer',
+                'description' => 'The newspaper archives are a collective effort of several people and organizations.'
+            ]
+        ]);
     }
 
     /**
@@ -66,6 +80,11 @@ class PublicController extends AbstractController
      */
     public function donate()
     {
-        return $this->render('public/donate.html.twig');
+        return $this->render('public/donate.html.twig', [
+            'opengraph' => [
+                'title' => 'Support The Pacer',
+                'description' => 'Your financial contributions helps advance journalism education at UT Martin.'
+            ]
+        ]);
     }
 }

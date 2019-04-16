@@ -44,7 +44,11 @@ class ArchiveController extends AbstractController
         return $this->render('archive/index.html.twig', [
             'issue_counts_by_year' => $issue_counts_by_year,
             'volumes' => $volumes,
-            'years' => $years
+            'years' => $years,
+            'opengraph' => [
+                'title' => 'The Pacer Archives',
+                'description' => 'A collection of student newspaper issues since 1928.'
+            ]
         ]);
     }
 
