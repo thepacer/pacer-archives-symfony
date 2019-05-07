@@ -1,13 +1,10 @@
 sonata_admin:
-    title: 'Archive Administration'
-    title_logo: false
+    title: 'Archive Admin'
+    title_logo: favicon-32x32.png
     show_mosaic_button: false
-    # templates:
-    #     dashboard: 'admin/dashboard.html.twig'
     dashboard:
         blocks:
             -
-                # class:    col-lg-3 col-xs-6
                 position: left
                 type:     sonata.admin.block.stats
                 settings:
@@ -16,7 +13,6 @@ sonata_admin:
                     text:  Volumes
                     color: bg-aqua
             -
-                # class:    col-lg-3 col-xs-6
                 position: left
                 type:     sonata.admin.block.stats
                 settings:
@@ -25,7 +21,6 @@ sonata_admin:
                     text:  Issues
                     color: bg-aqua
             -
-                # class:    col-lg-3 col-xs-6
                 position: right
                 type:     sonata.admin.block.stats
                 settings:
@@ -34,7 +29,6 @@ sonata_admin:
                     text:  Articles
                     color: bg-aqua
             -
-                # class:    col-lg-3 col-xs-6
                 position: right
                 type:     sonata.admin.block.stats
                 settings:
