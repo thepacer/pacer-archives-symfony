@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Cache\Simple\FilesystemCache;
-
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Issue;
@@ -13,31 +13,32 @@ use GuzzleHttp\Client as Client;
 
 class PublicController extends AbstractController
 {
+    const CACHE_TTL = 3600;
+
     /**
      * @Route("/", name="home")
      */
     public function index(Request $request)
     {
-        $cache = new FilesystemCache();
+        $cache = new FilesystemAdapter();
         $entityManager = $this->getDoctrine()->getManager();
 
         // Clear cache
         if ($request->get('clearCache')) {
-            $cache->clear();
+            $cache->delete('public.pacer_site_feed');
+            $cache->delete('public.issue_count');
         }
 
-        if (!$cache->has('public.pacer_site_feed')) {
+        $feed = $cache->get('public.pacer_site_feed', function (ItemInterface $item) {
+            $item->expiresAfter(self::CACHE_TTL);
             $client = new Client();
             $response = $client->get('http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5');
-            $cache->set('public.pacer_site_feed', json_decode($response->getBody()), 3600);
-        }
-
-        if (!$cache->has('public.issue_count')) {
-            $cache->set('public.issue_count', $entityManager->getRepository(Issue::class)->getTotalIssueCount(), 300);
-        }
-
-        $feed = $cache->get('public.pacer_site_feed');
-        $issue_count = $cache->get('public.issue_count');
+            return json_decode($response->getBody());
+        });
+        $issue_count = $cache->get('public.issue_count', function (ItemInterface $item) use ($entityManager) {
+            $item->expiresAfter(self::CACHE_TTL);
+            return $entityManager->getRepository(Issue::class)->getTotalIssueCount();
+        });
 
         return $this->render('public/index.html.twig', [
             'feed' => $feed,
