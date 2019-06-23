@@ -101,9 +101,6 @@
     "doctrine/reflection": {
         "version": "v1.0.0"
     },
-    "facebook/webdriver": {
-        "version": "1.6.0"
-    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.36"
     },
@@ -154,9 +151,6 @@
     },
     "psr/log": {
         "version": "1.1.0"
-    },
-    "psr/simple-cache": {
-        "version": "1.0.1"
     },
     "ralouphie/getallheaders": {
         "version": "2.0.5"
@@ -317,12 +311,6 @@
             "ref": "99d0a737bb3a14a25530fc8c528aa2a632f43079"
         }
     },
-    "symfony/http-client": {
-        "version": "v4.3.0"
-    },
-    "symfony/http-client-contracts": {
-        "version": "v1.1.3"
-    },
     "symfony/http-foundation": {
         "version": "v4.2.1"
     },
@@ -352,9 +340,6 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
-    },
-    "symfony/panther": {
-        "version": "v0.2.0"
     },
     "symfony/phpunit-bridge": {
         "version": "4.1",
