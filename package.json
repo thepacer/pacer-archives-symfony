@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "webpack-notifier": "^1.7.0"
+        "webpack-notifier": "^1.8.0"
     },
     "license": "UNLICENSED",
     "private": true,
