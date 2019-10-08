@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "aws/aws-sdk-php-symfony": "^2.0",
-        "beberlei/DoctrineExtensions": "^1.2",
+        "beberlei/doctrineextensions": "^1.2",
         "guzzlehttp/guzzle": "^6.3",
         "knplabs/knp-markdown-bundle": "^1.7",
         "sensio/framework-extra-bundle": "^5.2",
