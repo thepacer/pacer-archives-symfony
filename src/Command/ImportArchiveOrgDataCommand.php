@@ -9,6 +9,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Symfony\Component\HttpClient\HttpClient;
 
 use App\Entity\Issue;
 use App\Entity\Volume;
@@ -77,7 +78,7 @@ class ImportArchiveOrgDataCommand extends Command
             'output' => 'json'
         ]);
 
-        $client = new \GuzzleHttp\Client();
+        $client = HttpClient::create();
         $result = $client->request('GET', $url);
 
         $json = json_decode($result->getBody());

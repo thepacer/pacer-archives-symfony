@@ -9,7 +9,7 @@ use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 use App\Entity\Issue;
-use GuzzleHttp\Client as Client;
+use Symfony\Component\HttpClient\HttpClient;
 
 class PublicController extends AbstractController
 {
@@ -31,9 +31,9 @@ class PublicController extends AbstractController
 
         $feed = $cache->get('public.pacer_site_feed', function (ItemInterface $item) {
             $item->expiresAfter(self::CACHE_TTL);
-            $client = new Client();
-            $response = $client->get('http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5');
-            return json_decode($response->getBody());
+            $client = HttpClient::create();
+            $response = $client->request('GET', 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5');
+            return json_decode($response->getContent());
         });
         $issue_count = $cache->get('public.issue_count', function (ItemInterface $item) use ($entityManager) {
             $item->expiresAfter(self::CACHE_TTL);
