@@ -81,7 +81,7 @@ class ImportArchiveOrgDataCommand extends Command
         $client = HttpClient::create();
         $result = $client->request('GET', $url);
 
-        $json = json_decode($result->getBody());
+        $json = json_decode($result->getContent());
 
         foreach ($json->response->docs as $doc) {
             // Find existing volume
