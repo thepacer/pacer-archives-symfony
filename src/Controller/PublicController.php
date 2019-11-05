@@ -81,11 +81,6 @@ class PublicController extends AbstractController
      */
     public function donate()
     {
-        return $this->render('public/donate.html.twig', [
-            'opengraph' => [
-                'title' => 'Support The Pacer',
-                'description' => 'Your financial contributions helps advance journalism education at UT Martin.'
-            ]
-        ]);
+        return $this->redirect('https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1');
     }
 }
