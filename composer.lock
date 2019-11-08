@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.112.17",
+            "version": "3.115.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "3f9a88fd8ae93f040d583d19b1b8242604d99080"
+                "reference": "c705a740705bdfb7c23394a3a92adb2fe13fe149"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/3f9a88fd8ae93f040d583d19b1b8242604d99080",
-                "reference": "3f9a88fd8ae93f040d583d19b1b8242604d99080",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c705a740705bdfb7c23394a3a92adb2fe13fe149",
+                "reference": "c705a740705bdfb7c23394a3a92adb2fe13fe149",
                 "shasum": ""
             },
             "require": {
@@ -87,20 +87,20 @@
                 "s3",
                 "sdk"
             ],
-            "time": "2019-10-08T18:13:19+00:00"
+            "time": "2019-11-07T19:27:35+00:00"
         },
         {
             "name": "aws/aws-sdk-php-symfony",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php-symfony.git",
-                "reference": "6a6eda7df2c72c033c5c15594ee85db7d0107784"
+                "reference": "86bed6e529f8d371cb81331b31785b6a69a20b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php-symfony/zipball/6a6eda7df2c72c033c5c15594ee85db7d0107784",
-                "reference": "6a6eda7df2c72c033c5c15594ee85db7d0107784",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php-symfony/zipball/86bed6e529f8d371cb81331b31785b6a69a20b0a",
+                "reference": "86bed6e529f8d371cb81331b31785b6a69a20b0a",
                 "shasum": ""
             },
             "require": {
@@ -140,7 +140,7 @@
                 "symfony",
                 "symfony3"
             ],
-            "time": "2019-02-27T00:49:24+00:00"
+            "time": "2019-11-07T19:11:43+00:00"
         },
         {
             "name": "beberlei/doctrineextensions",
