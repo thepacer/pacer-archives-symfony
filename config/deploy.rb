@@ -2,7 +2,7 @@
 lock "~> 3.11.0"
 
 set :application, "ThePacerOrg"
-set :repo_url, "git@github.com:PacerCMS/pacer-archives-symfony.git"
+set :repo_url, "git@github.com:thepacer/pacer-archives-symfony.git"
 
 # Use package.lock.json
 set :npm_method, 'ci'
