@@ -1,5 +1,7 @@
 # _The Pacer_ Archives
 
+[![Build Status](https://travis-ci.com/thepacer/pacer-archives.svg?branch=master)](https://travis-ci.com/thepacer/pacer-archives)
+
 A PHP application written in the Symfony framework to present the archives of _The Pacer_, the student newspaper at the University of Tennessee at Martin.
 
 ## Requirements
@@ -20,4 +22,4 @@ A PHP application written in the Symfony framework to present the archives of _T
 1. `npm ci`
 1. `./bin/console doctrine:migrations:migrate`
 1. `npm run-script dev-server` (captures console)
-1. `./bin/console server:run` (captures console)
+1. `symfony server:start` (captures console)
