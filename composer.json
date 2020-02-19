@@ -22,6 +22,7 @@
         "symfony/form": "^4.4",
         "symfony/framework-bundle": "^4.4",
         "symfony/http-client": "^4.4",
+        "symfony/monolog-bundle": "^3.5",
         "symfony/orm-pack": "^1.0",
         "symfony/security": "^4.4",
         "symfony/security-bundle": "^4.4",

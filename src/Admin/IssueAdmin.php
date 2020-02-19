@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 
 final class IssueAdmin extends AbstractAdmin
 {
@@ -24,6 +25,10 @@ final class IssueAdmin extends AbstractAdmin
             ])
             ->add('pageCount', null, [
                 'label' => 'Page Count'
+            ])
+            ->add('utmDigitalArchiveUrl', UrlType::class, [
+                'label' => 'UTM Digital Archive URL',
+                'required' => false
             ])
             ->add('archiveKey', null, [
                 'label' => 'Archive.org Identifier'
@@ -48,6 +53,9 @@ final class IssueAdmin extends AbstractAdmin
                 'label' => 'Page Count'
             ])
             ->add('volume')
+            ->add('utmDigitalArchiveUrl', null, [
+                'label' => 'UTM Digital Archive URL'
+            ])
             ->add('archiveKey', null, [
                 'label' => 'Archive.org Identifier'
             ])
@@ -67,6 +75,9 @@ final class IssueAdmin extends AbstractAdmin
                 'label' => 'Page Count'
             ])
             ->add('volume')
+            ->add('utmDigitalArchiveUrl', null, [
+                'label' => 'UTM Digital Archive URL'
+            ])
             ->add('archiveKey', null, [
                 'label' => 'Archive.org Identifier'
             ])
