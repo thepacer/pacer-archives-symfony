@@ -68,7 +68,8 @@ class ImportArchiveOrgDataCommand extends Command
                 'volume',
                 'issue',
                 'pages',
-                'notes'
+                'notes',
+                'utmdigitalarchive'
             ],
             'sort' => [
                 'date asc'
@@ -114,6 +115,9 @@ class ImportArchiveOrgDataCommand extends Command
             $issue->setArchiveKey($doc->identifier);
             $issue->setPageCount(isset($doc->pages) ? $doc->pages : 0);
             $issue->setArchiveNotes(isset($doc->notes) ? $doc->notes : '');
+            if (property_exists($doc, 'utmdigitalarchive')) {
+                $issue->setUtmDigitalArchiveUrl($doc->utmdigitalarchive);
+            }
             $this->entityManager->persist($issue);
         }
 
