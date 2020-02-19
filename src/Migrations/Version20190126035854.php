@@ -66,40 +66,10 @@ final class Version20190126035854 extends AbstractMigration
         $userTable = $schema->createTable('user');
         $userTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
         $userTable->addColumn('email', 'string', ['length' => 180, 'notnull' => true]);
-        $userTable->addColumn('roles', 'text', ['notnull' => true]);
+        $userTable->addColumn('roles', 'text', ['notnull' => true, 'comment' => '(DC2Type:json)']);
         $userTable->addColumn('password', 'string', ['length' => 255, 'notnull' => true]);
         $userTable->addUniqueIndex(['email'], 'UNIQ_8D93D649E7927C74');
         $userTable->setPrimaryKey(['id']);
-
-        $legacyArticleTable = $schema->createTable('legacy_article');
-        $legacyArticleTable->addColumn('article_id', 'integer', ['autoincrement' => true, 'notnull' => true]);
-        $legacyArticleTable->addColumn('issue_id', 'string', ['length' => 255, 'notnull' => true]);
-        $legacyArticleTable->addColumn('section_id', 'string', ['length' => 15, 'notnull' => true]);
-        $legacyArticleTable->addColumn('author_id', 'string', ['length' => 40]);
-        $legacyArticleTable->addColumn('co_author_id', 'string', ['length' => 40]);
-        $legacyArticleTable->addColumn('author_title', 'string', ['length' => 40]);
-        $legacyArticleTable->addColumn('co_author_title', 'string', ['length' => 40]);
-        $legacyArticleTable->addColumn('title', 'string', ['length' => 200]);
-        $legacyArticleTable->addColumn('subtitle', 'string', ['length' => 200]);
-        $legacyArticleTable->addColumn('summary', 'text');
-        $legacyArticleTable->addColumn('full_text', 'text');
-        $legacyArticleTable->addColumn('photo_src', 'string', ['length' => 150]);
-        $legacyArticleTable->addColumn('photo_align', 'string', ['length' => 15]);
-        $legacyArticleTable->addColumn('photo_border', 'string', ['length' => 2]);
-        $legacyArticleTable->addColumn('priority', 'integer');
-        $legacyArticleTable->addColumn('photo_credit', 'string', ['length' => 40]);
-        $legacyArticleTable->addColumn('photo_caption', 'text');
-        $legacyArticleTable->addColumn('keywords', 'text');
-        $legacyArticleTable->addColumn(
-            'last_edited',
-            'string',
-            [
-                'length' => 200,
-                'notnull' => true,
-                'default' => 'UNKNOWN'
-            ]
-        );
-        $legacyArticleTable->setPrimaryKey(['article_id']);
 
         $imageTable = $schema->createTable('image');
         $imageTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
