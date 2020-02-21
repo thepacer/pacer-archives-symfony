@@ -70,8 +70,23 @@ class ImportContentdmLinksCommand extends Command
                 $issue = $this->entityManager->getRepository(Issue::class)->findOneBy([
                     'issueDate' => new \DateTime($item->date)
                 ]);
+                // See if we have a matching issue by date
                 if (is_null($issue)) {
-                    $io->error(sprintf('Could not find issue matching date: %s; Record: %s', $item->date, $this->buildUtmArchiveUrl($item)));
+                    // No match, see if we already have this URL saved
+                    $issue = $this->entityManager->getRepository(Issue::class)->findOneBy([
+                        'utmDigitalArchiveUrl' => $this->buildUtmArchiveUrl($item)
+                    ]);
+                    if ($issue) {
+                        $io->writeln(sprintf(
+                            'No match on date: %s; Found match on: %s; Record: %s',
+                            $item->date,
+                            $issue->getIssueDate()->format('Y-m-d'),
+                            $this->buildUtmArchiveUrl($item)
+                        ));
+                        continue;
+                    }
+                    // No match, add error message.
+                    $io->error(sprintf('No match on date: %s; Record: %s', $item->date, $this->buildUtmArchiveUrl($item)));
                     continue;
                 } else {
                     $issue->setUtmDigitalArchiveUrl($this->buildUtmArchiveUrl($item));
