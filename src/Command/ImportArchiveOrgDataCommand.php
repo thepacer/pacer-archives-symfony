@@ -48,7 +48,7 @@ class ImportArchiveOrgDataCommand extends Command
                 $volume->setVolumeStartDate(new \DateTime("$start_year-08-01"));
                 $volume->setVolumeEndDate(new \DateTime("$end_year-07-31"));
                 $volume->setNameplateKey('volette');
-                if ($volume->getVolumeNumber() >= 54) {
+                if ($volume->getVolumeNumber() >= 44) {
                     $volume->setNameplateKey('pacer');
                 }
                 $this->entityManager->persist($volume);
