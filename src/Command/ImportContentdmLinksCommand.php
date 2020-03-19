@@ -36,7 +36,6 @@ class ImportContentdmLinksCommand extends Command
     {
         $this
             ->setDescription('Imports data from UT Martin\'s CONTENTdm instance.')
-            ->addOption('save', null, InputOption::VALUE_NONE, 'Save matched records to database.')
         ;
     }
 
@@ -100,11 +99,7 @@ class ImportContentdmLinksCommand extends Command
                 break;
             }
         }
-
-        if ($input->getOption('save')) {
-            $this->entityManager->flush();
-        }
-
+        $this->entityManager->flush();
         $io->success('Done!');
 
         return 0;
