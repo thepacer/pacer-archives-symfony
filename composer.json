@@ -10,8 +10,6 @@
         "knplabs/knp-markdown-bundle": "^1.7",
         "sensio/framework-extra-bundle": "^5.2",
         "sensiolabs/security-checker": "^6.0",
-        "sonata-project/admin-bundle": "^3.45",
-        "sonata-project/doctrine-orm-admin-bundle": "^3.8",
         "stof/doctrine-extensions-bundle": "^1.3",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.4",
@@ -32,7 +30,8 @@
         "symfony/webpack-encore-bundle": "^1.0",
         "symfony/yaml": "^4.4",
         "tomodomo/twig-pluralize-extension": "^2.0",
-        "twig/extensions": "^1.5"
+        "twig/extensions": "^1.5",
+        "twig/extra-bundle": "^3.0"
     },
     "config": {
         "platform": {
