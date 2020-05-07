@@ -18,13 +18,14 @@ env:
 matrix:
   fast_finish: true
   include:
+    - php: 7.1
+    - php: 7.2
     - php: 7.3
 
 before_install:
-  - composer self-update
   - phpenv versions
-  - phpenv shell 7.3
   - php --version
+  - composer self-update
 
 install:
   - composer install
