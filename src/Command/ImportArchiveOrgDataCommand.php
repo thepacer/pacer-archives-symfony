@@ -32,7 +32,7 @@ class ImportArchiveOrgDataCommand extends Command
         ;
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
 
@@ -124,5 +124,6 @@ class ImportArchiveOrgDataCommand extends Command
         $this->entityManager->flush();
 
         $io->success('Done!');
+        return 0;
     }
 }

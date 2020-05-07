@@ -101,7 +101,6 @@ class ImportContentdmLinksCommand extends Command
         }
         $this->entityManager->flush();
         $io->success('Done!');
-
         return 0;
     }
 
