@@ -17,9 +17,6 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
-    "cocur/slugify": {
-        "version": "v3.2"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -113,12 +110,6 @@
     "knplabs/knp-markdown-bundle": {
         "version": "1.7.1"
     },
-    "knplabs/knp-menu": {
-        "version": "2.3.0"
-    },
-    "knplabs/knp-menu-bundle": {
-        "version": "v2.2.1"
-    },
     "michelf/php-markdown": {
         "version": "1.8.0"
     },
@@ -175,42 +166,6 @@
         "files": [
             "config/packages/security_checker.yaml"
         ]
-    },
-    "sonata-project/admin-bundle": {
-        "version": "3.31",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.31",
-            "ref": "0e5931df1732e3dccfba42a20853049e5e9db6ae"
-        }
-    },
-    "sonata-project/block-bundle": {
-        "version": "3.14.0"
-    },
-    "sonata-project/cache": {
-        "version": "2.0.1"
-    },
-    "sonata-project/core-bundle": {
-        "version": "3.9",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.9",
-            "ref": "2f69bd1995730b73a5211a9707622fb25a925df7"
-        }
-    },
-    "sonata-project/datagrid-bundle": {
-        "version": "2.4.0"
-    },
-    "sonata-project/doctrine-extensions": {
-        "version": "1.1.5"
-    },
-    "sonata-project/doctrine-orm-admin-bundle": {
-        "version": "3.8.2"
-    },
-    "sonata-project/exporter": {
-        "version": "1.11.0"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
@@ -280,9 +235,6 @@
     },
     "symfony/event-dispatcher-contracts": {
         "version": "v1.1.1"
-    },
-    "symfony/expression-language": {
-        "version": "v4.2.3"
     },
     "symfony/filesystem": {
         "version": "v4.2.1"
@@ -406,9 +358,6 @@
     "symfony/security": {
         "version": "v4.2.2"
     },
-    "symfony/security-acl": {
-        "version": "v3.0.1"
-    },
     "symfony/security-bundle": {
         "version": "3.3",
         "recipe": {
@@ -423,9 +372,6 @@
     },
     "symfony/stopwatch": {
         "version": "v4.2.2"
-    },
-    "symfony/templating": {
-        "version": "v4.2.3"
     },
     "symfony/test-pack": {
         "version": "v1.0.5"
@@ -501,6 +447,9 @@
             "version": "1.0",
             "ref": "ddb2e0a77773b7fd75d8d649545f174e664500ab"
         }
+    },
+    "twig/extra-bundle": {
+        "version": "v3.0.3"
     },
     "twig/twig": {
         "version": "v2.6.0"
