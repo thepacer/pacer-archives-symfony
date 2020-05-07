@@ -1,6 +1,5 @@
 language: generic
 dist: xenial
-sudo: false
 
 notifications:
   email: false
@@ -24,6 +23,8 @@ matrix:
     - php: 7.3
 
 before_install:
+  - phpenv versions
+  - php --version
   - composer self-update
 
 install:
