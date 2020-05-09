@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}The Pacer{% endblock %}</title>
     <meta property="description" content="{{ opengraph.description|replace({"\n":' ', "\r":' '})|truncate(140)|default('Student newspaper at the University of Tennessee at Martin.') }}" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <script src="https://kit.fontawesome.com/09b66f5b11.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
     <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
     <meta property="og:site_name" content="The Pacer">
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-4 text-center">
           <div class="py-3 py-lg-0">
-            <a class="h3 site-header-logo text-dark" href="{{ path('home') }}"><img src="{{ asset('assets/images/nameplate.svg') }}" class="img-fluid py-2" style="max-height:80px" /></a>
+            <a class="h3 site-header-logo text-dark" href="{{ path('home') }}"><img src="{{ asset('build/nameplate.svg') }}" class="img-fluid py-2" style="max-height:80px" /></a>
           </div>
         </div>
         <div class="col-md-4 text-center text-md-right align-items-center">
