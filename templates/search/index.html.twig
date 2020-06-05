@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% form_theme searchForm 'bootstrap_4_horizontal_layout.html.twig' %}
+
+{% block title %}Search - {{ parent() }}{% endblock %}
+
+{% block body %}
+
+<div class="container mt-3">
+  <div class="card mb-3">
+    <div class="card-header">Search</div>
+    <div class="card-body">
+      {{ form_start(searchForm) }}
+      <div class="form-group">{{ form_widget(searchForm.s) }}</div>
+      <ul class="list-inline">
+        <li class="list-inline-item"><strong>Find in:</strong></li>
+        {% for index in searchForm.index %}
+          <li class="list-inline-item">{{ form_widget(index) }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="card-footer text-right">
+      <input type="submit" class="btn btn-primary" value="Search" />
+    </div>
+  </div>
+  {{ form_rest(searchForm) }}
+  {{ form_end(searchForm) }}
+
+  {% if searchForm.vars.submitted %}
+  <div class="row">
+    <div class="col-md-8">
+      {% for row in results %}
+      {% set article = row[0] %}
+      <div class="card mb-1">
+        <div class="card-body">
+          <h4 class="mb-1"><a href="{{ path('article', { id: article.id, slug: article.slug } )}}">{{ article.headline }}</a></h4>
+          <p class="text-muted">{{ article.datePublished|date('F j, Y') }} | {{ article.authorByline }}</p>
+          <p class="mb-0">{{ article.articleBody|striptags|truncate(80, '...') }}</p>
+        </div>
+      </div>
+      {% else %}
+      <p class="alert alert-info">No results matched your query.</p>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% endblock %}
