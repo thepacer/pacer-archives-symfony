@@ -25,10 +25,11 @@
   {{ form_rest(searchForm) }}
   {{ form_end(searchForm) }}
 
-  {% if searchForm.vars.submitted %}
+  {% if pagination and pagination.getTotalItemCount > 0 %}
+
   <div class="row">
     <div class="col-md-8">
-      {% for row in results %}
+      {% for row in pagination %}
       {% set article = row[0] %}
       <div class="card mb-1">
         <div class="card-body">
@@ -40,8 +41,24 @@
       {% else %}
       <p class="alert alert-info">No results matched your query.</p>
       {% endfor %}
+      <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="mb-3"><span class="h2">{{ pagination.getTotalItemCount }}</span> results</div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item{% if pagination.isSorted('a.datePublished') %} sorted{% endif %}">
+          {{ knp_pagination_sortable(pagination, 'Date Published', 'a.datePublished') }}
+        </li>
+        <li class="list-group-item{% if pagination.isSorted('score') %}  sorted{% endif %}">
+          {{ knp_pagination_sortable(pagination, 'Relevancy', 'score') }}
+        </li>
+      </ul>
     </div>
   </div>
+  
+
   {% endif %}
 </div>
 

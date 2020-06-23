@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use App\Form\ArticleSearchType;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,27 +18,36 @@ class SearchController extends AbstractController
     /**
      * @Route("/", name="search")
      */
-    public function index(ArticleRepository $articleRepository, Request $request)
+    public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request)
     {
         $searchForm = $this->createForm(ArticleSearchType::class, null, [
-            'action' => $this->generateUrl('search')
+            'method' => 'GET',
+            'action' => $this->generateUrl('search'),
+            's' => $request->query->get('s'),
+            'index' => $request->query->get('index', 'content')
         ]);
 
-        $searchForm->handleRequest($request);
-        $results = [];
-        if ($searchForm->isSubmitted() && $searchForm->isValid()) {
-            $data = $searchForm->getData();
-            if ($data['s']) {
-                if ($data['index'] == 'author') {
-                    $results = $articleRepository->searchAuthor($data['s']);
-                } else {
-                    $results = $articleRepository->searchContent($data['s']);
-                }
+        $pagination = false;
+
+        if ($request->query->get('s')) {
+            if ($request->query->get('index') == 'author') {
+                $query = $articleRepository->searchAuthor($request->query->get('s'));
+            } else {
+                $query = $articleRepository->searchContent($request->query->get('s'));
             }
+            $pagination = $paginator->paginate(
+                $query,
+                $request->query->getInt('page', 1),
+                10,
+                ['wrap-queries' => true]
+            );
         }
+
+
+
         return $this->render('search/index.html.twig', [
             'searchForm' => $searchForm->createView(),
-            'results' => $results
+            'pagination' => $pagination
         ]);
     }
 }

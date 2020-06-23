@@ -10,12 +10,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleSearchType extends AbstractType
 {
+    public function getBlockPrefix(): string
+    {
+        return '';
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->setAction($options['action'])
             ->add('s', SearchType::class, [
-                'label' => 'Search Term'
+                'label' => 'Search Term',
+                'mapped' => false,
+                'data' => $options['s']
             ])
             ->add('index', ChoiceType::class, [
                 'choices' => [
@@ -24,7 +31,10 @@ class ArticleSearchType extends AbstractType
                 ],
                 'data' => 'content',
                 'label' => 'Search Index',
-                'expanded' => true
+                'property_path' => 'index',
+                'expanded' => true,
+                'data' => $options['index'],
+                'required' => true
             ])
         ;
     }
@@ -32,8 +42,12 @@ class ArticleSearchType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
+            'csrf_protection' => false,
             'action' => '',
-            'mapped' => false
+            'method' => 'get',
+            'mapped' => false,
+            's' => '',
+            'index' => 'content'
         ]);
     }
 }

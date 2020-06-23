@@ -27,7 +27,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->having('score > 0')
             ->orderBy('score', 'DESC')
             ->getQuery()
-            ->getResult()
         ;
     }
 
@@ -39,7 +38,6 @@ class ArticleRepository extends ServiceEntityRepository
             ->having('score > 0')
             ->orderBy('score', 'DESC')
             ->getQuery()
-            ->getResult()
         ;
     }
 }
