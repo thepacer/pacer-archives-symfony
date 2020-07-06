@@ -10,7 +10,11 @@
     <div class="card-header">Search</div>
     <div class="card-body">
       {{ form_start(searchForm) }}
-      <div class="form-group">{{ form_widget(searchForm.s) }}</div>
+      <div class="form-group">{{ form_widget(searchForm.s, {attr: { placeholder: 'Enter search text ...'}} ) }}</div>
+      <div class="d-flex mb-2">
+        <div class="p-2"><i class="fas fa-info-circle"></i></div>
+        <div class="p-2 flex-fill text-muted">This form will search articles that are available on this website from 2002 to 2006. To search the contents of older issues, use the <a href="https://archive.org/details/thepacer" target="_blank">search form on the Internet Archive site</a> and select "text contents".</div>
+      </div>
       <ul class="list-inline">
         <li class="list-inline-item"><strong>Find in:</strong></li>
         {% for index in searchForm.index %}
