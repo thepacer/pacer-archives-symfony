@@ -8,7 +8,7 @@ use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-use App\Entity\Issue;
+use App\Repository\IssueRepository;
 use Symfony\Component\HttpClient\HttpClient;
 
 class PublicController extends AbstractController
@@ -18,10 +18,9 @@ class PublicController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request)
+    public function index(IssueRepository $issueRepository, Request $request)
     {
         $cache = new FilesystemAdapter();
-        $entityManager = $this->getDoctrine()->getManager();
 
         // Clear cache
         if ($request->get('clearCache')) {
@@ -35,9 +34,9 @@ class PublicController extends AbstractController
             $response = $client->request('GET', 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5');
             return json_decode($response->getContent());
         });
-        $issue_count = $cache->get('public.issue_count', function (ItemInterface $item) use ($entityManager) {
+        $issue_count = $cache->get('public.issue_count', function (ItemInterface $item) use ($issueRepository) {
             $item->expiresAfter(self::CACHE_TTL);
-            return $entityManager->getRepository(Issue::class)->getTotalIssueCount();
+            return $issueRepository->getTotalIssueCount();
         });
 
         return $this->render('public/index.html.twig', [
