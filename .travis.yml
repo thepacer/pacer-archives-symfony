@@ -26,7 +26,8 @@ matrix:
 before_install:
   - phpenv versions
   - php --version
-  - nvm use 10
+  - nvm versions
+  - nvm use lts/*
   - node --version
   - npm --version
   - composer self-update
