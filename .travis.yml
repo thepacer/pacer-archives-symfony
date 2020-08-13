@@ -26,7 +26,7 @@ matrix:
 before_install:
   - phpenv versions
   - php --version
-  - nvm versions
+  - nvm ls
   - nvm use lts/*
   - node --version
   - npm --version
