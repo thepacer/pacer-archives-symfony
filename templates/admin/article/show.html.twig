@@ -4,9 +4,17 @@
 
 {% block body %}
 <div class="container">
-    <h1>{{ article }}</h1>
+  {% embed 'admin/_page_header.html.twig' %}
+  {% block page_header_title %}{{ article }}{% endblock %}
+  {% block page_header_buttons %}
+  <a href="{{ path('article_index') }}"><i class="fas fa-list fa-fw"></i></a>
+  <a href="{{ path('article_edit', {'id': article.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
+  {% endblock %}
+  {% endembed %}
 
-    <table class="table">
+  <div class="card mb-3">
+    <div class="card-body">
+      <table class="table">
         <tbody>
             <tr>
                 <th>ID</th>
@@ -73,12 +81,10 @@
                 <td><tt>{{ article.slug }}</tt></td>
             </tr>
         </tbody>
-    </table>
+      </table>
+    </div>
+  </div>
 
-    <a href="{{ path('article_index') }}"><i class="fas fa-list fa-fw"></i></a>
-
-    <a href="{{ path('article_edit', {'id': article.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
-
-    {{ include('admin/article/_delete_form.html.twig') }}
+  {{ include('admin/article/_delete_form.html.twig') }}
 </div>
 {% endblock %}

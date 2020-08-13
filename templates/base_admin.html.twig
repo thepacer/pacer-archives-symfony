@@ -40,9 +40,16 @@
     <div id="content" tabindex="-1">
     {% block body %}{% endblock %}
     </div>
+
+    <footer class="text-center p-5">
+      <a href="{{ path('home') }}">Back to Website</a>
+    </footer>
+
     {% block javascripts %}
     <script src="https://kit.fontawesome.com/09b66f5b11.js" crossorigin="anonymous"></script>
     {{ encore_entry_script_tags('admin') }}
+    {% endblock %}
+    {% block pagejs %}
     {% endblock %}
   </body>
 </html>

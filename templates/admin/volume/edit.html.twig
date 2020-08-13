@@ -4,12 +4,13 @@
 
 {% block body %}
 <div class="container">
-    <h1>Edit {{ volume }}</h1>
+  {% embed 'admin/_page_header.html.twig' %}
+  {% block page_header_title %}Edit {{ volume }}{% endblock %}
+  {% block page_header_buttons %}
+  <a href="{{ path('volume_index') }}"><i class="fas fa-list fa-fw"></i></a>
+  {% endblock %}
+  {% endembed %}
 
-    {{ include('admin/volume/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('volume_index') }}"><i class="fas fa-list fa-fw"></i></a>
-
-    {{ include('admin/volume/_delete_form.html.twig') }}
+  {{ include('admin/volume/_form.html.twig', {'button_label': 'Update'}) }}
 </div>
 {% endblock %}

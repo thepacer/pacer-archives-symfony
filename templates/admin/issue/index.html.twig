@@ -4,26 +4,32 @@
 
 {% block body %}
 <div class="container">
-    <h1>Issues</h1>
+  {% embed 'admin/_page_header.html.twig' %}
+  {% block page_header_title %}Issues{% endblock %}
+  {% block page_header_buttons %}
+  <a href="{{ path('issue_new') }}"><i class="fas fa-plus fa-fw"></i></a>
+  {% endblock %}
+  {% endembed %}
 
-    <table class="table">
-        <thead>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table" id="issueTable">
+          <thead>
             <tr>
-                <th>ID</th>
                 <th>Date</th>
                 <th>Number</th>
                 <th>Pages</th>
                 <th>Archive Key</th>
                 <th>Notes</th>
                 <th>UT Martin Digital Archive</th>
-                <th></th>
+                <th data-sortable="false" class="col-actions"></th>
             </tr>
-        </thead>
-        <tbody>
-        {% for issue in issues %}
+          </thead>
+          <tbody>
+            {% for issue in issues %}
             <tr>
-                <td>{{ issue.id }}</td>
-                <td>{{ issue.issueDate ? issue.issueDate|date('n/j/Y') : '' }}</td>
+                <td data-sort="{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}">{{ issue.issueDate ? issue.issueDate|date('n/j/Y') : '' }}</td>
                 <td>{{ issue.issueNumber }}</td>
                 <td>{{ issue.pageCount }}</td>
                 <td>{{ issue.archiveKey }}</td>
@@ -34,14 +40,22 @@
                     <a href="{{ path('issue_edit', {'id': issue.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
                 <td colspan="8">no records found</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('issue_new') }}"><i class="fas fa-plus fa-fw"></i></a>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock %}
+
+{% block pagejs %}
+{{ parent() }}
+<script>
+$('#issueTable').DataTable()
+</script>
 {% endblock %}

@@ -4,38 +4,54 @@
 
 {% block body %}
 <div class="container">
-    <h1>Images</h1>
+  {% embed 'admin/_page_header.html.twig' %}
+  {% block page_header_title %}Images{% endblock %}
+  {% block page_header_buttons %}
+  <a href="{{ path('image_new') }}"><i class="fas fa-plus fa-fw"></i></a>
+  {% endblock %}
+  {% endembed %}
 
-    <table class="table">
-        <thead>
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table" id="imageTable">
+          <thead>
             <tr>
                 <th>ID</th>
                 <th>Caption</th>
                 <th>Credit</th>
                 <th>Path</th>
-                <th></th>
+                <th data-sortable="false" class="col-actions"></th>
             </tr>
-        </thead>
-        <tbody>
-        {% for image in images %}
+          </thead>
+          <tbody>
+            {% for image in images %}
             <tr>
                 <td>{{ image.id }}</td>
                 <td>{{ image.caption }}</td>
                 <td>{{ image.credit }}</td>
                 <td>{{ image.path }}</td>
-                <td>
+                <td class="col-actions">
                     <a href="{{ path('image_show', {'id': image.id}) }}"><i class="fas fa-eye fa-fw"></i></a>
                     <a href="{{ path('image_edit', {'id': image.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
                 </td>
             </tr>
-        {% else %}
+            {% else %}
             <tr>
                 <td colspan="5">no records found</td>
             </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <a href="{{ path('image_new') }}"><i class="fas fa-plus fa-fw"></i></a>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock %}
+
+{% block pagejs %}
+{{ parent() }}
+<script>
+$('#imageTable').DataTable()
+</script>
 {% endblock %}
