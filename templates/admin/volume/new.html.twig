@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Volume - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Create New Volume</h1>
+
+    {{ include('admin/volume/_form.html.twig') }}
+
+    <a href="{{ path('volume_index') }}"><i class="fas fa-list fa-fw"></i></a>
+</div>
+{% endblock %}

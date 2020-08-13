@@ -1,0 +1,15 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit {{ issue }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Edit {{ issue }}</h1>
+
+    {{ include('admin/issue/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('issue_index') }}"><i class="fas fa-list fa-fw"></i></a>
+
+    {{ include('admin/issue/_delete_form.html.twig') }}
+</div>
+{% endblock %}

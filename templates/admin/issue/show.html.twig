@@ -1,0 +1,48 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Issue {{ issue }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ issue }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ issue.id }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Number</th>
+                <td>{{ issue.issueNumber }}</td>
+            </tr>
+            <tr>
+                <th>Pages</th>
+                <td>{{ issue.pageCount }}</td>
+            </tr>
+            <tr>
+                <th>Archive Key</th>
+                <td><tt>{{ issue.archiveKey }}</tt></td>
+            </tr>
+            <tr>
+                <th>Notes</th>
+                <td>{{ issue.archiveNotes }}</td>
+            </tr>
+            <tr>
+                <th>UT Martin Digital Archive</th>
+                <td>{{ issue.utmDigitalArchiveUrl }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('issue_index') }}"><i class="fas fa-list fa-fw"></i></a>
+
+    <a href="{{ path('issue_edit', {'id': issue.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
+
+    {{ include('admin/issue/_delete_form.html.twig') }}
+</div>
+{% endblock %}

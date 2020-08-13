@@ -1,0 +1,15 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Edit {{ image }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Edit {{ image }}</h1>
+
+    {{ include('admin/image/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('image_index') }}"><i class="fas fa-list fa-fw"></i></a>
+
+    {{ include('admin/image/_delete_form.html.twig') }}
+</div>
+{% endblock %}

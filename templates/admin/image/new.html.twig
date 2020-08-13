@@ -1,0 +1,13 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Image - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Create new Image</h1>
+
+    {{ include('admin/image/_form.html.twig') }}
+
+    <a href="{{ path('image_index') }}"><i class="fas fa-list fa-fw"></i></a>
+</div>
+{% endblock %}

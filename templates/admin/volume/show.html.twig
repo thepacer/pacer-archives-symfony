@@ -1,0 +1,40 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}{{ volume }} - {{ parent() }}{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ volume }}</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ volume.id }}</td>
+            </tr>
+            <tr>
+                <th>VolumeNumber</th>
+                <td>{{ volume.volumeNumber }}</td>
+            </tr>
+            <tr>
+                <th>VolumeStartDate</th>
+                <td>{{ volume.volumeStartDate ? volume.volumeStartDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>VolumeEndDate</th>
+                <td>{{ volume.volumeEndDate ? volume.volumeEndDate|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>NameplateKey</th>
+                <td>{{ volume.nameplateKey }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('volume_index') }}"><i class="fas fa-list fa-fw"></i></a>
+
+    <a href="{{ path('volume_edit', {'id': volume.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
+
+    {{ include('admin/volume/_delete_form.html.twig') }}
+</div>
+{% endblock %}

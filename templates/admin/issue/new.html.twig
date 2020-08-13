@@ -1,0 +1,11 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}New Issue - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <h1>Create New Issue</h1>
+
+    {{ include('admin/issue/_form.html.twig') }}
+
+    <a href="{{ path('issue_index') }}"><i class="fas fa-list fa-fw"></i></a>
+{% endblock %}

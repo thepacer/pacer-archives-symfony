@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Form;
+
+use App\Entity\Article;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
+class ArticleType extends AbstractType
+{
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder
+            ->add('headline')
+            ->add('alternativeHeadline')
+            ->add('articleBody')
+            ->add('author_byline')
+            ->add('contributor_byline')
+            ->add('datePublished', DateType::class, [
+                'widget' => 'single_text'
+            ])
+            ->add('keywords')
+            ->add('modifiedBy')
+            ->add('legacyId')
+            ->add('slug')
+            ->add('issue')
+            ->add('printColumn')
+            ->add('printPage')
+            ->add('printSection')
+        ;
+    }
+
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => Article::class,
+        ]);
+    }
+}
