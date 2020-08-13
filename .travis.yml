@@ -1,5 +1,6 @@
 language: generic
 dist: xenial
+os: linux
 
 notifications:
   email: false
@@ -25,6 +26,8 @@ matrix:
 before_install:
   - phpenv versions
   - php --version
+  - node --version
+  - npm --version
   - composer self-update
 
 install:

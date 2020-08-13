@@ -1,8 +1,9 @@
 {
     "devDependencies": {
+        "webpack-dev-server": "^3.11.0",
         "webpack-notifier": "^1.8.0"
     },
-    "license": "UNLICENSED",
+    "license": "MIT",
     "private": true,
     "scripts": {
         "dev-server": "encore dev-server",
