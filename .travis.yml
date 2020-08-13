@@ -24,12 +24,7 @@ matrix:
     - php: 7.3
 
 before_install:
-  - phpenv versions
-  - php --version
-  - nvm ls
   - nvm use stable
-  - node --version
-  - npm --version
   - composer self-update
 
 install:
