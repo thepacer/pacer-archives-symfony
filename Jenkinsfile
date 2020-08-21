@@ -25,7 +25,7 @@ pipeline {
         SYMFONY_DEPRECATIONS_HELPER = 'disabled'
       }
       steps {
-        slackSend (message: "${currentBuild.fullDisplayName} Deploy started (<${env.BUILD_URL}|Open>)", color: '#37b787')
+        slackSend (message: "${currentBuild.fullDisplayName} Test started (<${env.BUILD_URL}|Open>)", color: '#37b787')
         sh './bin/console doctrine:database:drop --force'
         sh './bin/console doctrine:database:create'
         sh './bin/console doctrine:migrations:migrate -n'
@@ -41,12 +41,26 @@ pipeline {
         }
       }
     }
+    stage('Deploy to Staging') {
+      steps {
+        slackSend (message: "${currentBuild.fullDisplayName} Deploy to Staging started (<${env.BUILD_URL}|Open>)", color: '#37b787')
+        sh 'bundle exec cap staging deploy'
+      }
+      post {
+        success {
+          slackSend (message: "${currentBuild.fullDisplayName} Success after ${currentBuild.durationString.minus(' and counting')} (<${env.BUILD_URL}|Open>)", color: '#37b787')
+        }
+        failure {
+          slackSend (message: "${currentBuild.fullDisplayName} Failed after ${currentBuild.durationString.minus(' and counting')} (<${env.BUILD_URL}|Open>)", color: '#ff0000')
+        }
+      }
+    }
     stage('Deploy to Production') {
       when{
         branch 'master'
       }
       steps {
-        slackSend (message: "${currentBuild.fullDisplayName} Deploy started (<${env.BUILD_URL}|Open>)", color: '#37b787')
+        slackSend (message: "${currentBuild.fullDisplayName} Deploy to Production started (<${env.BUILD_URL}|Open>)", color: '#37b787')
         sh 'bundle exec cap production deploy'
       }
       post {
