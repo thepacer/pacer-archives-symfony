@@ -19,9 +19,18 @@ pipeline {
       }
     }
     stage('Test') {
+      environment {
+        APP_ENV = 'test'
+        SYMFONY_PHPUNIT_DIR = './bin/.phpunit'
+        SYMFONY_DEPRECATIONS_HELPER = 'disabled'
+      }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy started (<${env.BUILD_URL}|Open>)", color: '#37b787')
-        sh 'bin/phpunit'
+        sh './bin/console doctrine:database:drop --force'
+        sh './bin/console doctrine:database:create'
+        sh './bin/console doctrine:migrations:migrate -n'
+        sh './bin/console doctrine:fixtures:load -n'
+        sh './bin/phpunit'
       }
       post {
         success {
