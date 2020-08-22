@@ -42,6 +42,10 @@ pipeline {
       }
     }
     stage('Deploy to Staging') {
+      input {
+        message "Deploy to Staging?"
+        ok "Deploy"
+      }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Staging started (<${env.BUILD_URL}|Open>)", color: '#37b787')
         sh 'bundle exec cap staging deploy'
@@ -58,6 +62,10 @@ pipeline {
     stage('Deploy to Production') {
       when{
         branch 'master'
+      }
+      input {
+        message "Deploy to Production?"
+        ok "Deploy"
       }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Production started (<${env.BUILD_URL}|Open>)", color: '#37b787')
