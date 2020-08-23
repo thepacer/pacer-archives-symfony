@@ -1,4 +1,5 @@
 set :deploy_to, "/srv/www/thepacer.org/production"
+set :branch, ENV['GIT_BRANCH'] if ENV['GIT_BRANCH']
 
 server "thepacer.org", user: "deploy", roles: %w{app db web}
 
