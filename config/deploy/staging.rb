@@ -1,5 +1,4 @@
 set :deploy_to, "/srv/www/thepacer.org/staging"
-set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 server "thepacer.org", user: "deploy", roles: %w{app db web}
 
