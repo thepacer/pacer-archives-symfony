@@ -59,10 +59,6 @@ pipeline {
       when{
         branch 'master'
       }
-      input {
-        message "Deploy to Production?"
-        ok "Deploy"
-      }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Production started (<${env.BUILD_URL}|Open>)", color: '#37b787')
         sh "bundle exec cap production deploy BRANCH=${env.GIT_BRANCH}"
