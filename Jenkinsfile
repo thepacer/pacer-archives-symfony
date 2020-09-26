@@ -49,6 +49,7 @@ pipeline {
       }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Staging started (<${env.BUILD_URL}|Open>)", color: '#37b787')
+        sh 'bundle install'
         sh "bundle exec cap staging deploy BRANCH=${env.GIT_BRANCH}"
       }
       post {
@@ -66,6 +67,7 @@ pipeline {
       }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Production started (<${env.BUILD_URL}|Open>)", color: '#37b787')
+        sh 'bundle install'
         sh "bundle exec cap production deploy BRANCH=${env.GIT_BRANCH}"
       }
       post {
