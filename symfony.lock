@@ -213,13 +213,16 @@
         "version": "v4.2.1"
     },
     "symfony/console": {
-        "version": "3.3",
+        "version": "5.1",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "3.3",
-            "ref": "0fa049c19069a65f52c1c181d64be3de672c1504"
-        }
+            "version": "5.1",
+            "ref": "c6d02bdfba9da13c22157520e32a602dbee8a75c"
+        },
+        "files": [
+            "bin/console"
+        ]
     },
     "symfony/css-selector": {
         "version": "v4.2.3"
@@ -260,8 +263,11 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.0",
-            "ref": "dc3fc2e0334a4137c47cfd5a3ececc601fa61a0b"
-        }
+            "ref": "c0eeb50665f0f77226616b6038a9b06c03752d8e"
+        },
+        "files": [
+            ".env"
+        ]
     },
     "symfony/form": {
         "version": "v4.2.2"
@@ -272,7 +278,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "5.1",
-            "ref": "ffcb76bab779154c0a7d8cddb9f448c2c45a4e50"
+            "ref": "e1b2770f2404d8307450a49cabfc3b2ff3184792"
         },
         "files": [
             "config/packages/cache.yaml",
