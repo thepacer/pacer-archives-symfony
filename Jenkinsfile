@@ -45,6 +45,10 @@ pipeline {
       when {
         not {
           branch 'master'
+          expression {
+            isPrBranch = env.BRANCH_NAME ~= /PR\-[0-9]+/
+            return isPrBranch
+          }
         }
       }
       steps {
@@ -64,6 +68,10 @@ pipeline {
     stage('Deploy to Production') {
       when {
         branch 'master'
+        expression {
+          isPrBranch = env.BRANCH_NAME ~= /PR\-[0-9]+/
+          return !isPrBranch
+        }
       }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Production started (<${env.BUILD_URL}|Open>)", color: '#37b787')
