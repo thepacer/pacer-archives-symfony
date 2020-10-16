@@ -46,7 +46,7 @@ pipeline {
         not {
           branch 'master'
           expression {
-            isPrBranch = env.BRANCH_NAME ~= /PR\-[0-9]+/
+            isPrBranch = env.BRANCH_NAME ==~ /PR\-[0-9]+/
             return isPrBranch
           }
         }
@@ -69,7 +69,7 @@ pipeline {
       when {
         branch 'master'
         expression {
-          isPrBranch = env.BRANCH_NAME ~= /PR\-[0-9]+/
+          isPrBranch = env.BRANCH_NAME ==~ /PR\-[0-9]+/
           return !isPrBranch
         }
       }
