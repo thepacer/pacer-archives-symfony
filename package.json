@@ -13,7 +13,7 @@
     },
     "dependencies": {
         "@symfony/webpack-encore": "github:symfony/webpack-encore",
-        "bootstrap": "^4.5.2",
+        "bootstrap": "^4.5.3",
         "clndr": "^1.5.1",
         "datatables.net": "^1.10.22",
         "datatables.net-bs4": "^1.10.22",
@@ -21,7 +21,7 @@
         "jquery": "^3.5.1",
         "node-sass": "^4.14.1",
         "popper.js": "^1.16.1",
-        "sass-loader": "^10.0.2",
+        "sass-loader": "^10.0.3",
         "underscore": "^1.11.0"
     }
 }
