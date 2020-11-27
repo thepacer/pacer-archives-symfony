@@ -33,9 +33,9 @@
         Print Appearance
       </div>
       <div class="card-body">
-        {{ form_row(form.printPage, {label: 'Page'}) }}
-        {{ form_row(form.printColumn, {label: 'Page'}) }}
-        {{ form_row(form.printSection, {label: 'Section'}) }}
+        {{ form_row(form.printPage, {label: 'Page', help: 'Page number where article begins.'}) }}
+        {{ form_row(form.printColumn, {label: 'Column', help: 'From left to right, the column where article begins.'}) }}
+        {{ form_row(form.printSection, {label: 'Section', help: 'Name of the section heading for this article, or "Cover" if appearing on the front page.'}) }}
       </div>
     </div>
   </div>

@@ -181,7 +181,7 @@ class Article
         return $this->headline;
     }
 
-    public function setHeadline(string $headline): self
+    public function setHeadline(?string $headline): self
     {
         $this->headline = $headline;
 
@@ -193,7 +193,7 @@ class Article
         return $this->alternativeHeadline;
     }
 
-    public function setAlternativeHeadline(string $alternativeHeadline): self
+    public function setAlternativeHeadline(?string $alternativeHeadline): self
     {
         $this->alternativeHeadline = $alternativeHeadline;
 
@@ -205,7 +205,7 @@ class Article
         return $this->authorByline;
     }
 
-    public function setAuthorByline(string $authorByline): self
+    public function setAuthorByline(?string $authorByline): self
     {
         $this->authorByline = $authorByline;
 
@@ -217,7 +217,7 @@ class Article
         return $this->contributorByline;
     }
 
-    public function setContributorByline(string $contributorByline): self
+    public function setContributorByline(?string $contributorByline): self
     {
         $this->contributorByline = $contributorByline;
 

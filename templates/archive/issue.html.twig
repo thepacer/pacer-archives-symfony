@@ -81,4 +81,10 @@
   {% endif %}
 </div>
 
+{% if is_granted('ROLE_ADMIN') %}
+<div class="edit-button">
+  <a href="{{ path('issue_edit', {id: issue.id, return: 'public'}) }}" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt fa-fw"></i> Edit</a>
+</div>
+{% endif %}
+
 {% endblock %}
