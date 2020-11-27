@@ -21,7 +21,7 @@
             </tr>
             <tr>
                 <th>Date</th>
-                <td>{{ issue.issueDate ? issue.issueDate|date('Y-m-d') : '' }}</td>
+                <td>{{ issue.issueDate ? issue.issueDate|date('n/j/Y') : '' }}</td>
             </tr>
             <tr>
                 <th>Number</th>
@@ -41,7 +41,11 @@
             </tr>
             <tr>
                 <th>UT Martin Digital Archive</th>
-                <td>{{ issue.utmDigitalArchiveUrl }}</td>
+                {% if issue.utmDigitalArchiveUrl %}
+                <td><a href="{{ issue.utmDigitalArchiveUrl }}">{{ issue.utmDigitalArchiveUrl }}</a></td>
+                {% else %}
+                <td><em>Not set.</em></td>
+                {% endif %}
             </tr>
         </tbody>
       </table>
