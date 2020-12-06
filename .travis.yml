@@ -1,5 +1,5 @@
 language: generic
-dist: xenial
+dist: bionic
 os: linux
 
 notifications:
@@ -16,15 +16,10 @@ env:
     - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
     - SYMFONY_DEPRECATIONS_HELPER=disabled
 
-matrix:
-  fast_finish: true
-  include:
-    - php: 7.1
-    - php: 7.2
-    - php: 7.3
-
 before_install:
-  - nvm use stable
+  - nvm install 12.18.1
+  - nvm use 12.18.1
+  - phpenv shell 7.4.2
   - composer self-update
 
 install:
