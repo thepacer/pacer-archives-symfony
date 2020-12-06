@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "webpack-dev-server": "^3.11.0",
-        "webpack-notifier": "^1.10.1"
+        "webpack-notifier": "^1.11.0"
     },
     "license": "MIT",
     "private": true,
@@ -12,7 +12,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@symfony/webpack-encore": "^0.31.0",
+        "@symfony/webpack-encore": "^0.33.0",
         "bootstrap": "^4.5.3",
         "clndr": "^1.5.1",
         "datatables.net": "^1.10.22",
@@ -20,7 +20,7 @@
         "fullcalendar": "^5.4.0",
         "jquery": "^3.5.1",
         "popper.js": "^1.16.1",
-        "sass": "^1.29.0",
+        "sass": "^1.30.0",
         "sass-loader": "^10.1.0",
         "underscore": "^1.12.0"
     }
