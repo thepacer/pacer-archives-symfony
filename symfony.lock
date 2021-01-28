@@ -515,9 +515,6 @@
     "twig/twig": {
         "version": "v2.6.0"
     },
-    "webimpress/safe-writer": {
-        "version": "2.1.0"
-    },
     "zendframework/zend-code": {
         "version": "3.3.1"
     },

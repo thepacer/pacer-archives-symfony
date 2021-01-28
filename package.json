@@ -12,15 +12,15 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@symfony/webpack-encore": "^0.33.0",
-        "bootstrap": "^4.5.3",
+        "@symfony/webpack-encore": "^1.0.0",
+        "bootstrap": "^4.6.0",
         "clndr": "^1.5.1",
         "datatables.net": "^1.10.23",
         "datatables.net-bs4": "^1.10.23",
-        "fullcalendar": "^5.5.0",
+        "fullcalendar": "^5.5.1",
         "jquery": "^3.5.1",
         "popper.js": "^1.16.1",
-        "sass": "^1.32.4",
+        "sass": "^1.32.5",
         "sass-loader": "^10.1.1",
         "underscore": "^1.12.0"
     }
