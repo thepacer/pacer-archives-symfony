@@ -16,6 +16,7 @@
     <div class="col-md-8">  
       <div class="card mb-3">
         <div class="card-body">
+          <p><a href="{{ path('article', {slug: article.slug, id: article.id}) }}" class="btn btn-primary"><i class="fas fa-newspaper fa-fw"></i> Open {{ article }}</a></p>
           <h1>
             {{ article.headline }}
             {% if article.alternativeHeadline %}<br /><small class="text-italics">{{ article.alternativeHeadline }}</small>{% endif %}
