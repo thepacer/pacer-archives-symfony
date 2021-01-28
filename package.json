@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "file-loader": "^6.2.0",
         "webpack-dev-server": "^3.11.2",
         "webpack-notifier": "^1.12.0"
     },
