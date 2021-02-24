@@ -19,7 +19,7 @@ class IssueFixtures extends Fixture implements DependentFixtureInterface
         $issue->setIssueDate(new \DateTime('1928-12-17'));
         $issue->setVolume($volume);
         $issue->setIssueNumber('1');
-        $issue->setPageCount('4');
+        $issue->setPageCount(4);
         $issue->setArchiveKey('TheVolette19281217');
         $issue->setArchiveNotes('');
         $manager->persist($issue);

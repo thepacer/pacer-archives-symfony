@@ -26,7 +26,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $article->setPrintPage('1');
         $article->setPrintColumn('2');
         $article->setPrintSection('Cover');
-        $article->setLegacyId('100');
+        $article->setLegacyId(100);
         $manager->persist($article);
 
         $manager->flush();
