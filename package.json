@@ -21,8 +21,6 @@
         "file-loader": "^6.2.0",
         "fullcalendar": "^5.7.0",
         "jquery": "^3.6.0",
-        "npm": "^7.12.1",
-        "popper.js": "^1.16.1",
         "sass": "^1.32.13",
         "sass-loader": "^11.1.0",
         "underscore": "^1.13.1"
