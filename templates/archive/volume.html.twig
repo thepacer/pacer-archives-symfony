@@ -12,10 +12,10 @@
   </nav>
 
   <div class="d-flex flex-wrap mb-3">
-    <div class="mr-auto text-center text-md-left">
+    <div class="col text-center text-md-start">
       <h2 class="mb-4">Volume {{volume.volumeNumber}} ({{ volume.volumeStartDate|date('Y') }}-{{ volume.volumeEndDate|date('Y') }})</h2>
     </div>
-    <div class="text-center text-md-right">
+    <div class="col text-center text-md-end">
       {% if volume.issues.count > 0 %}
       <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-primary mb-1"><i class="fas fa-newspaper fa-fw mr-1"></i> Browse Volume on Archive.org</a>
       {% endif %}
@@ -34,7 +34,7 @@
       {% if volume.nameplateKey == 'pacer' %}<em>The Pacer</em>{% endif %}
       - Volume {{ volume.volumeNumber }}</strong>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-4 text-end">
       {% if nextVolume %}
       <a href="{{ path('volume', {volumeNumber: nextVolume.volumeNumber} ) }}" class="btn btn-link">Volume {{ nextVolume.volumeNumber }} <i class="fas fa-forward"></i></a>
       {% endif %}
