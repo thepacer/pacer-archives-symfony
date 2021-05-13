@@ -25,12 +25,11 @@
 
   <div class="float-end">
     <div class="btn-group btn-group-toggle" data-bs-toggle="buttons">
-      <label class="btn btn-light active">
-        <input type="radio" name="viewOptions" id="tableView" autocomplete="off" data-target="tableViewContent" checked><i class="fas fa-th-list"></i>
-      </label>
-      <label class="btn btn-light">
-        <input type="radio" name="viewOptions" id="gridView" autocomplete="off" data-target="gridViewContent"><i class="fas fa-th"></i>
-      </label>
+      <input type="radio" class="btn-check" name="viewOptions" id="tableView" autocomplete="off" data-target="tableViewContent" checked />
+      <label class="btn btn-light active" for="tableView"><i class="fas fa-th-list fa-fw"></i></label>
+
+      <input type="radio" class="btn-check" name="viewOptions" id="gridView" autocomplete="off" data-target="gridViewContent" />
+      <label class="btn btn-light" for="gridView"><i class="fas fa-th fa-fw"></i></label>
     </div>
   </div>
   <h3>By Academic Year</h3>
