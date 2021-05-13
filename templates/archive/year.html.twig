@@ -12,10 +12,10 @@
   </nav>
 
   <div class="d-flex flex-wrap mb-3">
-    <div class="mr-auto text-center text-md-left">
+    <div class="col text-center text-md-start">
       <h2 class="mb-4">Issues Published in {{ year }}</h2>
     </div>
-    <div class="text-center text-md-right">
+    <div class="col text-center text-md-end">
       {% if hasUTMDigitalArchives %}
         <a href="https://cdm17288.contentdm.oclc.org/digital/collection/p17288coll4/search/searchterm/{{ year}}/field/year/mode/exact/conn/and/order/date/ad/asc" target="_blank" class="btn btn-primary mb-1"><i class="fas fa-archive fa-fw mr-1"></i> UTM Digital Archives</a>
       {% endif %}
@@ -34,7 +34,7 @@
     <div class="col-4 text-center">
       <strong>{{ year }}</strong>
     </div>
-    <div class="col-4 text-right">
+    <div class="col-4 text-end">
       {% if nextYear %}
       <a href="{{ path('year', {year: nextYear} ) }}" class="btn btn-link">{{ nextYear }} <i class="fas fa-forward"></i></a>
       {% endif %}

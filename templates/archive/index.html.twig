@@ -12,19 +12,19 @@
   <div class="row mb-5">
     <div class="col-12">
       {% for year in years %}
-      <div class="float-left text-center mx-1 my-1">
+      <div class="col float-start text-center mx-1 my-1">
         {% if issue_counts_by_year[year] > 0 %}
-        <a href="{{ path('year', {year: year}) }}" data-toggle="tooltip" title="{{ pluralize(issue_counts_by_year[year], '1 issue', '%d issues', 'No issues available') }}" class="btn btn-light" style="width:100px">{{ year }}</a>
+        <a href="{{ path('year', {year: year}) }}" data-bs-toggle="tooltip" title="{{ pluralize(issue_counts_by_year[year], '1 issue', '%d issues', 'No issues available') }}" class="btn btn-light" style="width:100px">{{ year }}</a>
         {% else %}
-        <a href="{{ path('year', {year: year}) }}" data-toggle="tooltip" title="{{ pluralize(issue_counts_by_year[year], '1 issue', '%d issues', 'No issues available') }}" class="btn btn-light" style="opacity:0.25; width:100px">{{ year }}</a>
+        <a href="{{ path('year', {year: year}) }}" data-bs-toggle="tooltip" title="{{ pluralize(issue_counts_by_year[year], '1 issue', '%d issues', 'No issues available') }}" class="btn btn-light" style="opacity:0.25; width:100px">{{ year }}</a>
         {% endif %}
       </div>
       {% endfor %}
     </div>
   </div>
 
-  <div class="float-right">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  <div class="float-end">
+    <div class="btn-group btn-group-toggle" data-bs-toggle="buttons">
       <label class="btn btn-light active">
         <input type="radio" name="viewOptions" id="tableView" autocomplete="off" data-target="tableViewContent" checked><i class="fas fa-th-list"></i>
       </label>
