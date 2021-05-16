@@ -34,10 +34,6 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $article->setLegacyId(100);
         $article->setIssue($issue);
         $manager->persist($article);
-
-        // Enforce specified record ID
-        $metadata = $manager->getClassMetaData(get_class($article));
-        $metadata->setIdGeneratorType(\Doctrine\ORM\Mapping\ClassMetadata::GENERATOR_TYPE_NONE);
         $manager->flush();
 
         $this->addReference(self::ARTICLE_1, $article);

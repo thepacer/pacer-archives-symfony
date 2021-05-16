@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class VolumeController extends AbstractController
 {
     /**
-     * @Route("/", name="volume_index", methods={"GET"})
+     * @Route("", name="volume_index", methods={"GET"})
      */
     public function index(VolumeRepository $volumeRepository): Response
     {

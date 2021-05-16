@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class IssueController extends AbstractController
 {
     /**
-     * @Route("/", name="issue_index", methods={"GET"})
+     * @Route("", name="issue_index", methods={"GET"})
      */
     public function index(IssueRepository $issueRepository): Response
     {
