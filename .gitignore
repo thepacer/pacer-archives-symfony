@@ -8,6 +8,7 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
+
 ###> symfony/webpack-encore-bundle ###
 /node_modules/
 /public/build/
@@ -20,3 +21,5 @@ yarn-error.log
 /phpunit.xml
 .phpunit.result.cache
 ###< symfony/phpunit-bridge ###
+
+/build/
