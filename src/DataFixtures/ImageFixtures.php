@@ -13,7 +13,7 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $article = $manager->getRepository(Article::class)->findOneBy(['headline' => 'Test Article 1']);
+        $article = $this->getReference(ArticleFixtures::ARTICLE_1);
 
         $image = new Image();
         $image->setArticle($article);

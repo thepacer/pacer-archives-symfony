@@ -10,27 +10,35 @@ class PublicControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->request('GET', '/');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
+        $this->assertPageTitleSame('The Pacer');
     }
 
     public function testMissingIssues()
     {
         $client = static::createClient();
         $client->request('GET', '/missing-issues');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
+        $this->assertPageTitleSame('Missing Issues - The Pacer');
+        $this->assertSelectorTextContains('h2', 'Missing Issues');
     }
 
     public function testAbout()
     {
         $client = static::createClient();
         $client->request('GET', '/about');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
+        $this->assertPageTitleSame('About - The Pacer');
+        $this->assertSelectorTextContains('h2', 'Our History');
     }
 
     public function testDonate()
     {
         $client = static::createClient();
         $client->request('GET', '/donate');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertResponseRedirects(
+            'https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1',
+            302
+        );
     }
 }

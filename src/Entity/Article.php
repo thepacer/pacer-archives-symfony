@@ -128,6 +128,13 @@ class Article
         return $this->id;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getPrintColumn(): ?string
     {
         return $this->printColumn;
@@ -311,6 +318,13 @@ class Article
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 
     /**

@@ -14,6 +14,8 @@ use Symfony\Contracts\Cache\ItemInterface;
 class PublicController extends AbstractController
 {
     const CACHE_TTL = 3600;
+    const DONATION_URL = 'https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1';
+    const PACER_SITE_FEED = 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5';
 
     /**
      * @Route("/", name="home")
@@ -32,7 +34,7 @@ class PublicController extends AbstractController
             $item->expiresAfter(self::CACHE_TTL);
             $client = HttpClient::create();
             try {
-                $response = $client->request('GET', 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5');
+                $response = $client->request('GET', self::PACER_SITE_FEED);
                 return json_decode($response->getContent());
             } catch (ServerException $e) {
                 $cache->delete('public.pacer_site_feed');
@@ -85,6 +87,6 @@ class PublicController extends AbstractController
      */
     public function donate()
     {
-        return $this->redirect('https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1');
+        return $this->redirect(self::DONATION_URL);
     }
 }

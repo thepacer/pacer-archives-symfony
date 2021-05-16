@@ -10,6 +10,8 @@ use App\Entity\Issue;
 
 class VolumeFixtures extends Fixture
 {
+    const VOLUME_1 = 'Volume 1';
+
     public function load(ObjectManager $manager)
     {
         $volume = new Volume();
@@ -18,7 +20,8 @@ class VolumeFixtures extends Fixture
         $volume->setVolumeEndDate(new \DateTime('1929-07-31'));
         $volume->setNameplateKey('volette');
         $manager->persist($volume);
-
         $manager->flush();
+
+        $this->addReference(self::VOLUME_1, $volume);
     }
 }
