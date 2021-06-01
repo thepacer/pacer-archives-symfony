@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{% block title %}The Pacer{% endblock %}</title>
     {% if opengraph is defined %}
-    <meta property="description" content="{{ opengraph.description|replace({"\n":' ', "\r":' '})|truncate(140)|default('Student newspaper at the University of Tennessee at Martin.') }}" />
+    <meta property="description" content="{{ opengraph.description|replace({"\n":' ', "\r":' '})|u.truncate(140)|default('Student newspaper at the University of Tennessee at Martin.') }}" />
     <meta property="og:site_name" content="The Pacer">
     <meta property="og:url" content="{{ app.request.uri }}">
     <meta property="og:title" content="{{ opengraph.title|default(block('title')) }}">
-    <meta property="og:description" content="{{ opengraph.description|replace({"\n":' ', "\r":' '})|truncate(140)|default('Student newspaper at the University of Tennessee at Martin.') }}">
+    <meta property="og:description" content="{{ opengraph.description|replace({"\n":' ', "\r":' '})|u.truncate(140)|default('Student newspaper at the University of Tennessee at Martin.') }}">
     <meta property="og:type" content="{{ opengraph.type|default('object') }}">
     <meta property="og:image" content="{{ opengraph.image|default(app.request.schemeAndHttpHost ~ '/assets/images/opengraph.png') }}">
     {% endif %}
