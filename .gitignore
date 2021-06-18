@@ -16,8 +16,9 @@ yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
 ###> symfony/phpunit-bridge ###
-.phpunit.result.cache
+.phpunit
 /phpunit.xml
+.phpunit.result.cache
 ###< symfony/phpunit-bridge ###
 
 /build/
