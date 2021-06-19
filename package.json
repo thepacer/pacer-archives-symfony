@@ -13,9 +13,11 @@
     },
     "dependencies": {
         "@popperjs/core": "^2.9.2",
+        "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/webpack-encore": "^1.5.0",
         "bootstrap": "^5.0.1",
         "clndr": "^1.5.1",
+        "core-js": "^3.14.0",
         "datatables.net": "^1.10.25",
         "datatables.net-bs4": "^1.10.25",
         "file-loader": "^6.2.0",
@@ -23,6 +25,7 @@
         "jquery": "^3.6.0",
         "sass": "^1.35.1",
         "sass-loader": "^12.1.0",
+        "stimulus": "^2.0.0",
         "underscore": "^1.13.1"
     }
 }
