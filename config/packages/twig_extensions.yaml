@@ -8,7 +8,7 @@ services:
     Tomodomo\Twig\Pluralize: ~
 
     # Uncomment any lines below to activate that Twig extension
-    #Twig\Extensions\ArrayExtension: ~
-    #Twig\Extensions\DateExtension: ~
-    #Twig\Extensions\IntlExtension: ~
-    Twig\Extensions\TextExtension: ~
+    #Twig\Extensions\ArrayExtension: null
+    #Twig\Extensions\DateExtension: null
+    #Twig\Extensions\IntlExtension: null
+    Twig\Extensions\TextExtension: null

@@ -1,11 +1,3 @@
-# Logout
-app_logout:
-    path: /logout
-
-# Legacy PacerCMS links
-legacy_article_redirect:
-    path: /article/{slug}/{id}
-    controller: App\Controller\ArchiveController::legacyArticle
-legacy_issue_redirect:
-    path: /issue/{issueDate}
-    controller: App\Controller\ArchiveController::legacyIssue
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index

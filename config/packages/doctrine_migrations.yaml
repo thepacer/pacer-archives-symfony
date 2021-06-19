@@ -1,11 +1,6 @@
 doctrine_migrations:
-
-  storage:
-    table_storage:
-      table_name: doctrine_migration_versions
-
-  migrations_paths:
-      'DoctrineMigrations': '%kernel.project_dir%/migrations'
-
-  all_or_nothing: true
-  check_database_platform: true
+    migrations_paths:
+        # namespace is arbitrary but should be different from App\Migrations
+        # as migrations classes should NOT be autoloaded
+        'DoctrineMigrations': '%kernel.project_dir%/migrations'
+    enable_profiler: '%kernel.debug%'

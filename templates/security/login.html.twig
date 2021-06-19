@@ -16,6 +16,9 @@
   <body class="text-center">
       
     <main class="form-signin">
+      {% if error %}
+          <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+      {% endif %}
       {% for label, flashes in app.flashes %}
           {% for flash in flashes %}
               {% if ( label == 'success' ) %}
