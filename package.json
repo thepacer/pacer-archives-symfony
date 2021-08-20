@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "webpack-dev-server": "^3.11.2",
+        "webpack-dev-server": "^4.0.0",
         "webpack-notifier": "^1.13.0"
     },
     "license": "MIT",
@@ -17,13 +17,13 @@
         "@symfony/webpack-encore": "^1.5.0",
         "bootstrap": "^5.1.0",
         "clndr": "^1.5.1",
-        "core-js": "^3.16.1",
+        "core-js": "^3.16.2",
         "datatables.net": "^1.10.25",
         "datatables.net-bs4": "^1.10.25",
         "file-loader": "^6.2.0",
         "fullcalendar": "^5.9.0",
         "jquery": "^3.6.0",
-        "sass": "^1.37.5",
+        "sass": "^1.38.0",
         "sass-loader": "^12.1.0",
         "stimulus": "^2.0.0",
         "underscore": "^1.13.1"
