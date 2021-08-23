@@ -29,12 +29,13 @@ class Issue
     private $issueNumber;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=false)
      */
     private $pageCount;
 
     /**
     * @ORM\ManyToOne(targetEntity="Volume", inversedBy="issues")
+    * @ORM\JoinColumn(name="volume_id", referencedColumnName="id", nullable=false)
     */
     private $volume;
 

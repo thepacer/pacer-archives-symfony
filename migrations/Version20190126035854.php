@@ -19,20 +19,20 @@ final class Version20190126035854 extends AbstractMigration
         $articleTable = $schema->createTable('article');
         $articleTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
         $articleTable->addColumn('issue_id', 'integer', ['notnull' => false]);
-        $articleTable->addColumn('print_column', 'string', ['length' => 255]);
-        $articleTable->addColumn('print_page', 'string', ['length' => 255]);
-        $articleTable->addColumn('print_section', 'string', ['length' => 255]);
+        $articleTable->addColumn('print_column', 'string', ['length' => 255, 'notnull' => false]);
+        $articleTable->addColumn('print_page', 'string', ['length' => 255, 'notnull' => false]);
+        $articleTable->addColumn('print_section', 'string', ['length' => 255, 'notnull' => false]);
         $articleTable->addColumn('article_body', 'text', ['notnull' => true]);
         $articleTable->addColumn('headline', 'string', ['length' => 255, 'notnull' => true]);
-        $articleTable->addColumn('alternative_headline', 'string', ['length' => 255]);
+        $articleTable->addColumn('alternative_headline', 'string', ['length' => 255, 'notnull' => false]);
         $articleTable->addColumn('author_byline', 'string', ['length' => 255, 'notnull' => true]);
-        $articleTable->addColumn('contributor_byline', 'string', ['length' => 255]);
+        $articleTable->addColumn('contributor_byline', 'string', ['length' => 255, 'notnull' => false]);
         $articleTable->addColumn('date_created', 'datetime', ['notnull' => true]);
         $articleTable->addColumn('date_published', 'datetime', ['notnull' => true]);
         $articleTable->addColumn('date_modified', 'datetime', ['notnull' => true]);
         $articleTable->addColumn('keywords', 'text', ['notnull' => true]);
         $articleTable->addColumn('modified_by', 'string', ['length' => 255, 'notnull' => true]);
-        $articleTable->addColumn('legacy_id', 'integer');
+        $articleTable->addColumn('legacy_id', 'integer', ['notnull' => false]);
         $articleTable->addColumn('slug', 'string', ['length' => 128, 'notnull' => true]);
         $articleTable->addIndex(['issue_id'], 'IDX_23A0E665E7AA58C');
         $articleTable->addUniqueIndex(['slug'], 'UNIQ_23A0E66989D9B62');
@@ -54,8 +54,8 @@ final class Version20190126035854 extends AbstractMigration
         $issueTable->addColumn('issue_date', 'date', ['notnull' => true]);
         $issueTable->addColumn('issue_number', 'string', ['length' => 255, 'notnull' => true]);
         $issueTable->addColumn('page_count', 'text', ['notnull' => true]);
-        $issueTable->addColumn('archive_key', 'string', ['length' => 255]);
-        $issueTable->addColumn('archive_notes', 'text');
+        $issueTable->addColumn('archive_key', 'string', ['length' => 255, 'notnull' => false]);
+        $issueTable->addColumn('archive_notes', 'text', ['notnull' => false]);
         $issueTable->addUniqueIndex(['archive_key'], 'UNIQ_12AD233E1AB9D946');
         $issueTable->addIndex(['volume_id'], 'IDX_12AD233E8FD80EEA');
         $issueTable->setPrimaryKey(['id']);
@@ -93,7 +93,6 @@ final class Version20190126035854 extends AbstractMigration
         $schema->dropTable('volume');
         $schema->dropTable('issue');
         $schema->dropTable('user');
-        $schema->dropTable('legacy_article');
         $schema->dropTable('image');
     }
 }

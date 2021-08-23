@@ -16,7 +16,7 @@ env:
     - APP_ENV=test
     - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
     - SYMFONY_DEPRECATIONS_HELPER=disabled
-    - DATABASE_URL=mysql://travis@127.0.0.1:3306/chapterportal
+    - DATABASE_URL=mysql://travis@127.0.0.1:3306/pacer
 
 services:
   - mysql
