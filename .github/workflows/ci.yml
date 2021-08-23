@@ -1,60 +1,98 @@
-language: generic
-dist: bionic
-os: linux
+# GitHub Action for Symfony with MySQL
+name: CI Build and Test
+on: [push, pull_request]
+jobs:
+  build:
+    name: Build and Test (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:5.7
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: false
+          MYSQL_ROOT_PASSWORD: symfony
+          MYSQL_DATABASE: symfony
+        ports:
+          - 3306/tcp
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.4', '8.0']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
 
-notifications:
-  email: false
+      - name: Setup PHP, with composer and extensions
+        uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: phpunit-bridge
+          extensions: mbstring, xml, ctype, iconv, intl, pdo_sqlite, mysql
+          coverage: xdebug #optional
 
-cache:
-  directories:
-    - $HOME/.composer/cache/files
-    - ./bin/.phpunit
-    - ~/.symfony
+      - name: Start mysql service
+        run: sudo /etc/init.d/mysql start
 
-env:
-  global:
-    - APP_ENV=test
-    - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
-    - SYMFONY_DEPRECATIONS_HELPER=disabled
-    - DATABASE_URL=mysql://travis@127.0.0.1:3306/pacer
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
 
-services:
-  - mysql
+      - name: Cache composer dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          # Use composer.json for key, if composer.lock is not committed.
+          # key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
 
-before_install:
-  - nvm install 12.18.1
-  - nvm use 12.18.1
-  - phpenv shell 7.4.2
-  - composer self-update
-  - |
-    if [ ! -f ~/.symfony/bin/symfony ]; then
-      wget https://get.symfony.com/cli/installer -O - | bash
-    fi
-  - sudo apt-get update -qq
-  - sudo apt-get install -y -qq postfix
+      - name: Install Composer dependencies
+        run: composer install --no-progress --prefer-dist --optimize-autoloader
 
-install:
-  - composer install
-  - npm ci
-  - ./bin/phpunit install
-  - ./bin/console doctrine:database:create
-  - ./bin/console doctrine:migrations:migrate -n
-  - ./bin/console doctrine:fixtures:load -n
-  - npm run-script build
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16.x'
 
-before_script:
-  - sudo service postfix stop
-  - smtp-sink -d "%d.%H.%M.%S" localhost:2500 1000 &
-  - echo -e '#!/usr/bin/env bash\nexit 0' | sudo tee /usr/sbin/sendmail
-  - echo 'sendmail_path = "/usr/sbin/sendmail -t -i "' | sudo tee "/home/travis/.phpenv/versions/`php -i | grep "PHP Version" | head -n 1 | grep -o -P '\d+\.\d+\.\d+.*'`/etc/conf.d/sendmail.ini"
+      - name: Install Node dependencies
+        run: npm ci
 
-script:
-  - ./bin/phpunit
-  - sed -i 's/var\/cache\/dev/var\/cache\/test/gI' phpstan.neon
-  - sed -i 's/App_KernelDevDebugContainer/App_KernelTestDebugContainer/gI' phpstan.neon
-  - ./vendor/bin/phpstan analyse --memory-limit 2G
-  - ./bin/console lint:yaml config
-  - ./bin/console lint:twig templates
-  - ./bin/console lint:xliff translations
-  - ~/.symfony/bin/symfony security:check
-  - ./bin/console doctrine:schema:validate -vvv --no-interaction
+      - name: Build Webpack
+        run: npm run build
+
+      - name: Run Migration
+        run: |
+          php bin/console doctrine:database:create --if-not-exists -n
+          php bin/console doctrine:migrations:migrate -n
+          php bin/console doctrine:fixtures:load -n
+        env:
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+
+      - name: Run Validators
+        run: |
+          php bin/console lint:yaml config
+          php bin/console lint:twig templates
+          php bin/console lint:xliff translations
+          php bin/console doctrine:schema:validate -vvv --no-interaction
+        env:
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+
+      - name: Run PHPUnit
+        run: bin/phpunit --coverage-clover build/coverage-${{ matrix.php-versions }}.xml --log-junit build/phpunit-${{ matrix.php-versions }}.xml
+        env:
+          DATABASE_URL: mysql://root:symfony@127.0.0.1:${{ job.services.mysql.ports['3306'] }}/symfony
+
+      - name: Run PHPStan
+        run: |
+          sed -i 's/var\/cache\/dev/var\/cache\/test/gI' phpstan.neon
+          sed -i 's/App_KernelDevDebugContainer/App_KernelTestDebugContainer/gI' phpstan.neon
+          ./vendor/bin/phpstan analyse --memory-limit 2G
+
+      - name: Upload test result artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results-${{ matrix.php-versions }}
+          path: build/
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
