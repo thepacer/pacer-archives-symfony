@@ -29,7 +29,7 @@ class Issue
     private $issueNumber;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="integer", nullable=false)
      */
     private $pageCount;
 

@@ -50,10 +50,10 @@ final class Version20190126035854 extends AbstractMigration
 
         $issueTable = $schema->createTable('issue');
         $issueTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
-        $issueTable->addColumn('volume_id', 'integer');
+        $issueTable->addColumn('volume_id', 'integer', ['notnull' => true]);
         $issueTable->addColumn('issue_date', 'date', ['notnull' => true]);
         $issueTable->addColumn('issue_number', 'string', ['length' => 255, 'notnull' => true]);
-        $issueTable->addColumn('page_count', 'text', ['notnull' => true]);
+        $issueTable->addColumn('page_count', 'integer', ['notnull' => true]);
         $issueTable->addColumn('archive_key', 'string', ['length' => 255, 'notnull' => false]);
         $issueTable->addColumn('archive_notes', 'text', ['notnull' => false]);
         $issueTable->addUniqueIndex(['archive_key'], 'UNIQ_12AD233E1AB9D946');
