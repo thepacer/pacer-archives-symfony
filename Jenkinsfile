@@ -18,33 +18,6 @@ pipeline {
         }
       }
     }
-    stage('Test') {
-      environment {
-        APP_ENV = 'test'
-        SYMFONY_PHPUNIT_DIR = './bin/.phpunit'
-        SYMFONY_DEPRECATIONS_HELPER = 'disabled'
-      }
-      steps {
-        slackSend (message: "${currentBuild.fullDisplayName} Test started (<${env.BUILD_URL}|Open>)", color: '#37b787')
-        sh './bin/console doctrine:database:drop --force'
-        sh './bin/console doctrine:database:create'
-        sh './bin/console doctrine:migrations:migrate -n'
-        sh './bin/console doctrine:fixtures:load -n'
-        sh 'mkdir -p build/reports/'
-        sh './bin/phpunit --log-junit build/reports/phpunit.xml'
-      }
-      post {
-        success {
-          slackSend (message: "${currentBuild.fullDisplayName} Success after ${currentBuild.durationString.minus(' and counting')} (<${env.BUILD_URL}|Open>)", color: '#37b787')
-        }
-        failure {
-          slackSend (message: "${currentBuild.fullDisplayName} Failed after ${currentBuild.durationString.minus(' and counting')} (<${env.BUILD_URL}|Open>)", color: '#ff0000')
-        }
-        always {
-          junit 'build/reports/**/*.xml'
-        }
-      }
-    }
     stage('Deploy to Staging') {
       when {
         expression {
