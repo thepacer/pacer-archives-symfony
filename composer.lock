@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a22dcf88fd38a8c7d0ffaddafa4d4d38",
+    "content-hash": "6728c333cfca6614c13c33bf4f58ed25",
     "packages": [
         {
             "name": "aws/aws-sdk-php",
@@ -7700,113 +7700,6 @@
             "time": "2021-07-29T06:20:01+00:00"
         },
         {
-            "name": "tomodomo/twig-pluralize-extension",
-            "version": "v2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/TomodomoCo/twig-pluralize-extension.git",
-                "reference": "aa9f41e621ef22f9b5558b7b16e1a5136eb2e2e0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/TomodomoCo/twig-pluralize-extension/zipball/aa9f41e621ef22f9b5558b7b16e1a5136eb2e2e0",
-                "reference": "aa9f41e621ef22f9b5558b7b16e1a5136eb2e2e0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0",
-                "twig/twig": ">=v1.0.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Tomodomo\\Twig\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Tomodomo",
-                    "homepage": "https://tomodomo.co/"
-                }
-            ],
-            "description": "Twig extension to output correctly pluralized strings",
-            "homepage": "https://tomodomo.co/",
-            "keywords": [
-                "plural",
-                "twig",
-                "twig extension"
-            ],
-            "support": {
-                "issues": "https://github.com/TomodomoCo/twig-pluralize-extension/issues",
-                "source": "https://github.com/TomodomoCo/twig-pluralize-extension/tree/master"
-            },
-            "time": "2018-11-16T13:47:49+00:00"
-        },
-        {
-            "name": "twig/extensions",
-            "version": "v1.5.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/twigphp/Twig-extensions.git",
-                "reference": "57873c8b0c1be51caa47df2cdb824490beb16202"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig-extensions/zipball/57873c8b0c1be51caa47df2cdb824490beb16202",
-                "reference": "57873c8b0c1be51caa47df2cdb824490beb16202",
-                "shasum": ""
-            },
-            "require": {
-                "twig/twig": "^1.27|^2.0"
-            },
-            "require-dev": {
-                "symfony/phpunit-bridge": "^3.4",
-                "symfony/translation": "^2.7|^3.4"
-            },
-            "suggest": {
-                "symfony/translation": "Allow the time_diff output to be translated"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Twig_Extensions_": "lib/"
-                },
-                "psr-4": {
-                    "Twig\\Extensions\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "Common additional features for Twig that do not directly belong in core",
-            "keywords": [
-                "i18n",
-                "text"
-            ],
-            "support": {
-                "issues": "https://github.com/twigphp/Twig-extensions/issues",
-                "source": "https://github.com/twigphp/Twig-extensions/tree/master"
-            },
-            "abandoned": true,
-            "time": "2018-12-05T18:34:18+00:00"
-        },
-        {
             "name": "twig/extra-bundle",
             "version": "v3.3.1",
             "source": {
@@ -10962,5 +10855,5 @@
     "platform-overrides": {
         "php": "7.4.13"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

@@ -39,7 +39,7 @@
         <div class="card-body">
           <h4 class="mb-1"><a href="{{ path('article', { id: article.id, slug: article.slug } )}}">{{ article.headline }}</a></h4>
           <p class="text-muted">{{ article.datePublished|date('F j, Y') }} | {{ article.authorByline }}</p>
-          <p class="mb-0">{{ article.articleBody|striptags|truncate(80, '...') }}</p>
+          <p class="mb-0">{{ article.articleBody|striptags|u.truncate(80, '...') }}</p>
         </div>
       </div>
       {% else %}
