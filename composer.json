@@ -7,6 +7,10 @@
         "ext-iconv": "*",
         "aws/aws-sdk-php-symfony": "^2.0",
         "beberlei/doctrineextensions": "^1.2",
+        "composer/package-versions-deprecated": "1.11.99.3",
+        "doctrine/doctrine-bundle": "^2.4",
+        "doctrine/doctrine-migrations-bundle": "^3.1",
+        "doctrine/orm": "^2.9",
         "knplabs/knp-markdown-bundle": "^1.7",
         "knplabs/knp-paginator-bundle": "^5.5",
         "sensio/framework-extra-bundle": "^5.3",
@@ -21,7 +25,7 @@
         "symfony/framework-bundle": "^5.3",
         "symfony/http-client": "^5.3",
         "symfony/monolog-bundle": "^3.5",
-        "symfony/orm-pack": "^2.0",
+        "symfony/proxy-manager-bridge": "^5.3",
         "symfony/runtime": "^5.3",
         "symfony/security-bundle": "^5.3",
         "symfony/translation": "^5.3",
@@ -86,11 +90,12 @@
         "phpstan/phpstan": "^0.12.52",
         "phpstan/phpstan-doctrine": "^0.12.22",
         "phpstan/phpstan-symfony": "^0.12.28",
+        "phpunit/phpunit": "^9.5",
         "symfony/browser-kit": "^5.3",
         "symfony/css-selector": "^5.3",
         "symfony/maker-bundle": "^1.33",
         "symfony/phpunit-bridge": "^5.3",
-        "symfony/profiler-pack": "^1.0",
-        "symfony/test-pack": "^1.0"
+        "symfony/stopwatch": "^5.3",
+        "symfony/web-profiler-bundle": "^5.3"
     }
 }
