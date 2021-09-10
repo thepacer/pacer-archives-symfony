@@ -1,6 +1,6 @@
 # _The Pacer_ Archives
 
-[![Build Status](https://travis-ci.com/thepacer/pacer-archives-symfony.svg?branch=master)](https://travis-ci.com/thepacer/pacer-archives-symfony)
+[![CI Build and Test](https://github.com/thepacer/pacer-archives-symfony/actions/workflows/ci.yml/badge.svg)](https://github.com/thepacer/pacer-archives-symfony/actions/workflows/ci.yml)
 
 A PHP application written in the Symfony framework to present the archives of _The Pacer_, the student newspaper at the University of Tennessee at Martin.
 
