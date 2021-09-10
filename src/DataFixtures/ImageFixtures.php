@@ -2,12 +2,10 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
-use App\Entity\Article;
 use App\Entity\Image;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -27,8 +25,8 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return array(
+        return [
             ArticleFixtures::class,
-        );
+        ];
     }
 }

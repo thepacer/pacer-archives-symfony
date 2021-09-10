@@ -2,15 +2,13 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Volume;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-use App\Entity\Volume;
-use App\Entity\Issue;
-
 class VolumeFixtures extends Fixture
 {
-    const VOLUME_1 = 'Volume 1';
+    public const VOLUME_1 = 'Volume 1';
 
     public function load(ObjectManager $manager)
     {

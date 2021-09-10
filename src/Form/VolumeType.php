@@ -19,22 +19,22 @@ class VolumeType extends AbstractType
         $entity = $builder->getData();
         $builder
             ->add('volumeNumber', null, [
-                'label' => 'Volume'
+                'label' => 'Volume',
             ])
             ->add('volumeStartDate', DateType::class, [
                 'label' => 'Start Date',
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('volumeEndDate', DateType::class, [
                 'label' => 'End Date',
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('nameplateKey', ChoiceType::class, [
                 'label' => 'Nameplate',
                 'choices' => [
                     'The Pacer' => 'pacer',
-                    'The Volette' => 'volette'
-                ]
+                    'The Volette' => 'volette',
+                ],
             ]);
         if ($entity->getId()) {
             $builder
@@ -47,7 +47,7 @@ class VolumeType extends AbstractType
                             ->setParameter('volume', $entity)
                             ->orderBy('i.issueDate', 'ASC');
                     },
-                    'required' => false
+                    'required' => false,
                 ])
             ;
         }

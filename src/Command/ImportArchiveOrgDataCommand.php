@@ -2,17 +2,15 @@
 
 namespace App\Command;
 
+use App\Entity\Issue;
+use App\Entity\Volume;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpClient\HttpClient;
-
-use App\Entity\Issue;
-use App\Entity\Volume;
 
 class ImportArchiveOrgDataCommand extends Command
 {
@@ -54,14 +52,14 @@ class ImportArchiveOrgDataCommand extends Command
                     $volume->setNameplateKey('pacer');
                 }
                 $this->entityManager->persist($volume);
-                $v++;
+                ++$v;
             } while ($v <= 99);
         }
 
         $this->entityManager->flush();
 
         // Import Issues
-        $url = 'https://archive.org/advancedsearch.php?' . http_build_query([
+        $url = 'https://archive.org/advancedsearch.php?'.http_build_query([
             'q' => 'collection:thepacer',
             'fl' => [
                 'date',
@@ -71,14 +69,14 @@ class ImportArchiveOrgDataCommand extends Command
                 'issue',
                 'pages',
                 'notes',
-                'utmdigitalarchive'
+                'utmdigitalarchive',
             ],
             'sort' => [
-                'date asc'
+                'date asc',
             ],
             'rows' => 3000,
             'page' => 1,
-            'output' => 'json'
+            'output' => 'json',
         ]);
 
         $client = HttpClient::create();
@@ -89,7 +87,7 @@ class ImportArchiveOrgDataCommand extends Command
         foreach ($json->response->docs as $doc) {
             // Find existing volume
             $volume = $this->entityManager->getRepository(Volume::class)->findOneBy([
-                'volumeNumber' => (int) $doc->volume
+                'volumeNumber' => (int) $doc->volume,
             ]);
 
             if (!$volume) {
@@ -99,15 +97,15 @@ class ImportArchiveOrgDataCommand extends Command
 
             // Find existing match based on identifer
             $issue = $this->entityManager->getRepository(Issue::class)->findOneBy([
-                'archiveKey' => $doc->identifier
+                'archiveKey' => $doc->identifier,
             ]);
             // Find existing match based on issue date
-            if ($issue === null) {
+            if (null === $issue) {
                 $issue = $this->entityManager->getRepository(Issue::class)->findOneBy([
-                    'issueDate' => new \DateTime($doc->date)
+                    'issueDate' => new \DateTime($doc->date),
                 ]);
             }
-            if ($issue === null) {
+            if (null === $issue) {
                 $issue = new Issue();
             }
 
@@ -126,6 +124,7 @@ class ImportArchiveOrgDataCommand extends Command
         $this->entityManager->flush();
 
         $io->success('Done!');
+
         return 0;
     }
 }

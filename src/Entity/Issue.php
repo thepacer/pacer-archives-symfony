@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Issue
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -34,9 +34,9 @@ class Issue
     private $pageCount;
 
     /**
-    * @ORM\ManyToOne(targetEntity="Volume", inversedBy="issues")
-    * @ORM\JoinColumn(name="volume_id", referencedColumnName="id", nullable=false)
-    */
+     * @ORM\ManyToOne(targetEntity="Volume", inversedBy="issues")
+     * @ORM\JoinColumn(name="volume_id", referencedColumnName="id", nullable=false)
+     */
     private $volume;
 
     /**
@@ -51,7 +51,7 @@ class Issue
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="issue")
-     * @ORM\OrderBy({"printSection" = "ASC", "datePublished" = "DESC"})
+     * @ORM\OrderBy({"printSection": "ASC", "datePublished": "DESC"})
      */
     private $articles;
 

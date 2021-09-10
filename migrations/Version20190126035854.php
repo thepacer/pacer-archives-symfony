@@ -9,12 +9,12 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20190126035854 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Baseline schema.';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $articleTable = $schema->createTable('article');
         $articleTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
@@ -83,7 +83,7 @@ final class Version20190126035854 extends AbstractMigration
         $imageTable->addForeignKeyConstraint($articleTable, ['article_id'], ['id'], [], 'FK_C53D045F7294869C');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $schema->getTable('image')->removeForeignKey('FK_C53D045F7294869C');
         $schema->getTable('issue')->removeForeignKey('FK_12AD233E8FD80EEA');

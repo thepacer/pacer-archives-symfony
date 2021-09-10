@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
-
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -13,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Volume
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -36,7 +35,7 @@ class Volume
 
     /**
      * @ORM\OneToMany(targetEntity="Issue", mappedBy="volume")
-     * @ORM\OrderBy({"issueDate" = "ASC"})
+     * @ORM\OrderBy({"issueDate": "ASC"})
      */
     private $issues;
 
@@ -130,6 +129,7 @@ class Volume
 
         // Grab a random issue from the volume
         $issue = $this->issues->get(array_rand($this->issues->toArray()));
+
         return $issue;
     }
 
@@ -149,7 +149,7 @@ class Volume
 
     public function getNamePlateDisplay(): string
     {
-        switch($this->nameplateKey) {
+        switch ($this->nameplateKey) {
             case 'pacer':
                 return 'The Pacer';
             case 'volette':

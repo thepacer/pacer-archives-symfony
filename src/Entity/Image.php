@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Image
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -94,6 +94,6 @@ class Image
 
     public function __toString()
     {
-        return 'Image #' . $this->id;
+        return 'Image #'.$this->id;
     }
 }

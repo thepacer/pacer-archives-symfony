@@ -28,7 +28,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="article_new", methods={"GET","POST"})
+     * @Route("/new", name="article_new", methods={"GET", "POST"})
      */
     public function new(Request $request): Response
     {
@@ -61,7 +61,7 @@ class ArticleController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="article_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Article $article): Response
     {
@@ -71,9 +71,10 @@ class ArticleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            if ($request->query->get('return') == 'public') {
+            if ('public' == $request->query->get('return')) {
                 return $this->redirectToRoute('article', ['id' => $article->getId(), 'slug' => $article->getSlug()]);
             }
+
             return $this->redirectToRoute('article_index');
         }
 

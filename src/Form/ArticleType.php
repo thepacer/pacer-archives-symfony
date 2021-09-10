@@ -19,7 +19,7 @@ class ArticleType extends AbstractType
             ->add('authorByline')
             ->add('contributorByline')
             ->add('datePublished', DateType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('keywords')
             ->add('slug')

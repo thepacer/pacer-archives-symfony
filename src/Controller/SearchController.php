@@ -2,13 +2,12 @@
 
 namespace App\Controller;
 
-use App\Repository\ArticleRepository;
 use App\Form\ArticleSearchType;
+use App\Repository\ArticleRepository;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/search")
@@ -24,13 +23,13 @@ class SearchController extends AbstractController
             'method' => 'GET',
             'action' => $this->generateUrl('search'),
             's' => $request->query->get('s'),
-            'index' => $request->query->get('index', 'content')
+            'index' => $request->query->get('index', 'content'),
         ]);
 
         $pagination = false;
 
         if ($request->query->get('s')) {
-            if ($request->query->get('index') == 'author') {
+            if ('author' == $request->query->get('index')) {
                 $query = $articleRepository->searchAuthor($request->query->get('s'));
             } else {
                 $query = $articleRepository->searchContent($request->query->get('s'));
@@ -45,7 +44,7 @@ class SearchController extends AbstractController
 
         return $this->render('search/index.html.twig', [
             'searchForm' => $searchForm->createView(),
-            'pagination' => $pagination
+            'pagination' => $pagination,
         ]);
     }
 }

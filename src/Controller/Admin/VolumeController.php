@@ -28,7 +28,7 @@ class VolumeController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="volume_new", methods={"GET","POST"})
+     * @Route("/new", name="volume_new", methods={"GET", "POST"})
      */
     public function new(Request $request): Response
     {
@@ -61,7 +61,7 @@ class VolumeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="volume_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="volume_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Volume $volume): Response
     {
@@ -71,9 +71,10 @@ class VolumeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            if ($request->query->get('return') == 'public') {
+            if ('public' == $request->query->get('return')) {
                 return $this->redirectToRoute('volume', ['volumeNumber' => $volume->getVolumeNumber()]);
             }
+
             return $this->redirectToRoute('volume_index');
         }
 

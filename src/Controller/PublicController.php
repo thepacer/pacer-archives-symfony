@@ -13,9 +13,9 @@ use Symfony\Contracts\Cache\ItemInterface;
 
 class PublicController extends AbstractController
 {
-    const CACHE_TTL = 3600;
-    const DONATION_URL = 'https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1';
-    const PACER_SITE_FEED = 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5';
+    public const CACHE_TTL = 3600;
+    public const DONATION_URL = 'https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1';
+    public const PACER_SITE_FEED = 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5';
 
     /**
      * @Route("/", name="home")
@@ -35,14 +35,17 @@ class PublicController extends AbstractController
             $client = HttpClient::create();
             try {
                 $response = $client->request('GET', self::PACER_SITE_FEED);
+
                 return json_decode($response->getContent());
             } catch (ServerException $e) {
                 $cache->delete('public.pacer_site_feed');
+
                 return false;
             }
         });
         $issue_count = $cache->get('public.issue_count', function (ItemInterface $item) use ($issueRepository) {
             $item->expiresAfter(self::CACHE_TTL);
+
             return $issueRepository->getTotalIssueCount();
         });
 
@@ -51,8 +54,8 @@ class PublicController extends AbstractController
             'issue_count' => $issue_count,
             'opengraph' => [
                 'title' => 'The Pacer',
-                'description' => 'The student newspaper of the University of Tennessee at Martin since 1928.'
-            ]
+                'description' => 'The student newspaper of the University of Tennessee at Martin since 1928.',
+            ],
         ]);
     }
 
@@ -64,8 +67,8 @@ class PublicController extends AbstractController
         return $this->render('public/missing-issues.html.twig', [
             'opengraph' => [
                 'title' => 'Missing Issues',
-                'description' => 'We have collected a list of issues that are not available in our collection.'
-            ]
+                'description' => 'We have collected a list of issues that are not available in our collection.',
+            ],
         ]);
     }
 
@@ -77,8 +80,8 @@ class PublicController extends AbstractController
         return $this->render('public/about.html.twig', [
             'opengraph' => [
                 'title' => 'About The Pacer',
-                'description' => 'The newspaper archives are a collective effort of several people and organizations.'
-            ]
+                'description' => 'The newspaper archives are a collective effort of several people and organizations.',
+            ],
         ]);
     }
 

@@ -1,3 +1,10 @@
+# PHP-CS-Fixer
+/tools/php-cs-fixer/vendor
+.php-cs-fixer.cache
+
+# Build artifacts
+/build/
+
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -20,8 +27,6 @@ yarn-error.log
 /phpunit.xml
 .phpunit.result.cache
 ###< symfony/phpunit-bridge ###
-
-/build/
 
 ###> phpunit/phpunit ###
 /phpunit.xml

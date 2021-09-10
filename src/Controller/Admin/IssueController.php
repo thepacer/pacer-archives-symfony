@@ -28,7 +28,7 @@ class IssueController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="issue_new", methods={"GET","POST"})
+     * @Route("/new", name="issue_new", methods={"GET", "POST"})
      */
     public function new(Request $request): Response
     {
@@ -61,7 +61,7 @@ class IssueController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="issue_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="issue_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Issue $issue): Response
     {
@@ -71,9 +71,10 @@ class IssueController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            if ($request->query->get('return') == 'public') {
+            if ('public' == $request->query->get('return')) {
                 return $this->redirectToRoute('issue', ['issueDate' => $issue->getIssueDate()->format('Y-m-d')]);
             }
+
             return $this->redirectToRoute('issue_index');
         }
 

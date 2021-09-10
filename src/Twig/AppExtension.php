@@ -23,7 +23,7 @@ class AppExtension extends AbstractExtension
         $none = $none ?? $many;
 
         // Choose the correct string
-        switch($count) {
+        switch ($count) {
             case 0:
                 $string = $none;
                 break;

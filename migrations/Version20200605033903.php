@@ -9,12 +9,12 @@ use Doctrine\Migrations\AbstractMigration;
 
 final class Version20200605033903 extends AbstractMigration
 {
-    public function getDescription() : string
+    public function getDescription(): string
     {
         return 'Add search index for articles.';
     }
 
-    public function up(Schema $schema) : void
+    public function up(Schema $schema): void
     {
         $articleTable = $schema->getTable('article');
 
@@ -27,7 +27,7 @@ final class Version20200605033903 extends AbstractMigration
         $index->addFlag('fulltext');
     }
 
-    public function down(Schema $schema) : void
+    public function down(Schema $schema): void
     {
         $articleTable = $schema->getTable('article');
         $articleTable->dropIndex('IDX_23A0E666BEA8CB3E0E861BDABEFA08E');

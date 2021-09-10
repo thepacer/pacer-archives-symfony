@@ -28,7 +28,7 @@ class ImageController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="image_new", methods={"GET","POST"})
+     * @Route("/new", name="image_new", methods={"GET", "POST"})
      */
     public function new(Request $request): Response
     {
@@ -61,7 +61,7 @@ class ImageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="image_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="image_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Image $image): Response
     {

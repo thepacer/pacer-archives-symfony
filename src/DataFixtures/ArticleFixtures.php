@@ -2,16 +2,14 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
 use App\Entity\Article;
-use App\Entity\Issue;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class ArticleFixtures extends Fixture implements DependentFixtureInterface
 {
-    const ARTICLE_1 = 'Article 1';
+    public const ARTICLE_1 = 'Article 1';
 
     public function load(ObjectManager $manager)
     {
@@ -41,8 +39,8 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return array(
+        return [
             IssueFixtures::class,
-        );
+        ];
     }
 }

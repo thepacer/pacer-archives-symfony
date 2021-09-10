@@ -2,16 +2,14 @@
 
 namespace App\DataFixtures;
 
-use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Persistence\ObjectManager;
-use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-
 use App\Entity\Issue;
-use App\Entity\Volume;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Persistence\ObjectManager;
 
 class IssueFixtures extends Fixture implements DependentFixtureInterface
 {
-    const ISSUE_1 = 'Issue 1';
+    public const ISSUE_1 = 'Issue 1';
 
     public function load(ObjectManager $manager)
     {
@@ -32,8 +30,8 @@ class IssueFixtures extends Fixture implements DependentFixtureInterface
 
     public function getDependencies()
     {
-        return array(
+        return [
             VolumeFixtures::class,
-        );
+        ];
     }
 }

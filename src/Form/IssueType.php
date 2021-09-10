@@ -14,7 +14,7 @@ class IssueType extends AbstractType
     {
         $builder
             ->add('issueDate', DateType::class, [
-                'widget' => 'single_text'
+                'widget' => 'single_text',
             ])
             ->add('issueNumber')
             ->add('pageCount')

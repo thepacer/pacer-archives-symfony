@@ -22,18 +22,18 @@ class ArticleSearchType extends AbstractType
             ->add('s', SearchType::class, [
                 'label' => 'Search Term',
                 'mapped' => false,
-                'data' => $options['s']
+                'data' => $options['s'],
             ])
             ->add('index', ChoiceType::class, [
                 'choices' => [
                     'Article Content' => 'content',
-                    'Author Bylines' => 'author'
+                    'Author Bylines' => 'author',
                 ],
                 'label' => 'Search Index',
                 'property_path' => 'index',
                 'expanded' => true,
                 'data' => $options['index'],
-                'required' => true
+                'required' => true,
             ])
         ;
     }
@@ -46,7 +46,7 @@ class ArticleSearchType extends AbstractType
             'method' => 'get',
             'mapped' => false,
             's' => '',
-            'index' => 'content'
+            'index' => 'content',
         ]);
     }
 }

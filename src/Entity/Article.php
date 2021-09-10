@@ -4,27 +4,27 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
  * @ORM\Table(indexes={
- *   @ORM\Index(
- *     columns={"article_body", "headline", "alternative_headline"},
- *     flags={"fulltext"}
- *   ),
- *   @ORM\Index(
- *     columns={"author_byline", "contributor_byline"},
- *     flags={"fulltext"}
- *   )
+ *     @ORM\Index(
+ *         columns={"article_body", "headline", "alternative_headline"},
+ *         flags={"fulltext"}
+ *     ),
+ *     @ORM\Index(
+ *         columns={"author_byline", "contributor_byline"},
+ *         flags={"fulltext"}
+ *     )
  * })
  */
 class Article
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -362,6 +362,6 @@ class Article
 
     public function __toString()
     {
-        return $this->datePublished->format('n/j/Y') . ': ' . $this->headline;
+        return $this->datePublished->format('n/j/Y').': '.$this->headline;
     }
 }

@@ -2,26 +2,23 @@
 
 namespace App\Controller;
 
+use App\Repository\ArticleRepository;
+use App\Repository\ImageRepository;
+use App\Repository\IssueRepository;
+use App\Repository\VolumeRepository;
+use Aws\S3\S3Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-use Aws\S3\S3Client;
-
-use App\Repository\ArticleRepository;
-use App\Repository\ImageRepository;
-use App\Repository\IssueRepository;
-use App\Repository\VolumeRepository;
-
 /**
  * @Route("/archive")
  */
 class ArchiveController extends AbstractController
 {
-
-    const START_YEAR = 1928;
+    public const START_YEAR = 1928;
 
     /**
      * @Route("/", name="archive")
@@ -37,7 +34,7 @@ class ArchiveController extends AbstractController
             $issue_counts_by_year[$year] = 0;
         }
         foreach ($issues as $issue) {
-            $issue_counts_by_year[$issue->getIssueDate()->format('Y')]++;
+            ++$issue_counts_by_year[$issue->getIssueDate()->format('Y')];
         }
 
         return $this->render('archive/index.html.twig', [
@@ -46,13 +43,13 @@ class ArchiveController extends AbstractController
             'years' => $years,
             'opengraph' => [
                 'title' => 'The Pacer Archives',
-                'description' => 'A collection of student newspaper issues since 1928.'
-            ]
+                'description' => 'A collection of student newspaper issues since 1928.',
+            ],
         ]);
     }
 
     /**
-     * @Route("/volume/{volumeNumber}", name="volume", requirements={"volumeNumber"="\d+"})
+     * @Route("/volume/{volumeNumber}", name="volume", requirements={"volumeNumber": "\d+"})
      */
     public function volume(VolumeRepository $volumeRepository, int $volumeNumber)
     {
@@ -71,14 +68,14 @@ class ArchiveController extends AbstractController
             'nextVolume' => $nextVolume,
             'opengraph' => [
                 'title' => $volume,
-                'description' => 'Issues that appeared in ' . $volume,
-                'image' => 'https://archive.org/services/img/' . $volume->getCoverIssue()->getArchiveKey()
-            ]
+                'description' => 'Issues that appeared in '.$volume,
+                'image' => 'https://archive.org/services/img/'.$volume->getCoverIssue()->getArchiveKey(),
+            ],
         ]);
     }
 
     /**
-     * @Route("/year/{year}", name="year", requirements={"year"="[1|2][0|9][0-9][0-9]"})
+     * @Route("/year/{year}", name="year", requirements={"year": "[1|2][0|9][0-9][0-9]"})
      */
     public function year(IssueRepository $issueRepository, int $year)
     {
@@ -97,15 +94,15 @@ class ArchiveController extends AbstractController
             'previousYear' => ($year > self::START_YEAR) ? $year - 1 : false,
             'nextYear' => ($year < (int) date('Y')) ? $year + 1 : false,
             'opengraph' => [
-                'title' => 'The Pacer - ' . $year,
-                'description' => 'Issues of The Volette and The Pacer from ' . $year . '.'
-            ]
+                'title' => 'The Pacer - '.$year,
+                'description' => 'Issues of The Volette and The Pacer from '.$year.'.',
+            ],
         ]);
     }
 
     /**
-     * @Route("/issue/{issueDate}", name="issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
-     * @Route("/issue-{issueDate}", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
+     * @Route("/issue/{issueDate}", name="issue", requirements={"issueDate": "([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
+     * @Route("/issue-{issueDate}", requirements={"issueDate": "([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
      */
     public function issue(IssueRepository $issueRepository, ArticleRepository $articleRepository, string $issueDate)
     {
@@ -135,13 +132,13 @@ class ArchiveController extends AbstractController
                     $issue->getIssueDate()->format('F j, Y'),
                     ucwords($issue->getVolume()->getNameplateKey())
                 ),
-                'image' => 'https://archive.org/services/img/' . $issue->getArchiveKey()
-            ]
+                'image' => 'https://archive.org/services/img/'.$issue->getArchiveKey(),
+            ],
         ]);
     }
 
     /**
-     * @Route("/article/{slug}/{id}", name="article", requirements={"id"="\d+"})
+     * @Route("/article/{slug}/{id}", name="article", requirements={"id": "\d+"})
      */
     public function article(ArticleRepository $articleRepository, string $slug, int $id)
     {
@@ -155,7 +152,7 @@ class ArchiveController extends AbstractController
         if ($slug != $article->getSlug()) {
             return $this->redirectToRoute('article', [
                 'id' => $article->getId(),
-                'slug' => $article->getSlug()
+                'slug' => $article->getSlug(),
             ], 301);
         }
 
@@ -163,14 +160,14 @@ class ArchiveController extends AbstractController
             $articleImage = $this->generateUrl(
                 's3_proxy',
                 [
-                    'id' => $article->getImages()->first()->getId()
+                    'id' => $article->getImages()->first()->getId(),
                 ],
                 UrlGeneratorInterface::ABSOLUTE_URL
             );
         } else {
             // No image attached, use issue cover if set
             if ($article->getIssue()) {
-                $articleImage = 'https://archive.org/services/img/' . $article->getIssue()->getArchiveKey();
+                $articleImage = 'https://archive.org/services/img/'.$article->getIssue()->getArchiveKey();
             } else {
                 $articleImage = false;
             }
@@ -192,15 +189,15 @@ class ArchiveController extends AbstractController
                     ucwords($nameplateKey)
                 ),
                 'description' => $article->getArticleBody(), // Truncated in Twig template
-                'image' => $articleImage
-            ]
+                'image' => $articleImage,
+            ],
         ]);
     }
 
     /**
-     * S3 Proxy
+     * S3 Proxy.
      *
-     * @Route("/image/{id}", name="s3_proxy", requirements={"id"="\d+"})
+     * @Route("/image/{id}", name="s3_proxy", requirements={"id": "\d+"})
      */
     public function s3Proxy(ImageRepository $imageRepository, S3Client $s3Client, $id)
     {
@@ -213,7 +210,7 @@ class ArchiveController extends AbstractController
         try {
             $object = $s3Client->getObject([
                 'Bucket' => 'pacer-archives',
-                'Key'    => $image->getPath()
+                'Key' => $image->getPath(),
             ]);
         } catch (\Aws\S3\Exception\S3Exception $e) {
             throw $this->createNotFoundException('Unable to load image.');
@@ -232,7 +229,7 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * @Route("/legacy-issue/{issueDate}", name="legacy_issue", requirements={"issueDate"="([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
+     * @Route("/legacy-issue/{issueDate}", name="legacy_issue", requirements={"issueDate": "([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
      */
     public function legacyIssue(IssueRepository $issueRepository, string $issueDate)
     {
@@ -244,14 +241,14 @@ class ArchiveController extends AbstractController
 
         // Redirect to new route
         return $this->redirectToRoute('issue', [
-            'issueDate' => $issue->getIssueDate()->format('Y-m-d')
+            'issueDate' => $issue->getIssueDate()->format('Y-m-d'),
         ], 301);
     }
 
     /**
-     * Handle PacerCMS (Legacy) Article Links
+     * Handle PacerCMS (Legacy) Article Links.
      *
-     * @Route("/legacy-article/{id}", name="legacy_article", requirements={"id"="\d+"})
+     * @Route("/legacy-article/{id}", name="legacy_article", requirements={"id": "\d+"})
      */
     public function legacyArticle(ArticleRepository $articleRepository, int $id)
     {
@@ -264,7 +261,7 @@ class ArchiveController extends AbstractController
         // Redirect to new route
         return $this->redirectToRoute('article', [
             'id' => $article->getId(),
-            'slug' => $article->getSlug()
+            'slug' => $article->getSlug(),
         ], 301);
     }
 }
