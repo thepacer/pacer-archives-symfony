@@ -1,5 +1,6 @@
 {
     "devDependencies": {
+        "stimulus": "^2.0.0",
         "webpack-dev-server": "^4.2.1",
         "webpack-notifier": "^1.13.0"
     },
