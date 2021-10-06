@@ -1,8 +1,8 @@
 {
     "devDependencies": {
-        "stimulus": "^2.0.0",
-        "webpack-dev-server": "^4.2.1",
-        "webpack-notifier": "^1.13.0"
+        "stimulus": "^3.0.0",
+        "webpack-dev-server": "^4.3.1",
+        "webpack-notifier": "^1.14.0"
     },
     "license": "MIT",
     "private": true,
@@ -13,12 +13,12 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@popperjs/core": "^2.10.1",
+        "@popperjs/core": "^2.10.2",
         "@symfony/stimulus-bridge": "^2.1.0",
         "@symfony/webpack-encore": "^1.6.1",
-        "bootstrap": "^5.1.1",
+        "bootstrap": "^5.1.2",
         "clndr": "^1.5.1",
-        "core-js": "^3.18.0",
+        "core-js": "^3.18.2",
         "datatables.net": "^1.11.3",
         "datatables.net-bs4": "^1.11.3",
         "file-loader": "^6.2.0",
