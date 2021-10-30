@@ -27,4 +27,9 @@ final class Version20200219013921 extends AbstractMigration
         $issueTable->dropIndex('UNIQ_12AD233E58E11750');
         $issueTable->dropColumn('utm_digital_archive_url', 'string', ['length' => 255, 'notnull' => false]);
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

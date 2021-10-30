@@ -95,4 +95,9 @@ final class Version20190126035854 extends AbstractMigration
         $schema->dropTable('user');
         $schema->dropTable('image');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }

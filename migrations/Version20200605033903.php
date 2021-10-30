@@ -33,4 +33,9 @@ final class Version20200605033903 extends AbstractMigration
         $articleTable->dropIndex('IDX_23A0E666BEA8CB3E0E861BDABEFA08E');
         $articleTable->dropIndex('IDX_23A0E6615AFD08B8597F21E');
     }
+
+    public function isTransactional(): bool
+    {
+        return false;
+    }
 }
