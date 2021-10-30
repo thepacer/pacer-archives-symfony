@@ -56,6 +56,18 @@
           <strong>Section:</strong> {{ article.printSection|default('Not set.') }}<br />
         </div>
       </div>
+      <div class="card mb-3">
+        <div class="card-header">
+          Images
+        </div>
+        <div class="card-body">
+          <ul>
+            {% for image in article.images %}
+            <li><a href="{{ path('image_show', {id: image.id}) }}">{{ image }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 
