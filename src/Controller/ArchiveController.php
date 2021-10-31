@@ -195,8 +195,6 @@ class ArchiveController extends AbstractController
     }
 
     /**
-     * S3 Proxy.
-     *
      * @Route("/image/{id}", name="s3_proxy", requirements={"id": "\d+"})
      */
     public function s3Proxy(ImageRepository $imageRepository, S3Client $s3Client, $id)
@@ -219,6 +217,32 @@ class ArchiveController extends AbstractController
         $disposition = HeaderUtils::makeDisposition(
             HeaderUtils::DISPOSITION_INLINE,
             basename($image->getPath())
+        );
+
+        $response = new Response($object['Body']);
+        $response->headers->set('Content-Type', $object['ContentType']);
+        $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+    /**
+     * @Route("/content/{path}", name="s3_content_proxy", requirements={"path": ".+"})
+     */
+    public function s3ContentProxy(S3Client $s3Client, string $path): Response
+    {
+        try {
+            $object = $s3Client->getObject([
+                'Bucket' => 'pacer-archives',
+                'Key' => $path,
+            ]);
+        } catch (\Aws\S3\Exception\S3Exception $e) {
+            throw $this->createNotFoundException('Unable to load file.');
+        }
+
+        $disposition = HeaderUtils::makeDisposition(
+            HeaderUtils::DISPOSITION_INLINE,
+            basename($path)
         );
 
         $response = new Response($object['Body']);
