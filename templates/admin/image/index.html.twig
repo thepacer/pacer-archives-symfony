@@ -21,6 +21,7 @@
                 <th>Caption</th>
                 <th>Credit</th>
                 <th>Path</th>
+                <th>Article</th>
                 <th data-sortable="false" class="col-actions"></th>
             </tr>
           </thead>
@@ -30,7 +31,12 @@
                 <td>{{ image.id }}</td>
                 <td>{{ image.caption }}</td>
                 <td>{{ image.credit }}</td>
-                <td>{{ image.path }}</td>
+                <td><tt>{{ image.path }}</tt></td>
+                <td>
+                  {% if image.article %}
+                  <a href="{{ path('article_show', {id: image.article.id}) }}">{{ image.article }}</a>
+                  {% endif %}
+                </td>
                 <td class="col-actions">
                     <a href="{{ path('image_show', {'id': image.id}) }}"><i class="fas fa-eye fa-fw"></i></a>
                     <a href="{{ path('image_edit', {'id': image.id}) }}"><i class="fas fa-edit fa-fw"></i></a>
