@@ -60,13 +60,14 @@
         <div class="card-header">
           Images
         </div>
+        {% for image in article.images %}
+        <img src="{{ path('s3_proxy', {id: image.id}) }}" class="card-img-top" alt="Article Image" />
         <div class="card-body">
-          <ul>
-            {% for image in article.images %}
-            <li><a href="{{ path('image_show', {id: image.id}) }}">{{ image }}</li>
-            {% endfor %}
-          </ul>
+          <p class="text-muted text-end">{{ image.credit }}</p>
+          {{ image.caption|markdown }}
+          <p class="text-end"><a href="{{ path('image_edit', {id: image.id}) }}" class="btn btn-light"><i class="fas fa-edit fa-fw"></i> Edit</a></p>
         </div>
+        {% endfor %}
       </div>
     </div>
   </div>
