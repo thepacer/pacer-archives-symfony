@@ -71,8 +71,8 @@ final class Version20190126035854 extends AbstractMigration
         $imageTable = $schema->createTable('image');
         $imageTable->addColumn('id', 'integer', ['autoincrement' => true, 'notnull' => true]);
         $imageTable->addColumn('article_id', 'integer', ['notnull' => true]);
-        $imageTable->addColumn('caption', 'text', ['notnull' => true]);
-        $imageTable->addColumn('credit', 'string', ['length' => 255, 'notnull' => true]);
+        $imageTable->addColumn('caption', 'text', ['notnull' => false]);
+        $imageTable->addColumn('credit', 'string', ['length' => 255, 'notnull' => false]);
         $imageTable->addColumn('path', 'string', ['length' => 255, 'notnull' => true]);
         $imageTable->addIndex(['article_id'], 'IDX_C53D045F7294869C');
         $imageTable->setPrimaryKey(['id']);

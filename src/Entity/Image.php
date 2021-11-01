@@ -23,12 +23,12 @@ class Image
     private $article;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $caption;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $credit;
 
@@ -59,7 +59,7 @@ class Image
         return $this->caption;
     }
 
-    public function setCaption(string $caption): self
+    public function setCaption(?string $caption): self
     {
         $this->caption = $caption;
 
@@ -71,7 +71,7 @@ class Image
         return $this->credit;
     }
 
-    public function setCredit(string $credit): self
+    public function setCredit(?string $credit): self
     {
         $this->credit = $credit;
 
