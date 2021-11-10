@@ -33,7 +33,7 @@ class ArticleRepository extends ServiceEntityRepository
     public function searchAuthor(string $searchTerm)
     {
         return $this->createQueryBuilder('a')
-            ->addSelect('MATCH (a.author_byline, a.contributor_byline) AGAINST (:searchTerm) AS score')
+            ->addSelect('MATCH (a.authorByline, a.contributorByline) AGAINST (:searchTerm) AS score')
             ->setParameter('searchTerm', $searchTerm)
             ->having('score > 0')
             ->orderBy('score', 'DESC')
