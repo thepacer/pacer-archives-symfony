@@ -17,10 +17,19 @@ class SearchControllerTest extends WebTestCase
 
         $buttonCrawlerNode = $crawler->selectButton('Search');
         $form = $buttonCrawlerNode->form();
-        $form['s'] = 'test';
+        $form['s'] = 'Some text.';
         $form['index'] = 'content';
         $client->submit($form);
 
         $this->assertResponseIsSuccessful();
+
+        $buttonCrawlerNode = $crawler->selectButton('Search');
+        $form = $buttonCrawlerNode->form();
+        $form['s'] = 'Kent';
+        $form['index'] = 'author';
+        $client->submit($form);
+
+        $this->assertResponseIsSuccessful();
+
     }
 }
