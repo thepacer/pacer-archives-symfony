@@ -30,6 +30,5 @@ class SearchControllerTest extends WebTestCase
         $client->submit($form);
 
         $this->assertResponseIsSuccessful();
-
     }
 }
