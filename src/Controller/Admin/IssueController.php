@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Issue;
 use App\Form\IssueType;
 use App\Repository\IssueRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,14 +31,13 @@ class IssueController extends AbstractController
     /**
      * @Route("/new", name="issue_new", methods={"GET", "POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $issue = new Issue();
         $form = $this->createForm(IssueType::class, $issue);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($issue);
             $entityManager->flush();
 
@@ -63,13 +63,13 @@ class IssueController extends AbstractController
     /**
      * @Route("/{id}/edit", name="issue_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Issue $issue): Response
+    public function edit(Request $request, Issue $issue, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(IssueType::class, $issue);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             if ('public' == $request->query->get('return')) {
                 return $this->redirectToRoute('issue', ['issueDate' => $issue->getIssueDate()->format('Y-m-d')]);
@@ -87,10 +87,9 @@ class IssueController extends AbstractController
     /**
      * @Route("/{id}", name="issue_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Issue $issue): Response
+    public function delete(Request $request, Issue $issue, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$issue->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($issue);
             $entityManager->flush();
         }

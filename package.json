@@ -20,7 +20,7 @@
         "clndr": "^1.5.1",
         "core-js": "^3.19.1",
         "datatables.net": "^1.11.3",
-        "datatables.net-bs4": "^1.11.3",
+        "datatables.net-bs5": "^1.11.3",
         "file-loader": "^6.2.0",
         "fullcalendar": "^5.10.1",
         "jquery": "^3.6.0",

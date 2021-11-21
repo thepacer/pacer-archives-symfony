@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Volume;
 use App\Form\VolumeType;
 use App\Repository\VolumeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,14 +31,13 @@ class VolumeController extends AbstractController
     /**
      * @Route("/new", name="volume_new", methods={"GET", "POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $volume = new Volume();
         $form = $this->createForm(VolumeType::class, $volume);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($volume);
             $entityManager->flush();
 
@@ -63,13 +63,13 @@ class VolumeController extends AbstractController
     /**
      * @Route("/{id}/edit", name="volume_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Volume $volume): Response
+    public function edit(Request $request, Volume $volume, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(VolumeType::class, $volume);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $entityManager->flush();
 
             if ('public' == $request->query->get('return')) {
                 return $this->redirectToRoute('volume', ['volumeNumber' => $volume->getVolumeNumber()]);
@@ -87,10 +87,9 @@ class VolumeController extends AbstractController
     /**
      * @Route("/{id}", name="volume_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Volume $volume): Response
+    public function delete(Request $request, Volume $volume, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$volume->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($volume);
             $entityManager->flush();
         }
