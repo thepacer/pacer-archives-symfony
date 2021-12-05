@@ -7,7 +7,7 @@ use Twig\TwigFunction;
 
 class AppExtension extends AbstractExtension
 {
-    public function getFunctions()
+    public function getFunctions(): ?array
     {
         return [
             new TwigFunction('pluralize', [$this, 'getPluralizedString']),
