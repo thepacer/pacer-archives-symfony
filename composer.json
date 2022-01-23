@@ -38,7 +38,7 @@
     },
     "config": {
         "platform": {
-            "php": "7.4.13"
+            "php": "7.4.25"
         },
         "preferred-install": {
             "*": "dist"
