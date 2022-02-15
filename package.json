@@ -22,10 +22,10 @@
         "datatables.net": "^1.11.4",
         "datatables.net-bs5": "^1.11.4",
         "file-loader": "^6.2.0",
-        "fullcalendar": "^5.10.1",
+        "fullcalendar": "^5.10.2",
         "jquery": "^3.6.0",
         "sass": "^1.49.7",
-        "sass-loader": "^12.4.0",
+        "sass-loader": "^12.5.0",
         "underscore": "^1.13.2"
     }
 }
