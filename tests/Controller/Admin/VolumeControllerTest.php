@@ -17,7 +17,7 @@ class VolumeControllerTest extends WebTestCase
     public function testIndex(): void
     {
         $client = static::createClient();
-        $userRepository = static::$container->get(UserRepository::class);
+        $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user@example.com');
         $client->loginUser($testUser);
         $crawler = $client->request('GET', '/admin/volume');
@@ -30,7 +30,7 @@ class VolumeControllerTest extends WebTestCase
     public function testShow(): void
     {
         $client = static::createClient();
-        $userRepository = static::$container->get(UserRepository::class);
+        $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user@example.com');
         $client->loginUser($testUser);
         $crawler = $client->request('GET', '/admin/volume/1');
@@ -43,7 +43,7 @@ class VolumeControllerTest extends WebTestCase
     public function testEdit(): void
     {
         $client = static::createClient();
-        $userRepository = static::$container->get(UserRepository::class);
+        $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneByEmail('user@example.com');
         $client->loginUser($testUser);
         $crawler = $client->request('GET', '/admin/volume/1/edit');

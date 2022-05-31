@@ -47,7 +47,7 @@
 
   <div class="row">
     <div class="col-lg-7 text-justify">
-      {{ article.articleBody | markdown }}
+      {{ article.articleBody|markdown_to_html }}
     </div>
 
     {% if article.images.count > 0 %}
@@ -62,7 +62,7 @@
         {% endif %}
         {% if image.caption %}
         <div class="card-body small">
-          {{ image.caption | markdown }}
+          {{ image.caption|markdown_to_html }}
         </div>
         {% endif %}
       </div>

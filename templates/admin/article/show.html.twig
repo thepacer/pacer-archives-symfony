@@ -24,7 +24,7 @@
           <p><cite>{{ article.authorByline }}</cite></p>
           <p><cite>{{ article.contributorByline }}</cite></p>
           <hr />
-          {{ article.articleBody|markdown }}
+          {{ article.articleBody|markdown_to_html}}
           <hr />
           <p>
             <strong>Keywords:</strong> {{ article.keywords }}<br />
@@ -64,7 +64,7 @@
         <img src="{{ path('s3_proxy', {id: image.id}) }}" class="card-img-top" alt="Article Image" />
         <div class="card-body">
           <p class="text-muted text-end">{{ image.credit }}</p>
-          {{ image.caption|markdown }}
+          {{ image.caption|markdown_to_html }}
           <p class="text-end"><a href="{{ path('image_edit', {id: image.id}) }}" class="btn btn-light"><i class="fas fa-edit fa-fw"></i> Edit</a></p>
         </div>
         {% endfor %}

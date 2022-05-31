@@ -52,7 +52,7 @@
   {% if issue.archiveNotes %}
   <h3 class="mb-2">Notes</h3>
   
-  {{ issue.archiveNotes|markdown }}
+  {{ issue.archiveNotes|markdown_to_html }}
   {% endif %}
 
   <h3 class="mb-2">Volume Issues</h3>
