@@ -44,7 +44,12 @@
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "symfony/flex": true,
+            "phpstan/extension-installer": true,
+            "symfony/runtime": true
+        }
     },
     "autoload": {
         "psr-4": {
