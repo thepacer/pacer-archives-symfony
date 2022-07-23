@@ -81,7 +81,7 @@ class ArchiveController extends AbstractController
     {
         $issues = $issueRepository->getIssuesByYear($year);
 
-        if ($year < self::START_YEAR || $year > (date('Y'))) {
+        if ($year < self::START_YEAR || $year > date('Y')) {
             return $this->createNotFoundException('No matching year found.');
         }
 
