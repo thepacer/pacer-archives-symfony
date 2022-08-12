@@ -21,9 +21,9 @@ pipeline {
     stage('Deploy to Staging') {
       when {
         expression {
-          isMaster = env.BRANCH_NAME == "master"
+          isMain = env.BRANCH_NAME == "main"
           isPrBranch = env.BRANCH_NAME ==~ /PR\-[0-9]+/
-          return !isMaster && !isPrBranch
+          return !isMain && !isPrBranch
         }
       }
       steps {
@@ -42,7 +42,7 @@ pipeline {
     }
     stage('Deploy to Production') {
       when {
-        branch 'master'
+        branch 'main'
       }
       steps {
         slackSend (message: "${currentBuild.fullDisplayName} Deploy to Production started (<${env.BUILD_URL}|Open>)", color: '#37b787')
