@@ -11,6 +11,7 @@ set :npm_method, 'ci'
 set :linked_files, [".env.local"]
 
 # Adjust branch if environment variable provided
+set :branch, 'main'
 set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 set :file_permissions_users, ['www-data']
