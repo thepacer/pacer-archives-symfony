@@ -23,11 +23,11 @@ class Volume
     #[ORM\Column(type: 'date')]
     private $volumeEndDate;
 
-    #[ORM\OneToMany(targetEntity: 'Issue', mappedBy: 'volume')]
+    #[ORM\OneToMany(targetEntity: Issue::class, mappedBy: 'volume')]
     #[ORM\OrderBy(['issueDate' => 'ASC'])]
     private $issues;
 
-    #[ORM\OneToOne(targetEntity: 'Issue', orphanRemoval: true)]
+    #[ORM\OneToOne(targetEntity: Issue::class, orphanRemoval: true)]
     private $coverIssue;
 
     #[ORM\Column(type: 'string', length: 10)]

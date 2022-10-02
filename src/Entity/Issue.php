@@ -23,7 +23,7 @@ class Issue
     #[ORM\Column(type: 'integer', nullable: false)]
     private $pageCount;
 
-    #[ORM\ManyToOne(targetEntity: 'Volume', inversedBy: 'issues')]
+    #[ORM\ManyToOne(targetEntity: Volume::class, inversedBy: 'issues')]
     #[ORM\JoinColumn(name: 'volume_id', referencedColumnName: 'id', nullable: false)]
     private $volume;
 
