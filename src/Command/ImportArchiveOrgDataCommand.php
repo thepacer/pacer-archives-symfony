@@ -5,6 +5,7 @@ namespace App\Command;
 use App\Entity\Issue;
 use App\Entity\Volume;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -12,10 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\HttpClient\HttpClient;
 
+#[AsCommand(name: 'app:import-archive-org-data')]
 class ImportArchiveOrgDataCommand extends Command
 {
-    protected static $defaultName = 'app:import-archive-org-data';
-
     protected $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)

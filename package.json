@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "stimulus": "^3.1.0",
-        "webpack-dev-server": "^4.9.3",
+        "webpack-dev-server": "^4.11.1",
         "webpack-notifier": "^1.15.0"
     },
     "license": "MIT",
@@ -13,19 +13,19 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@popperjs/core": "^2.11.5",
+        "@popperjs/core": "^2.11.6",
         "@symfony/stimulus-bridge": "^3.2.1",
-        "@symfony/webpack-encore": "^3.0.0",
-        "bootstrap": "^5.2.0",
+        "@symfony/webpack-encore": "^4.0.0",
+        "bootstrap": "^5.2.1",
         "clndr": "^1.5.1",
-        "core-js": "^3.24.1",
+        "core-js": "^3.25.3",
         "datatables.net": "^1.12.1",
         "datatables.net-bs5": "^1.12.1",
         "file-loader": "^6.2.0",
-        "fullcalendar": "^5.11.2",
-        "jquery": "^3.6.0",
-        "sass": "^1.54.0",
+        "fullcalendar": "^5.11.3",
+        "jquery": "^3.6.1",
+        "sass": "^1.55.0",
         "sass-loader": "^13.0.2",
-        "underscore": "^1.13.4"
+        "underscore": "^1.13.6"
     }
 }
