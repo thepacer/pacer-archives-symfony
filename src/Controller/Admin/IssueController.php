@@ -12,15 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/issue")
- * @IsGranted("ROLE_ADMIN")
- */
+#[Route(path: '/admin/issue')]
+#[IsGranted('ROLE_ADMIN')]
 class IssueController extends AbstractController
 {
-    /**
-     * @Route("", name="issue_index", methods={"GET"})
-     */
+    #[Route(path: '', name: 'issue_index', methods: ['GET'])]
     public function index(IssueRepository $issueRepository): Response
     {
         return $this->render('admin/issue/index.html.twig', [
@@ -28,9 +24,7 @@ class IssueController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="issue_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/new', name: 'issue_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $issue = new Issue();
@@ -50,9 +44,7 @@ class IssueController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="issue_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'issue_show', methods: ['GET'])]
     public function show(Issue $issue): Response
     {
         return $this->render('admin/issue/show.html.twig', [
@@ -60,9 +52,7 @@ class IssueController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="issue_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/{id}/edit', name: 'issue_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Issue $issue, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(IssueType::class, $issue);
@@ -84,9 +74,7 @@ class IssueController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="issue_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/{id}', name: 'issue_delete', methods: ['DELETE'])]
     public function delete(Request $request, Issue $issue, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$issue->getId(), $request->request->get('_token'))) {

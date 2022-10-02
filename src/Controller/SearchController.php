@@ -9,14 +9,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/search")
- */
+#[Route(path: '/search')]
 class SearchController extends AbstractController
 {
-    /**
-     * @Route("/", name="search")
-     */
+    #[Route(path: '/', name: 'search')]
     public function index(ArticleRepository $articleRepository, PaginatorInterface $paginator, Request $request)
     {
         $searchForm = $this->createForm(ArticleSearchType::class, null, [

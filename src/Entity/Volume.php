@@ -6,47 +6,31 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\VolumeRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\VolumeRepository')]
 class Volume
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=4)
-     */
+    #[ORM\Column(type: 'string', length: 4)]
     private $volumeNumber;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'date')]
     private $volumeStartDate;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'date')]
     private $volumeEndDate;
 
-    /**
-     * @ORM\OneToMany(targetEntity="Issue", mappedBy="volume")
-     * @ORM\OrderBy({"issueDate": "ASC"})
-     */
+    #[ORM\OneToMany(targetEntity: 'Issue', mappedBy: 'volume')]
+    #[ORM\OrderBy(['issueDate' => 'ASC'])]
     private $issues;
 
-    /**
-     * @ORM\OneToOne(targetEntity="Issue", orphanRemoval=true)
-     */
+    #[ORM\OneToOne(targetEntity: 'Issue', orphanRemoval: true)]
     private $coverIssue;
 
-    /**
-     * @ORM\Column(type="string", length=10)
-     */
+    #[ORM\Column(type: 'string', length: 10)]
     private $nameplateKey;
 
     public function __construct()

@@ -12,15 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/volume")
- * @IsGranted("ROLE_ADMIN")
- */
+#[Route(path: '/admin/volume')]
+#[IsGranted('ROLE_ADMIN')]
 class VolumeController extends AbstractController
 {
-    /**
-     * @Route("", name="volume_index", methods={"GET"})
-     */
+    #[Route(path: '', name: 'volume_index', methods: ['GET'])]
     public function index(VolumeRepository $volumeRepository): Response
     {
         return $this->render('admin/volume/index.html.twig', [
@@ -28,9 +24,7 @@ class VolumeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="volume_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/new', name: 'volume_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $volume = new Volume();
@@ -50,9 +44,7 @@ class VolumeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="volume_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'volume_show', methods: ['GET'])]
     public function show(Volume $volume): Response
     {
         return $this->render('admin/volume/show.html.twig', [
@@ -60,9 +52,7 @@ class VolumeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="volume_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/{id}/edit', name: 'volume_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Volume $volume, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(VolumeType::class, $volume);
@@ -84,9 +74,7 @@ class VolumeController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="volume_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/{id}', name: 'volume_delete', methods: ['DELETE'])]
     public function delete(Request $request, Volume $volume, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$volume->getId(), $request->request->get('_token'))) {

@@ -12,15 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/admin/article")
- * @IsGranted("ROLE_ADMIN")
- */
+#[Route(path: '/admin/article')]
+#[IsGranted('ROLE_ADMIN')]
 class ArticleController extends AbstractController
 {
-    /**
-     * @Route("", name="article_index", methods={"GET"})
-     */
+    #[Route(path: '', name: 'article_index', methods: ['GET'])]
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('admin/article/index.html.twig', [
@@ -28,9 +24,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/new", name="article_new", methods={"GET", "POST"})
-     */
+    #[Route(path: '/new', name: 'article_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $article = new Article();
@@ -50,9 +44,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="article_show", methods={"GET"})
-     */
+    #[Route(path: '/{id}', name: 'article_show', methods: ['GET'])]
     public function show(Article $article): Response
     {
         return $this->render('admin/article/show.html.twig', [
@@ -60,9 +52,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}/edit", name="article_edit", methods={"GET", "POST"})
-     */
+    #[Route(path: '/{id}/edit', name: 'article_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ArticleType::class, $article);
@@ -84,9 +74,7 @@ class ArticleController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/{id}", name="article_delete", methods={"DELETE"})
-     */
+    #[Route(path: '/{id}', name: 'article_delete', methods: ['DELETE'])]
     public function delete(Request $request, Article $article, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$article->getId(), $request->request->get('_token'))) {

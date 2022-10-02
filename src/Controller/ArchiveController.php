@@ -13,16 +13,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-/**
- * @Route("/archive")
- */
+#[Route(path: '/archive')]
 class ArchiveController extends AbstractController
 {
     public const START_YEAR = 1928;
 
-    /**
-     * @Route("/", name="archive")
-     */
+    #[Route(path: '/', name: 'archive')]
     public function index(IssueRepository $issueRepository, VolumeRepository $volumeRepository)
     {
         $volumes = $volumeRepository->findAllCurrentVolumes();
@@ -48,9 +44,7 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/volume/{volumeNumber}", name="volume", requirements={"volumeNumber": "\d+"})
-     */
+    #[Route(path: '/volume/{volumeNumber}', name: 'volume', requirements: ['volumeNumber' => '\d+'])]
     public function volume(VolumeRepository $volumeRepository, int $volumeNumber)
     {
         $volume = $volumeRepository->findOneBy(['volumeNumber' => $volumeNumber]);
@@ -74,9 +68,7 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/year/{year}", name="year", requirements={"year": "[1|2][0|9][0-9][0-9]"})
-     */
+    #[Route(path: '/year/{year}', name: 'year', requirements: ['year' => '[1|2][0|9][0-9][0-9]'])]
     public function year(IssueRepository $issueRepository, int $year)
     {
         $issues = $issueRepository->getIssuesByYear($year);
@@ -100,10 +92,8 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/issue/{issueDate}", name="issue", requirements={"issueDate": "([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
-     * @Route("/issue-{issueDate}", requirements={"issueDate": "([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
-     */
+    #[Route(path: '/issue/{issueDate}', name: 'issue', requirements: ['issueDate' => '([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])'])]
+    #[Route(path: '/issue-{issueDate}', requirements: ['issueDate' => '([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])'])]
     public function issue(IssueRepository $issueRepository, ArticleRepository $articleRepository, string $issueDate)
     {
         $issue = $issueRepository->findOneBy(['issueDate' => new \DateTime($issueDate)]);
@@ -137,9 +127,7 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/article/{slug}/{id}", name="article", requirements={"id": "\d+"})
-     */
+    #[Route(path: '/article/{slug}/{id}', name: 'article', requirements: ['id' => '\d+'])]
     public function article(ArticleRepository $articleRepository, string $slug, int $id)
     {
         $article = $articleRepository->find($id);
@@ -194,9 +182,7 @@ class ArchiveController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/image/{id}", name="s3_proxy", requirements={"id": "\d+"})
-     */
+    #[Route(path: '/image/{id}', name: 's3_proxy', requirements: ['id' => '\d+'])]
     public function s3Proxy(ImageRepository $imageRepository, S3Client $s3Client, $id)
     {
         $image = $imageRepository->find($id);
@@ -226,9 +212,7 @@ class ArchiveController extends AbstractController
         return $response;
     }
 
-    /**
-     * @Route("/content/{path}", name="s3_content_proxy", requirements={"path": ".+"})
-     */
+    #[Route(path: '/content/{path}', name: 's3_content_proxy', requirements: ['path' => '.+'])]
     public function s3ContentProxy(S3Client $s3Client, string $path): Response
     {
         try {
@@ -252,9 +236,7 @@ class ArchiveController extends AbstractController
         return $response;
     }
 
-    /**
-     * @Route("/legacy-issue/{issueDate}", name="legacy_issue", requirements={"issueDate": "([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])"})
-     */
+    #[Route(path: '/legacy-issue/{issueDate}', name: 'legacy_issue', requirements: ['issueDate' => '([0-9]{2,4})-([0-1][0-9])-([0-3][0-9])'])]
     public function legacyIssue(IssueRepository $issueRepository, string $issueDate)
     {
         $issue = $issueRepository->findOneBy(['issueDate' => new \DateTime($issueDate)]);
@@ -271,9 +253,8 @@ class ArchiveController extends AbstractController
 
     /**
      * Handle PacerCMS (Legacy) Article Links.
-     *
-     * @Route("/legacy-article/{id}", name="legacy_article", requirements={"id": "\d+"})
      */
+    #[Route(path: '/legacy-article/{id}', name: 'legacy_article', requirements: ['id' => '\d+'])]
     public function legacyArticle(ArticleRepository $articleRepository, int $id)
     {
         $article = $articleRepository->findOneBy(['legacyId' => $id]);

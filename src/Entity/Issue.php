@@ -6,58 +6,38 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\IssueRepository")
- */
+#[ORM\Entity(repositoryClass: 'App\Repository\IssueRepository')]
 class Issue
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="date")
-     */
+    #[ORM\Column(type: 'date')]
     private $issueDate;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $issueNumber;
 
-    /**
-     * @ORM\Column(type="integer", nullable=false)
-     */
+    #[ORM\Column(type: 'integer', nullable: false)]
     private $pageCount;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Volume", inversedBy="issues")
-     * @ORM\JoinColumn(name="volume_id", referencedColumnName="id", nullable=false)
-     */
+    #[ORM\ManyToOne(targetEntity: 'Volume', inversedBy: 'issues')]
+    #[ORM\JoinColumn(name: 'volume_id', referencedColumnName: 'id', nullable: false)]
     private $volume;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true, unique: true)]
     private $archiveKey;
 
-    /**
-     * @ORM\Column(type="text", nullable=true)
-     */
+    #[ORM\Column(type: 'text', nullable: true)]
     private $archiveNotes;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Article", mappedBy="issue")
-     * @ORM\OrderBy({"printSection": "ASC", "datePublished": "DESC"})
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Article', mappedBy: 'issue')]
+    #[ORM\OrderBy(['printSection' => 'ASC', 'datePublished' => 'DESC'])]
     private $articles;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true, unique=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true, unique: true)]
     private $utmDigitalArchiveUrl;
 
     public function __construct()

@@ -17,9 +17,7 @@ class PublicController extends AbstractController
     public const DONATION_URL = 'https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1';
     public const PACER_SITE_FEED = 'http://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5';
 
-    /**
-     * @Route("/", name="home")
-     */
+    #[Route(path: '/', name: 'home')]
     public function index(IssueRepository $issueRepository, Request $request)
     {
         $cache = new FilesystemAdapter();
@@ -59,9 +57,7 @@ class PublicController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/missing-issues", name="missing_issues")
-     */
+    #[Route(path: '/missing-issues', name: 'missing_issues')]
     public function missingIssues()
     {
         return $this->render('public/missing-issues.html.twig', [
@@ -72,9 +68,7 @@ class PublicController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/about", name="about")
-     */
+    #[Route(path: '/about', name: 'about')]
     public function about()
     {
         return $this->render('public/about.html.twig', [
@@ -85,9 +79,7 @@ class PublicController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/donate", name="donate")
-     */
+    #[Route(path: '/donate', name: 'donate')]
     public function donate()
     {
         return $this->redirect(self::DONATION_URL);

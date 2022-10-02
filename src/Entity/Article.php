@@ -7,114 +7,75 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-/**
- * @ORM\Entity(repositoryClass="App\Repository\ArticleRepository")
- * @ORM\Table(indexes={
- *     @ORM\Index(
- *         columns={"article_body", "headline", "alternative_headline"},
- *         flags={"fulltext"}
- *     ),
- *     @ORM\Index(
- *         columns={"author_byline", "contributor_byline"},
- *         flags={"fulltext"}
- *     )
- * })
- */
+#[ORM\Table]
+#[ORM\Index(columns: ['article_body', 'headline', 'alternative_headline'], flags: ['fulltext'])]
+#[ORM\Index(columns: ['author_byline', 'contributor_byline'], flags: ['fulltext'])]
+#[ORM\Entity(repositoryClass: 'App\Repository\ArticleRepository')]
 class Article
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $printColumn;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $printPage;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $printSection;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $articleBody;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $headline;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $alternativeHeadline;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $authorByline;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $contributorByline;
 
     /**
-     * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="create")
      */
+    #[ORM\Column(type: 'datetime')]
     private $dateCreated;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
+    #[ORM\Column(type: 'datetime')]
     private $datePublished;
 
     /**
-     * @ORM\Column(type="datetime")
      * @Gedmo\Timestampable(on="update")
      */
+    #[ORM\Column(type: 'datetime')]
     private $dateModified;
 
-    /**
-     * @ORM\Column(type="text")
-     */
+    #[ORM\Column(type: 'text')]
     private $keywords;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    #[ORM\Column(type: 'string', length: 255)]
     private $modifiedBy;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Issue", inversedBy="articles")
-     */
+    #[ORM\ManyToOne(targetEntity: 'App\Entity\Issue', inversedBy: 'articles')]
     private $issue;
 
-    /**
-     * @ORM\Column(type="integer", nullable=true)
-     */
+    #[ORM\Column(type: 'integer', nullable: true)]
     private $legacyId;
 
     /**
      * @Gedmo\Slug(fields={"headline", "id"})
-     * @ORM\Column(length=128, unique=true)
      */
+    #[ORM\Column(length: 128, unique: true)]
     private $slug;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Image", mappedBy="article", orphanRemoval=true, cascade={"persist"})
-     */
+    #[ORM\OneToMany(targetEntity: 'App\Entity\Image', mappedBy: 'article', orphanRemoval: true, cascade: ['persist'])]
     private $images;
 
     public function __construct()
