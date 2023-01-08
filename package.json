@@ -1,6 +1,6 @@
 {
     "devDependencies": {
-        "stimulus": "^3.1.1",
+        "stimulus": "^3.2.1",
         "webpack-dev-server": "^4.11.1",
         "webpack-notifier": "^1.15.0"
     },
@@ -15,16 +15,16 @@
     "dependencies": {
         "@popperjs/core": "^2.11.6",
         "@symfony/stimulus-bridge": "^3.2.1",
-        "@symfony/webpack-encore": "^4.1.2",
+        "@symfony/webpack-encore": "^4.2.0",
         "bootstrap": "^5.2.3",
         "clndr": "^1.5.1",
-        "core-js": "^3.26.1",
+        "core-js": "^3.27.1",
         "datatables.net": "^1.13.1",
         "datatables.net-bs5": "^1.13.1",
         "file-loader": "^6.2.0",
-        "fullcalendar": "^5.11.3",
-        "jquery": "^3.6.1",
-        "sass": "^1.56.1",
+        "fullcalendar": "^6.0.2",
+        "jquery": "^3.6.3",
+        "sass": "^1.57.1",
         "sass-loader": "^13.2.0",
         "underscore": "^1.13.6"
     }
