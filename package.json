@@ -18,13 +18,13 @@
         "@symfony/webpack-encore": "^4.2.0",
         "bootstrap": "^5.2.3",
         "clndr": "^1.5.1",
-        "core-js": "^3.27.2",
-        "datatables.net": "^1.13.2",
-        "datatables.net-bs5": "^1.13.2",
+        "core-js": "^3.29.0",
+        "datatables.net": "^1.13.3",
+        "datatables.net-bs5": "^1.13.3",
         "file-loader": "^6.2.0",
-        "fullcalendar": "^6.1.1",
+        "fullcalendar": "^6.1.4",
         "jquery": "^3.6.3",
-        "sass": "^1.58.0",
+        "sass": "^1.58.3",
         "sass-loader": "^13.2.0",
         "underscore": "^1.13.6"
     }
