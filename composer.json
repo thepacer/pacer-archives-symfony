@@ -13,7 +13,6 @@
         "doctrine/orm": "^2.10",
         "knplabs/knp-paginator-bundle": "^5.8",
         "league/commonmark": "^2.3",
-        "sensio/framework-extra-bundle": "^6.2",
         "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^6.1",
