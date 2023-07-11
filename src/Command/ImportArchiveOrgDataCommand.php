@@ -24,7 +24,7 @@ class ImportArchiveOrgDataCommand extends Command
         $this->entityManager = $entityManager;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->addOption('create-volumes', null, InputOption::VALUE_NONE, 'Create volumes.')

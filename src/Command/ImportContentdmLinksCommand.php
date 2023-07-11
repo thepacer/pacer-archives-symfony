@@ -29,7 +29,7 @@ class ImportContentdmLinksCommand extends Command
         $this->httpClient = HttpClient::create();
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Imports data from UT Martin\'s CONTENTdm instance.')
