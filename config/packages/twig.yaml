@@ -2,4 +2,5 @@ twig:
     form_themes: ['bootstrap_4_layout.html.twig']
     default_path: '%kernel.project_dir%/templates'
     globals:
-      ga_tracking_id: '%env(resolve:GA_TRACKING_ID)%'
+      matomo_analytics_url: '%env(resolve:MATOMO_ANALYTICS_URL)%'
+      matomo_analytics_site_id: '%env(resolve:MATOMO_ANALYTICS_SITE_ID)%'
