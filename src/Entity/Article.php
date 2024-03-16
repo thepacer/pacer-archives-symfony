@@ -42,19 +42,15 @@ class Article
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $contributorByline;
 
-    /**
-     * @Gedmo\Timestampable(on="create")
-     */
     #[ORM\Column(type: 'datetime')]
+    #[Gedmo\Timestampable(on: 'create')]
     private $dateCreated;
 
     #[ORM\Column(type: 'datetime')]
     private $datePublished;
 
-    /**
-     * @Gedmo\Timestampable(on="update")
-     */
     #[ORM\Column(type: 'datetime')]
+    #[Gedmo\Timestampable(on: 'update')]
     private $dateModified;
 
     #[ORM\Column(type: 'text')]
@@ -69,10 +65,8 @@ class Article
     #[ORM\Column(type: 'integer', nullable: true)]
     private $legacyId;
 
-    /**
-     * @Gedmo\Slug(fields={"headline", "id"})
-     */
     #[ORM\Column(length: 128, unique: true)]
+    #[Gedmo\Slug(fields: ['headline', 'id'])]
     private $slug;
 
     #[ORM\OneToMany(targetEntity: 'App\Entity\Image', mappedBy: 'article', orphanRemoval: true, cascade: ['persist'])]
