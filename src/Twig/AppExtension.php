@@ -17,7 +17,7 @@ class AppExtension extends AbstractExtension
     /**
      * @url https://github.com/TomodomoCo/twig-pluralize-extension/blob/master/src/Pluralize.php
      */
-    public function getPluralizedString(int $count, string $one, string $many, string $none = null): string
+    public function getPluralizedString(int $count, string $one, string $many, ?string $none = null): string
     {
         // If the option for $none is null, use the option for $many
         $none = $none ?? $many;
