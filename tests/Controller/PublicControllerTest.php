@@ -37,7 +37,7 @@ class PublicControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/donate');
         $this->assertResponseRedirects(
-            'https://securelb.imodules.com/s/1341/utaa/form/interior_form.aspx?sid=1341&gid=5&pgid=4197&cid=6250&dids=2802&bledit=1',
+            'https://give.utm.edu/campaigns/42936/donations/new?designation=PACER_03',
             302
         );
     }
