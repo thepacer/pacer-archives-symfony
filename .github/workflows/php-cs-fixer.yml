@@ -9,13 +9,14 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
       with:
+        token: ${{ secrets.GITHUB_TOKEN }}
         ref: ${{ github.head_ref }}
 
     - name: PHP-CS-Fixer
       uses: docker://oskarstark/php-cs-fixer-ga
 
     - name: Create PR for CS fixups
-      uses: peter-evans/create-pull-request@v6
+      uses: peter-evans/create-pull-request@v7
       id: create-pull-request
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
