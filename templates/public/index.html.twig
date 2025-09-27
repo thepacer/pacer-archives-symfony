@@ -76,8 +76,11 @@
               </li>
             {% else %}
             <div class="d-flex">
-              <div class="p-2"><i class="fas fa-exclamation-triangle fa-2x text-danger"></i></div>
-              <div class="p-2">Unable to load content from the website.</div>
+              <div class="p-2"><i class="fas fa-exclamation-triangle fa-2x text-warning"></i></div>
+              <div class="p-2">
+                <p class="mb-2">Unable to load recent articles from <em>The Pacer</em> website at this time.</p>
+                <p class="mb-0"><a href="https://www.thepacer.net/" target="_blank" class="btn btn-sm btn-outline-primary">Visit ThePacer.net directly</a></p>
+              </div>
             </div>
             {% endfor %}
           </ul>

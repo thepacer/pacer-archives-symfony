@@ -11,7 +11,7 @@ class IssueFixtures extends Fixture implements DependentFixtureInterface
 {
     public const ISSUE_1 = 'Issue 1';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $volume = $this->getReference(VolumeFixtures::VOLUME_1);
 
@@ -28,7 +28,7 @@ class IssueFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference(self::ISSUE_1, $issue);
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             VolumeFixtures::class,

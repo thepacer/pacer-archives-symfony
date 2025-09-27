@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $article = $this->getReference(ArticleFixtures::ARTICLE_1);
 
@@ -23,7 +23,7 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
         $manager->flush();
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             ArticleFixtures::class,

@@ -10,7 +10,7 @@ class VolumeFixtures extends Fixture
 {
     public const VOLUME_1 = 'Volume 1';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $volume = new Volume();
         $volume->setVolumeNumber('1');

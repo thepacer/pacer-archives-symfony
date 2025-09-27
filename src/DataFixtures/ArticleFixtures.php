@@ -11,7 +11,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 {
     public const ARTICLE_1 = 'Article 1';
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $issue = $this->getReference(IssueFixtures::ISSUE_1);
 
@@ -37,7 +37,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
         $this->addReference(self::ARTICLE_1, $article);
     }
 
-    public function getDependencies()
+    public function getDependencies(): array
     {
         return [
             IssueFixtures::class,
