@@ -20,11 +20,11 @@ jobs:
       id: create-pull-request
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: Fix coding standards in ${{ github.ref }}
-        branch: coding-standards/${{ github.ref }}
+        title: Fix coding standards in ${{ github.ref_name }}
+        branch: coding-standards/${{ github.ref_name }}
         assignees: ${{ github.actor }}
         labels: php-cs-fixer
-        body: Please merge these changes into the ${{ github.ref }} branch to fix coding standard violations.
+        body: Please merge these changes into the ${{ github.ref_name }} branch to fix coding standard violations.
         commit-message: Apply php-cs-fixer changes as of ${{ github.sha }}
 
     - name: Leave a notice in the discussion when fixing code in a Pull Request
