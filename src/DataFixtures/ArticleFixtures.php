@@ -13,7 +13,7 @@ class ArticleFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $issue = $this->getReference(IssueFixtures::ISSUE_1);
+        $issue = $this->getReference(IssueFixtures::ISSUE_1, \App\Entity\Issue::class);
 
         $article = new Article();
         $article->setId(1);

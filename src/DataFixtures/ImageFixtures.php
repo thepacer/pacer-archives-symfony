@@ -11,7 +11,7 @@ class ImageFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager): void
     {
-        $article = $this->getReference(ArticleFixtures::ARTICLE_1);
+        $article = $this->getReference(ArticleFixtures::ARTICLE_1, \App\Entity\Article::class);
 
         $image = new Image();
         $image->setArticle($article);

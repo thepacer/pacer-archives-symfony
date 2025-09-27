@@ -13,7 +13,7 @@ class IssueFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager): void
     {
-        $volume = $this->getReference(VolumeFixtures::VOLUME_1);
+        $volume = $this->getReference(VolumeFixtures::VOLUME_1, \App\Entity\Volume::class);
 
         $issue = new Issue();
         $issue->setIssueDate(new \DateTime('1928-12-17'));

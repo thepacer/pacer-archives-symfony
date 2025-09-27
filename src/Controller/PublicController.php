@@ -32,10 +32,10 @@ class PublicController extends AbstractController
 
         $feed = $cache->get('public.pacer_site_feed', function (ItemInterface $item) use ($cache) {
             $item->expiresAfter(self::CACHE_TTL);
-            
+
             // Create a temporary cookie jar for this request
             $tmpCookieFile = tempnam(sys_get_temp_dir(), 'pacer_cookies');
-            
+
             $client = HttpClient::create([
                 'headers' => [
                     'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
@@ -58,7 +58,7 @@ class PublicController extends AbstractController
                         'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
                     ],
                 ]);
-                
+
                 // Extract cookies from response if any
                 $setCookieHeaders = $response->getHeaders()['set-cookie'] ?? [];
                 $cookieString = '';
@@ -79,7 +79,7 @@ class PublicController extends AbstractController
                 if ($cookieString) {
                     $headers['Cookie'] = rtrim($cookieString, '; ');
                 }
-                
+
                 $response = $client->request('GET', self::PACER_SITE_FEED, [
                     'headers' => $headers,
                 ]);
@@ -87,7 +87,7 @@ class PublicController extends AbstractController
                 if ($response->getStatusCode() === 200) {
                     $content = $response->getContent();
                     $decoded = json_decode($content, true);
-                    
+
                     if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
                         @unlink($tmpCookieFile);
                         return $decoded;
@@ -104,7 +104,7 @@ class PublicController extends AbstractController
                     if ($cookieString) {
                         $headers['Cookie'] = rtrim($cookieString, '; ');
                     }
-                    
+
                     $response = $client->request('GET', self::PACER_RSS_FEED, [
                         'headers' => $headers,
                     ]);
@@ -179,7 +179,7 @@ class PublicController extends AbstractController
         try {
             $xml = new \SimpleXMLElement($rssContent);
             $items = [];
-            
+
             foreach ($xml->channel->item as $item) {
                 $items[] = [
                     'title' => ['rendered' => (string) $item->title],
@@ -192,7 +192,7 @@ class PublicController extends AbstractController
                     ]
                 ];
             }
-            
+
             return array_slice($items, 0, 5); // Limit to 5 items like WP-JSON
         } catch (\Exception $e) {
             return false;
