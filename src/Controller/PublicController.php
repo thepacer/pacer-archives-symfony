@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Repository\IssueRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
-use Symfony\Component\HttpClient\Exception\ServerException;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,7 +63,7 @@ class PublicController extends AbstractController
                 $cookieString = '';
                 foreach ($setCookieHeaders as $cookie) {
                     $cookiePart = explode(';', $cookie)[0];
-                    $cookieString .= $cookiePart . '; ';
+                    $cookieString .= $cookiePart.'; ';
                 }
             } catch (\Exception $e) {
                 $cookieString = '';
@@ -84,12 +83,13 @@ class PublicController extends AbstractController
                     'headers' => $headers,
                 ]);
 
-                if ($response->getStatusCode() === 200) {
+                if (200 === $response->getStatusCode()) {
                     $content = $response->getContent();
                     $decoded = json_decode($content, true);
 
-                    if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                    if (JSON_ERROR_NONE === json_last_error() && is_array($decoded)) {
                         @unlink($tmpCookieFile);
+
                         return $decoded;
                     }
                 }
@@ -109,12 +109,13 @@ class PublicController extends AbstractController
                         'headers' => $headers,
                     ]);
 
-                    if ($response->getStatusCode() === 200) {
+                    if (200 === $response->getStatusCode()) {
                         $content = $response->getContent();
                         // Parse RSS and convert to similar format as WP-JSON
                         $rssData = $this->parseRssFeed($content);
-                        if ($rssData !== false) {
+                        if (false !== $rssData) {
                             @unlink($tmpCookieFile);
+
                             return $rssData;
                         }
                     }
@@ -125,6 +126,7 @@ class PublicController extends AbstractController
 
             @unlink($tmpCookieFile);
             $cache->delete('public.pacer_site_feed');
+
             return false;
         });
         $issue_count = $cache->get('public.issue_count', function (ItemInterface $item) use ($issueRepository) {
@@ -172,7 +174,7 @@ class PublicController extends AbstractController
     }
 
     /**
-     * Parse RSS feed content and convert to format similar to WP-JSON API
+     * Parse RSS feed content and convert to format similar to WP-JSON API.
      */
     private function parseRssFeed(string $rssContent): array|false
     {
@@ -187,9 +189,9 @@ class PublicController extends AbstractController
                     'date' => date('Y-m-d\TH:i:s', strtotime((string) $item->pubDate)),
                     '_embedded' => [
                         'author' => [
-                            ['name' => 'The Pacer Staff'] // Default author for RSS
-                        ]
-                    ]
+                            ['name' => 'The Pacer Staff'], // Default author for RSS
+                        ],
+                    ],
                 ];
             }
 
