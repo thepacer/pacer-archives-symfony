@@ -84,10 +84,9 @@ class ImportContentdmLinksCommand extends Command
                     // No match, add error message.
                     $io->error(sprintf('No match on date: %s; Record: %s', $item->date, $this->buildUtmArchiveUrl($item)));
                     continue;
-                } else {
-                    $issue->setUtmDigitalArchiveUrl($this->buildUtmArchiveUrl($item));
-                    $this->entityManager->persist($issue);
                 }
+                $issue->setUtmDigitalArchiveUrl($this->buildUtmArchiveUrl($item));
+                $this->entityManager->persist($issue);
             }
 
             // Determine if we're leaving the loop
