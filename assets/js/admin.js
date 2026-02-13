@@ -1,30 +1,21 @@
 /* jshint esversion: 6 */
 
-// Javascript
-const $ = require('jquery');
-global.$ = global.jQuery = $;
-import { createPopper } from '@popperjs/core';
-const bootstrap = require('bootstrap');
-import { Tooltip, Toast, Popover } from 'bootstrap';
-require('clndr');
-require('datatables.net');
-require('datatables.net-bs5');
+// Import Bootstrap components
+import { Tooltip } from 'bootstrap';
 
 // CSS
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
-require('../../node_modules/datatables.net-bs5/css/dataTables.bootstrap5.css');
 require('../css/admin.scss');
 
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl);
+// Initialize tooltips
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all tooltips and initialize them with Bootstrap's native API
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  Array.from(tooltipTriggerList).forEach(tooltipTriggerEl => {
+    new Tooltip(tooltipTriggerEl);
+  });
+  
+  // Note: DataTables has been removed as it requires jQuery
+  // If needed, consider replacing with a vanilla JS table library like DataTables 2.0
+  // or implement search/sort functionality with vanilla JavaScript
 });
-
-const defaultDataTableSettings = {
-  pageLength: 100
-}
-
-$('#articleTable').DataTable(defaultDataTableSettings)
-$('#issueTable').DataTable(defaultDataTableSettings)
-$('#volumeTable').DataTable(defaultDataTableSettings)
-$('#imageTable').DataTable(defaultDataTableSettings)
