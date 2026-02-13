@@ -24,7 +24,7 @@ class PublicController extends AbstractController
         $cache = new FilesystemAdapter();
 
         // Clear cache
-        if ($request->get('clearCache')) {
+        if ($request->query->get('clearCache')) {
             $cache->delete('public.pacer_site_feed');
             $cache->delete('public.issue_count');
         }

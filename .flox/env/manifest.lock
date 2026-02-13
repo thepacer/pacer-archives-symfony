@@ -3,6 +3,9 @@
   "manifest": {
     "version": 1,
     "install": {
+      "composer": {
+        "pkg-path": "phpPackages.composer"
+      },
       "php": {
         "pkg-path": "php"
       },
@@ -26,6 +29,122 @@
     }
   },
   "packages": [
+    {
+      "attr_path": "phpPackages.composer",
+      "broken": false,
+      "derivation": "/nix/store/mjcfxnyf05vdl3hpi3n4yrgi1qm82bk5-composer-2.9.5.drv",
+      "description": "Dependency Manager for PHP",
+      "install_id": "composer",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
+      "name": "composer-2.9.5",
+      "pname": "composer",
+      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+      "rev_count": 942779,
+      "rev_date": "2026-02-08T14:52:16Z",
+      "scrape_date": "2026-02-09T04:39:06.064897Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.9.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/l85n2q4sq0jrm8ajnmp0irfvydlfdcl4-composer-2.9.5"
+      },
+      "system": "aarch64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "phpPackages.composer",
+      "broken": false,
+      "derivation": "/nix/store/9ai12h00kb0dgbb2hfm7asdxxsjxdg7z-composer-2.9.5.drv",
+      "description": "Dependency Manager for PHP",
+      "install_id": "composer",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
+      "name": "composer-2.9.5",
+      "pname": "composer",
+      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+      "rev_count": 942779,
+      "rev_date": "2026-02-08T14:52:16Z",
+      "scrape_date": "2026-02-09T05:11:31.578379Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.9.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/r1kzpkqdg6dmqh35sp7smb9gjjdf9akp-composer-2.9.5"
+      },
+      "system": "aarch64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "phpPackages.composer",
+      "broken": false,
+      "derivation": "/nix/store/d78gcafqmg13cvbyc9vlxwx2mg6a8iwq-composer-2.9.5.drv",
+      "description": "Dependency Manager for PHP",
+      "install_id": "composer",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
+      "name": "composer-2.9.5",
+      "pname": "composer",
+      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+      "rev_count": 942779,
+      "rev_date": "2026-02-08T14:52:16Z",
+      "scrape_date": "2026-02-09T05:44:50.511981Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.9.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/66qlzvvcivwl8qcca5kh4rbbxig4jfq6-composer-2.9.5"
+      },
+      "system": "x86_64-darwin",
+      "group": "toplevel",
+      "priority": 5
+    },
+    {
+      "attr_path": "phpPackages.composer",
+      "broken": false,
+      "derivation": "/nix/store/nf97pqqppqfr8css0fh6dzqdwj757ybi-composer-2.9.5.drv",
+      "description": "Dependency Manager for PHP",
+      "install_id": "composer",
+      "license": "MIT",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
+      "name": "composer-2.9.5",
+      "pname": "composer",
+      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
+      "rev_count": 942779,
+      "rev_date": "2026-02-08T14:52:16Z",
+      "scrape_date": "2026-02-09T06:21:13.783540Z",
+      "stabilities": [
+        "unstable"
+      ],
+      "unfree": false,
+      "version": "2.9.5",
+      "outputs_to_install": [
+        "out"
+      ],
+      "outputs": {
+        "out": "/nix/store/gsn9znrgvvc3hllzba5nin7i8jkpsg4d-composer-2.9.5"
+      },
+      "system": "x86_64-linux",
+      "group": "toplevel",
+      "priority": 5
+    },
     {
       "attr_path": "php",
       "broken": false,
