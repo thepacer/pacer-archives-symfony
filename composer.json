@@ -2,7 +2,7 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "aws/aws-sdk-php-symfony": "^2.2",
@@ -11,34 +11,33 @@
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.10",
-        "knplabs/knp-paginator-bundle": "^5.8",
+        "knplabs/knp-paginator-bundle": "^6.0",
         "league/commonmark": "^2.3",
         "stof/doctrine-extensions-bundle": "^1.4",
         "symfony/apache-pack": "^1.0",
-        "symfony/asset": "^6.1",
-        "symfony/cache": "^6.1",
-        "symfony/console": "^6.1",
-        "symfony/dotenv": "^6.1",
+        "symfony/asset": "^7.4",
+        "symfony/cache": "^7.4",
+        "symfony/console": "^7.4",
+        "symfony/dotenv": "^7.4",
         "symfony/flex": "^2.2",
-        "symfony/form": "^6.1",
-        "symfony/framework-bundle": "^6.1",
-        "symfony/http-client": "^6.1",
+        "symfony/form": "^7.4",
+        "symfony/framework-bundle": "^7.4",
+        "symfony/http-client": "^7.4",
         "symfony/monolog-bundle": "^3.7",
-        "symfony/proxy-manager-bridge": "^6.1",
-        "symfony/runtime": "^6.1",
-        "symfony/security-bundle": "^6.1",
-        "symfony/translation": "^6.1",
-        "symfony/twig-bundle": "^6.1",
-        "symfony/validator": "^6.1",
-        "symfony/webpack-encore-bundle": "^1.13",
-        "symfony/yaml": "^6.1",
+        "symfony/runtime": "^7.4",
+        "symfony/security-bundle": "^7.4",
+        "symfony/translation": "^7.4",
+        "symfony/twig-bundle": "^7.4",
+        "symfony/validator": "^7.4",
+        "symfony/webpack-encore-bundle": "^2.0",
+        "symfony/yaml": "^7.4",
         "twig/extra-bundle": "^3.0",
         "twig/markdown-extra": "^3.4",
         "twig/string-extra": "^3.3"
     },
     "config": {
         "platform": {
-            "php": "8.1.6"
+            "php": "8.2.0"
         },
         "preferred-install": {
             "*": "dist"
@@ -86,7 +85,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": false,
-            "require": "^6.1"
+            "require": "^7.4"
         }
     },
     "require-dev": {
@@ -97,11 +96,11 @@
         "phpstan/phpstan-symfony": "^1.0",
         "phpunit/phpunit": "^9.5",
         "rector/rector": "^0.14.5",
-        "symfony/browser-kit": "^6.1",
-        "symfony/css-selector": "^6.1",
+        "symfony/browser-kit": "^7.4",
+        "symfony/css-selector": "^7.4",
         "symfony/maker-bundle": "^1.33",
-        "symfony/phpunit-bridge": "^6.1",
-        "symfony/stopwatch": "^6.1",
-        "symfony/web-profiler-bundle": "^6.1"
+        "symfony/phpunit-bridge": "^7.4",
+        "symfony/stopwatch": "^7.4",
+        "symfony/web-profiler-bundle": "^7.4"
     }
 }
