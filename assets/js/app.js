@@ -1,19 +1,17 @@
 /* jshint esversion: 6 */
 
-// Javascript
-const $ = require('jquery');
-global.$ = global.jQuery = $;
-import { createPopper } from '@popperjs/core';
-import { Tooltip, Toast, Popover } from 'bootstrap';
-const bootstrap = require('bootstrap');
-global._ = require('underscore');
-require('clndr');
+// Import Bootstrap components
+import { Tooltip } from 'bootstrap';
 
 // CSS
 require('../../node_modules/bootstrap/dist/css/bootstrap.css');
 require('../css/app.scss');
 
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-  return new bootstrap.Tooltip(tooltipTriggerEl);
+// Initialize tooltips
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all tooltips and initialize them with Bootstrap's native API
+  const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+  Array.from(tooltipTriggerList).forEach(tooltipTriggerEl => {
+    new Tooltip(tooltipTriggerEl);
+  });
 });

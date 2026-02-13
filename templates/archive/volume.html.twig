@@ -87,62 +87,19 @@
 
 {% block javascripts %}
 {{ parent() }}
+{{ encore_entry_script_tags('archive') }}
 <script>
-  var volumeIssues = []
+// Calendar data for the archive.js to initialize
+window.volumeStartYear = {{ volume.volumeStartDate.format('Y') }};
+window.volumeEndYear = {{ volume.volumeEndDate.format('Y') }};
+window.volumeCalendarData = [
   {% for issue in volume.issues %}
-  volumeIssues.push({
+  {
     date: '{{ issue.issueDate.format('Y-m-d') }}',
     title: 'Issue',
     url: '{{ path('issue', {issueDate: issue.issueDate.format('Y-m-d')}) }}'
-  })
+  }{{ not loop.last ? ',' : '' }}
   {% endfor %}
-
-  if (volumeIssues.length > 0) {
-    var clndrTemplate =
-      "<h5 class='my-3'><%= month %></h5>" +
-      "<table class='table table-sm clndr-table'>" +
-        "<thead>" +
-            "<tr class='header-days'>" +
-            "<% for(var i = 0; i < daysOfTheWeek.length; i++) { %>" +
-                "<td class='header-day'><%= daysOfTheWeek[i] %></td>" +
-            "<% } %>" +
-            "</tr>" +
-        "</thead>" +
-        "<tbody>" +
-        "<% for(var i = 0; i < numberOfRows; i++){ %>" +
-            "<tr>" +
-            "<% for(var j = 0; j < 7; j++){ %>" +
-            "<% var d = j + i * 7; %>" +
-                "<td class='<%= days[d].classes %>'>" +
-                    "<% if (days[d].events.length > 0) { %>" +
-                    "<div class='day-contents'><a href='<%= days[d].events[0].url %>'><%= days[d].day %></a></div>" +
-                    "<% } else { %>" +
-                    "<div class='day-contents'><%= days[d].day %></div>" +
-                    "<% } %>" +
-                "</td>" +
-            "<% } %>" +
-            "</tr>" +
-        "<% } %>" +
-        "</tbody>" +
-    "</table>";
-
-    var academicMonths = [7,8,9,10,11,0,1,2,3,4,5,6]
-    $('.calendar').each(function (i, e) {
-      var cal = $(e).clndr({
-        template: clndrTemplate,
-        events: volumeIssues,
-        showAdjacentMonths: false
-      });
-      if (academicMonths[i]<7) {
-        cal.setYear({{ volume.volumeEndDate.format('Y') }});
-      } else {
-        cal.setYear({{ volume.volumeStartDate.format('Y') }})
-      }
-      cal.setMonth(academicMonths[i]);
-      if (cal.eventsThisInterval.length == 0) {
-        $(cal.calendarContainer).css({opacity: 0.25})
-      }
-    })
-  }
+];
 </script>
 {% endblock %}
