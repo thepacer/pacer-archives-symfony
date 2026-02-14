@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 use App\Repository\IssueRepository;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\ItemInterface;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Psr\Log\LoggerInterface;
 
 class PublicController extends AbstractController
 {
@@ -83,7 +82,7 @@ class PublicController extends AbstractController
                     $cookieString .= $cookiePart.'; ';
                 }
             } catch (\Exception $e) {
-                $this->logger->debug('Initial request failed: ' . $e->getMessage());
+                $this->logger->debug('Initial request failed: '.$e->getMessage());
                 $cookieString = '';
             }
 
@@ -105,9 +104,9 @@ class PublicController extends AbstractController
                     $content = $response->getContent();
 
                     // Check if content is gzip compressed and decompress
-                    if (substr($content, 0, 2) === "\x1f\x8b") {
+                    if ("\x1f\x8b" === substr($content, 0, 2)) {
                         $content = gzdecode($content);
-                        if ($content === false) {
+                        if (false === $content) {
                             throw new \Exception('Failed to decompress gzip content');
                         }
                     }
@@ -119,12 +118,11 @@ class PublicController extends AbstractController
                         @unlink($tmpCookieFile);
 
                         return $decoded;
-                    } else {
-                        $this->logger->debug('WP-JSON decode failed: ' . json_last_error_msg());
                     }
+                    $this->logger->debug('WP-JSON decode failed: '.json_last_error_msg());
                 }
             } catch (\Exception $e) {
-                $this->logger->debug('WP-JSON API request failed: ' . $e->getMessage());
+                $this->logger->debug('WP-JSON API request failed: '.$e->getMessage());
                 // WP-JSON failed, try RSS feed
                 try {
                     sleep(self::FEED_REQUEST_DELAY);
@@ -144,9 +142,9 @@ class PublicController extends AbstractController
                         $content = $response->getContent();
 
                         // Check if content is gzip compressed and decompress
-                        if (substr($content, 0, 2) === "\x1f\x8b") {
+                        if ("\x1f\x8b" === substr($content, 0, 2)) {
                             $content = gzdecode($content);
-                            if ($content === false) {
+                            if (false === $content) {
                                 throw new \Exception('Failed to decompress RSS gzip content');
                             }
                         }
@@ -158,12 +156,11 @@ class PublicController extends AbstractController
                             @unlink($tmpCookieFile);
 
                             return $rssData;
-                        } else {
-                            $this->logger->debug('RSS parsing failed');
                         }
+                        $this->logger->debug('RSS parsing failed');
                     }
                 } catch (\Exception $rssException) {
-                    $this->logger->debug('RSS request failed: ' . $rssException->getMessage());
+                    $this->logger->debug('RSS request failed: '.$rssException->getMessage());
                     // Both feeds failed
                 }
             }
