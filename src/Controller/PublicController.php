@@ -9,6 +9,8 @@ use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Psr\Log\LoggerInterface;
 
 class PublicController extends AbstractController
 {
@@ -17,6 +19,13 @@ class PublicController extends AbstractController
     public const PACER_SITE_FEED = 'https://www.thepacer.net/wp-json/wp/v2/posts?_embed&per_page=5';
     public const PACER_RSS_FEED = 'https://www.thepacer.net/feed/';
     public const FEED_REQUEST_DELAY = 2; // seconds
+
+    private LoggerInterface $logger;
+
+    public function __construct(LoggerInterface $logger)
+    {
+        $this->logger = $logger;
+    }
 
     #[Route(path: '/', name: 'home')]
     public function index(IssueRepository $issueRepository, Request $request)
@@ -31,6 +40,7 @@ class PublicController extends AbstractController
 
         $feed = $cache->get('public.pacer_site_feed', function (ItemInterface $item) use ($cache) {
             $item->expiresAfter(self::CACHE_TTL);
+            $this->logger->info('Fetching PACER site feed');
 
             // Create a temporary cookie jar for this request
             $tmpCookieFile = tempnam(sys_get_temp_dir(), 'pacer_cookies');
@@ -46,7 +56,14 @@ class PublicController extends AbstractController
                     'Upgrade-Insecure-Requests' => '1',
                 ],
                 'timeout' => 15,
-                'cafile' => false, // For development, consider removing in production
+                'verify_peer' => false,
+                'verify_host' => false,
+                'extra' => [
+                    'curl' => [
+                        CURLOPT_TCP_KEEPALIVE => 1,
+                        CURLOPT_TCP_KEEPIDLE => 60,
+                    ],
+                ],
             ]);
 
             // First, try to get the main page to establish session/cookies
@@ -66,6 +83,7 @@ class PublicController extends AbstractController
                     $cookieString .= $cookiePart.'; ';
                 }
             } catch (\Exception $e) {
+                $this->logger->debug('Initial request failed: ' . $e->getMessage());
                 $cookieString = '';
             }
 
@@ -85,15 +103,28 @@ class PublicController extends AbstractController
 
                 if (200 === $response->getStatusCode()) {
                     $content = $response->getContent();
+
+                    // Check if content is gzip compressed and decompress
+                    if (substr($content, 0, 2) === "\x1f\x8b") {
+                        $content = gzdecode($content);
+                        if ($content === false) {
+                            throw new \Exception('Failed to decompress gzip content');
+                        }
+                    }
+
                     $decoded = json_decode($content, true);
 
                     if (JSON_ERROR_NONE === json_last_error() && is_array($decoded)) {
+                        $this->logger->info('Successfully loaded PACER site feed from WP-JSON API');
                         @unlink($tmpCookieFile);
 
                         return $decoded;
+                    } else {
+                        $this->logger->debug('WP-JSON decode failed: ' . json_last_error_msg());
                     }
                 }
             } catch (\Exception $e) {
+                $this->logger->debug('WP-JSON API request failed: ' . $e->getMessage());
                 // WP-JSON failed, try RSS feed
                 try {
                     sleep(self::FEED_REQUEST_DELAY);
@@ -111,19 +142,33 @@ class PublicController extends AbstractController
 
                     if (200 === $response->getStatusCode()) {
                         $content = $response->getContent();
+
+                        // Check if content is gzip compressed and decompress
+                        if (substr($content, 0, 2) === "\x1f\x8b") {
+                            $content = gzdecode($content);
+                            if ($content === false) {
+                                throw new \Exception('Failed to decompress RSS gzip content');
+                            }
+                        }
+
                         // Parse RSS and convert to similar format as WP-JSON
                         $rssData = $this->parseRssFeed($content);
                         if (false !== $rssData) {
+                            $this->logger->info('Successfully loaded PACER site feed from RSS');
                             @unlink($tmpCookieFile);
 
                             return $rssData;
+                        } else {
+                            $this->logger->debug('RSS parsing failed');
                         }
                     }
                 } catch (\Exception $rssException) {
+                    $this->logger->debug('RSS request failed: ' . $rssException->getMessage());
                     // Both feeds failed
                 }
             }
 
+            $this->logger->error('Failed to load PACER site feed from all sources');
             @unlink($tmpCookieFile);
             $cache->delete('public.pacer_site_feed');
 
