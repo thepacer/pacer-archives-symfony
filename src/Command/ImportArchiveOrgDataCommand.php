@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Entity\Issue;
 use App\Entity\Volume;
+use App\Service\ArchiveThumbnailCache;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -17,11 +18,13 @@ use Symfony\Component\HttpClient\HttpClient;
 class ImportArchiveOrgDataCommand extends Command
 {
     protected $entityManager;
+    protected $thumbnailCache;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, ArchiveThumbnailCache $thumbnailCache)
     {
         parent::__construct();
         $this->entityManager = $entityManager;
+        $this->thumbnailCache = $thumbnailCache;
     }
 
     protected function configure(): void
@@ -118,6 +121,9 @@ class ImportArchiveOrgDataCommand extends Command
             if (property_exists($doc, 'utmdigitalarchive')) {
                 $issue->setUtmDigitalArchiveUrl($doc->utmdigitalarchive);
             }
+
+            $this->cacheIssueThumbnail($client, $doc->identifier, $io);
+
             $this->entityManager->persist($issue);
         }
 
@@ -126,5 +132,25 @@ class ImportArchiveOrgDataCommand extends Command
         $io->success('Done!');
 
         return 0;
+    }
+
+    protected function cacheIssueThumbnail($client, string $archiveKey, SymfonyStyle $io): void
+    {
+        if ($this->thumbnailCache->has($archiveKey)) {
+            return;
+        }
+
+        try {
+            $result = $client->request('GET', 'https://archive.org/services/img/'.$archiveKey);
+            if (200 !== $result->getStatusCode()) {
+                return;
+            }
+
+            $this->thumbnailCache->store($archiveKey, $result->getContent());
+        } catch (\Throwable $exception) {
+            if ($io->isVerbose()) {
+                $io->warning(sprintf('Could not cache thumbnail for %s', $archiveKey));
+            }
+        }
     }
 }

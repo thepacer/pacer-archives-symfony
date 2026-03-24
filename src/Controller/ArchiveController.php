@@ -6,16 +6,26 @@ use App\Repository\ArticleRepository;
 use App\Repository\ImageRepository;
 use App\Repository\IssueRepository;
 use App\Repository\VolumeRepository;
+use App\Service\ArchiveThumbnailCache;
 use Aws\S3\S3Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\HeaderUtils;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ArchiveController extends AbstractController
 {
     public const START_YEAR = 1928;
+
+    protected $thumbnailCache;
+
+    public function __construct(ArchiveThumbnailCache $thumbnailCache)
+    {
+        $this->thumbnailCache = $thumbnailCache;
+    }
 
     #[Route(path: '/archive/', name: 'archive')]
     public function index(IssueRepository $issueRepository, VolumeRepository $volumeRepository)
@@ -62,7 +72,9 @@ class ArchiveController extends AbstractController
             'opengraph' => [
                 'title' => $volume,
                 'description' => 'Issues that appeared in '.$volume,
-                'image' => 'https://archive.org/services/img/'.$volume->getCoverIssue()->getArchiveKey(),
+                'image' => $this->generateUrl('archive_thumbnail', [
+                    'archiveKey' => $volume->getCoverIssue()->getArchiveKey(),
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
             ],
         ]);
     }
@@ -121,7 +133,9 @@ class ArchiveController extends AbstractController
                     $issue->getIssueDate()->format('F j, Y'),
                     ucwords($issue->getVolume()->getNameplateKey())
                 ),
-                'image' => 'https://archive.org/services/img/'.$issue->getArchiveKey(),
+                'image' => $this->generateUrl('archive_thumbnail', [
+                    'archiveKey' => $issue->getArchiveKey(),
+                ], UrlGeneratorInterface::ABSOLUTE_URL),
             ],
         ]);
     }
@@ -154,7 +168,9 @@ class ArchiveController extends AbstractController
         } else {
             // No image attached, use issue cover if set
             if ($article->getIssue()) {
-                $articleImage = 'https://archive.org/services/img/'.$article->getIssue()->getArchiveKey();
+                $articleImage = $this->generateUrl('archive_thumbnail', [
+                    'archiveKey' => $article->getIssue()->getArchiveKey(),
+                ], UrlGeneratorInterface::ABSOLUTE_URL);
             } else {
                 $articleImage = false;
             }
@@ -207,6 +223,25 @@ class ArchiveController extends AbstractController
         $response = new Response($object['Body']);
         $response->headers->set('Content-Type', $object['ContentType']);
         $response->headers->set('Content-Disposition', $disposition);
+
+        return $response;
+    }
+
+    #[Route(path: '/archive/thumbnail/{archiveKey}', name: 'archive_thumbnail')]
+    public function thumbnail(string $archiveKey): Response
+    {
+        $thumbnailPath = $this->thumbnailCache->getPath($archiveKey);
+
+        if (!is_file($thumbnailPath)) {
+            return $this->redirect('https://archive.org/services/img/'.$archiveKey, 302);
+        }
+
+        $response = new BinaryFileResponse($thumbnailPath);
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, basename($thumbnailPath));
+        $response->headers->set('Content-Type', mime_content_type($thumbnailPath) ?: 'application/octet-stream');
+        $response->setPublic();
+        $response->setMaxAge(86400);
+        $response->setSharedMaxAge(86400);
 
         return $response;
     }
