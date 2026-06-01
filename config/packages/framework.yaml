@@ -22,7 +22,14 @@ framework:
         with_constructor_extractor: true
 
     profiler:
+        collect: false
+        collect_parameter: profile
         collect_serializer_data: true
+
+when@dev:
+    framework:
+        profiler:
+            collect: true
 
 when@test:
     framework:
