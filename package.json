@@ -1,7 +1,7 @@
 {
     "devDependencies": {
         "stimulus": "^3.2.1",
-        "webpack-dev-server": "^5.2.4",
+        "webpack-dev-server": "^5.2.5",
         "webpack-notifier": "^1.15.0"
     },
     "license": "MIT",
