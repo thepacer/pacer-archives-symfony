@@ -32,27 +32,27 @@
     {
       "attr_path": "phpPackages.composer",
       "broken": false,
-      "derivation": "/nix/store/mjcfxnyf05vdl3hpi3n4yrgi1qm82bk5-composer-2.9.5.drv",
+      "derivation": "/nix/store/cxyxpcv02s2add6w4ly909h1xb1jn39a-composer-2.10.3.drv",
       "description": "Dependency Manager for PHP",
       "install_id": "composer",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "composer-2.9.5",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "composer-2.10.3",
       "pname": "composer",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T04:39:06.064897Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T04:58:57.718339Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "2.9.5",
+      "version": "2.10.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/l85n2q4sq0jrm8ajnmp0irfvydlfdcl4-composer-2.9.5"
+        "out": "/nix/store/nxpwspffhrg3yx7kry1i5n40806cdaxv-composer-2.10.3"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -61,27 +61,27 @@
     {
       "attr_path": "phpPackages.composer",
       "broken": false,
-      "derivation": "/nix/store/9ai12h00kb0dgbb2hfm7asdxxsjxdg7z-composer-2.9.5.drv",
+      "derivation": "/nix/store/9nzj68245lz6ykwp8nbmpfi8q82s04z0-composer-2.10.3.drv",
       "description": "Dependency Manager for PHP",
       "install_id": "composer",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "composer-2.9.5",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "composer-2.10.3",
       "pname": "composer",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:11:31.578379Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T05:30:36.213442Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "2.9.5",
+      "version": "2.10.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/r1kzpkqdg6dmqh35sp7smb9gjjdf9akp-composer-2.9.5"
+        "out": "/nix/store/qjx7vbam4k9im2zvrk6xhdxj0j712p0s-composer-2.10.3"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -90,56 +90,27 @@
     {
       "attr_path": "phpPackages.composer",
       "broken": false,
-      "derivation": "/nix/store/d78gcafqmg13cvbyc9vlxwx2mg6a8iwq-composer-2.9.5.drv",
+      "derivation": "/nix/store/5qcx7kv1rxk70gwy6yf0bjpzsp9pvg6f-composer-2.10.3.drv",
       "description": "Dependency Manager for PHP",
       "install_id": "composer",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "composer-2.9.5",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "composer-2.10.3",
       "pname": "composer",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:44:50.511981Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T06:06:30.231594Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "2.9.5",
+      "version": "2.10.3",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/66qlzvvcivwl8qcca5kh4rbbxig4jfq6-composer-2.9.5"
-      },
-      "system": "x86_64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "phpPackages.composer",
-      "broken": false,
-      "derivation": "/nix/store/nf97pqqppqfr8css0fh6dzqdwj757ybi-composer-2.9.5.drv",
-      "description": "Dependency Manager for PHP",
-      "install_id": "composer",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "composer-2.9.5",
-      "pname": "composer",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T06:21:13.783540Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.9.5",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/gsn9znrgvvc3hllzba5nin7i8jkpsg4d-composer-2.9.5"
+        "out": "/nix/store/m8rhzdzvkl1adprdixr07phvlvgnnn0s-composer-2.10.3"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -148,27 +119,27 @@
     {
       "attr_path": "php",
       "broken": false,
-      "derivation": "/nix/store/8rnss7y3pmhg1diy8icbnwwmg199xlfv-php-with-extensions-8.4.17.drv",
+      "derivation": "/nix/store/nqjphdyh9y6r0bshjx4ljz00pf14pq7c-php-with-extensions-8.4.25.drv",
       "description": "HTML-embedded scripting language",
       "install_id": "php",
       "license": "PHP-3.01",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "php-with-extensions-8.4.17",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "php-with-extensions-8.4.25",
       "pname": "php",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T04:39:05.020635Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T04:58:56.713850Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "8.4.17",
+      "version": "8.4.25",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/in1slybl89zay85knrqj2d7kdzwy9i8m-php-with-extensions-8.4.17"
+        "out": "/nix/store/8n6gf3is9dq3n3wbs27jpgg8dn47gb31-php-with-extensions-8.4.25"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -177,27 +148,27 @@
     {
       "attr_path": "php",
       "broken": false,
-      "derivation": "/nix/store/3j3cq8f7j9vh44cq9sjhxwc3hf1bq1hy-php-with-extensions-8.4.17.drv",
+      "derivation": "/nix/store/34pydjs2l87k5iv6q8g03xjjqq5g30y0-php-with-extensions-8.4.25.drv",
       "description": "HTML-embedded scripting language",
       "install_id": "php",
       "license": "PHP-3.01",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "php-with-extensions-8.4.17",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "php-with-extensions-8.4.25",
       "pname": "php",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:11:30.203978Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T05:30:34.836764Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "8.4.17",
+      "version": "8.4.25",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/5ja907v977470pjcklzg7gs4jqv2igmr-php-with-extensions-8.4.17"
+        "out": "/nix/store/d6cr4iripmxc2kv0z883kwy4n31j3vbw-php-with-extensions-8.4.25"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -206,56 +177,27 @@
     {
       "attr_path": "php",
       "broken": false,
-      "derivation": "/nix/store/a8mavi1aqxmzwqzs6nz31w4dxnw7y7bz-php-with-extensions-8.4.17.drv",
+      "derivation": "/nix/store/hibmnvnn5q8fijbplfx1b72afik8zwcb-php-with-extensions-8.4.25.drv",
       "description": "HTML-embedded scripting language",
       "install_id": "php",
       "license": "PHP-3.01",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "php-with-extensions-8.4.17",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "php-with-extensions-8.4.25",
       "pname": "php",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:44:49.504358Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T06:06:28.859670Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "8.4.17",
+      "version": "8.4.25",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/qvbw7jkjklmsd30w1a5idl60wahwn8sd-php-with-extensions-8.4.17"
-      },
-      "system": "x86_64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "php",
-      "broken": false,
-      "derivation": "/nix/store/xlszc8b3ikv859nz49ka1slvhx2vgchl-php-with-extensions-8.4.17.drv",
-      "description": "HTML-embedded scripting language",
-      "install_id": "php",
-      "license": "PHP-3.01",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "php-with-extensions-8.4.17",
-      "pname": "php",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T06:21:12.456398Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "8.4.17",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/6m4jrz2w1rj0iqal9y93smq3wk0wdsmg-php-with-extensions-8.4.17"
+        "out": "/nix/store/wnhqcd0f1b20rmrsh26ailj65xny6ahk-php-with-extensions-8.4.25"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -264,27 +206,27 @@
     {
       "attr_path": "phpstan",
       "broken": false,
-      "derivation": "/nix/store/x42hr3806kyf5kjbkgz7idklryhwhbhq-phpstan-2.1.38.drv",
+      "derivation": "/nix/store/7vb67rb9ppk9wb4ykcqibfi3gjqniryi-phpstan-2.2.14.drv",
       "description": "PHP Static Analysis Tool",
       "install_id": "phpstan",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpstan-2.1.38",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "phpstan-2.2.14",
       "pname": "phpstan",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T04:39:06.091290Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T04:58:57.748319Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "2.1.38",
+      "version": "2.2.14",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/p05g0761jq99hls4pxkg82r1xa2l54if-phpstan-2.1.38"
+        "out": "/nix/store/9crw7iqnsg93k6p644brkrjyyj3qjm63-phpstan-2.2.14"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -293,27 +235,27 @@
     {
       "attr_path": "phpstan",
       "broken": false,
-      "derivation": "/nix/store/bhvhf6j3qcamkk21p9p4dmjv665l0yzf-phpstan-2.1.38.drv",
+      "derivation": "/nix/store/l45d5i3ls812734frb53vca4wqz1ijv2-phpstan-2.2.14.drv",
       "description": "PHP Static Analysis Tool",
       "install_id": "phpstan",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpstan-2.1.38",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "phpstan-2.2.14",
       "pname": "phpstan",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:11:31.611776Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T05:30:36.248110Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "2.1.38",
+      "version": "2.2.14",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/pcl1v6v4d6v3rnfiy7ilpqdzj8rx8k05-phpstan-2.1.38"
+        "out": "/nix/store/wbd54absbhybknqsrcfn95z3yr5rp9c4-phpstan-2.2.14"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -322,56 +264,27 @@
     {
       "attr_path": "phpstan",
       "broken": false,
-      "derivation": "/nix/store/gm4qmsrzvgzhkv5dfbsn07hrzr0jxhjy-phpstan-2.1.38.drv",
+      "derivation": "/nix/store/2xdc0nwzrcmq1z7xz1h0b2mwrn3z5n9p-phpstan-2.2.14.drv",
       "description": "PHP Static Analysis Tool",
       "install_id": "phpstan",
       "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpstan-2.1.38",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "phpstan-2.2.14",
       "pname": "phpstan",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:44:50.538167Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T06:06:30.270977Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "2.1.38",
+      "version": "2.2.14",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/amrschl9s1rqff04big2p5b5sn3cml7i-phpstan-2.1.38"
-      },
-      "system": "x86_64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "phpstan",
-      "broken": false,
-      "derivation": "/nix/store/lqjp8rc4cdbwq557bw4h59k68x7bpf36-phpstan-2.1.38.drv",
-      "description": "PHP Static Analysis Tool",
-      "install_id": "phpstan",
-      "license": "MIT",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpstan-2.1.38",
-      "pname": "phpstan",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T06:21:13.817822Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "2.1.38",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/3w1k526lhsyv8wwxmawnskzcwyb0bycn-phpstan-2.1.38"
+        "out": "/nix/store/vxljhi4j0v7qs55d6vzvj02axm3m68ka-phpstan-2.2.14"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -380,27 +293,27 @@
     {
       "attr_path": "phpunit",
       "broken": false,
-      "derivation": "/nix/store/wgczp5mzk97gm774dwzy9sck4wdj9as6-phpunit-12.5.8.drv",
+      "derivation": "/nix/store/7z2y8fl5n8ppjr87cbf7gl9hdibvg6xj-phpunit-13.3.2.drv",
       "description": "PHP Unit Testing framework",
       "install_id": "phpunit",
       "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpunit-12.5.8",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "phpunit-13.3.2",
       "pname": "phpunit",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T04:39:06.093058Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T04:58:57.750045Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "12.5.8",
+      "version": "13.3.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/pzzz2qiba8rf07ilicha68154m5k2r8y-phpunit-12.5.8"
+        "out": "/nix/store/h2ajlqk53ws8lpzgx8kayskxca8kkv9p-phpunit-13.3.2"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -409,27 +322,27 @@
     {
       "attr_path": "phpunit",
       "broken": false,
-      "derivation": "/nix/store/f3ha6cd95dhmjd79nqjcnrgx6f4ayf13-phpunit-12.5.8.drv",
+      "derivation": "/nix/store/kzd5l34rvl6az2p89n63fdrpvk8n5by3-phpunit-13.3.2.drv",
       "description": "PHP Unit Testing framework",
       "install_id": "phpunit",
       "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpunit-12.5.8",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "phpunit-13.3.2",
       "pname": "phpunit",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:11:31.614012Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T05:30:36.250239Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "12.5.8",
+      "version": "13.3.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/ryhkbkkyj2fj2cqhzmxj10i8whsxq25h-phpunit-12.5.8"
+        "out": "/nix/store/hscn3lmjv0vcnskxsagdln4ffa5v8vd9-phpunit-13.3.2"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -438,56 +351,27 @@
     {
       "attr_path": "phpunit",
       "broken": false,
-      "derivation": "/nix/store/grnhvidjn2jq8qzxwnsnlhhr1wffcvpp-phpunit-12.5.8.drv",
+      "derivation": "/nix/store/ivd03g5dww2nighh73q50wa88fcnvb37-phpunit-13.3.2.drv",
       "description": "PHP Unit Testing framework",
       "install_id": "phpunit",
       "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpunit-12.5.8",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "phpunit-13.3.2",
       "pname": "phpunit",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:44:50.539860Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T06:06:30.273237Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "12.5.8",
+      "version": "13.3.2",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/33hy4bvlkyav93927zrh079kx6awkcna-phpunit-12.5.8"
-      },
-      "system": "x86_64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "phpunit",
-      "broken": false,
-      "derivation": "/nix/store/n8545k2478chadjdmhb6w0c4fk2z6vih-phpunit-12.5.8.drv",
-      "description": "PHP Unit Testing framework",
-      "install_id": "phpunit",
-      "license": "BSD-3-Clause",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "phpunit-12.5.8",
-      "pname": "phpunit",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T06:21:13.819952Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "12.5.8",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/d0rga7mkx2m76k21yl1sdmbc8lrpm7lp-phpunit-12.5.8"
+        "out": "/nix/store/k8fla1nhqjs8w9b403l1qys5xhy9w0nw-phpunit-13.3.2"
       },
       "system": "x86_64-linux",
       "group": "toplevel",
@@ -496,27 +380,27 @@
     {
       "attr_path": "symfony-cli",
       "broken": false,
-      "derivation": "/nix/store/zl2nqm3knammhfa96fr4d817i32adpcs-symfony-cli-5.16.1.drv",
+      "derivation": "/nix/store/dzxb56zr93fhazi4hpnyzzifnhd94w8w-symfony-cli-5.20.0.drv",
       "description": "Symfony CLI",
       "install_id": "symfony-cli",
       "license": "AGPL-3.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "symfony-cli-5.16.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "symfony-cli-5.20.0",
       "pname": "symfony-cli",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T04:40:18.750386Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T05:00:18.434485Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "5.16.1",
+      "version": "5.20.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/rgra3lll8hr0ahqv74583jjh2rp04795-symfony-cli-5.16.1"
+        "out": "/nix/store/dnhmwssiqqc5w62v40mml5848i0cbhp9-symfony-cli-5.20.0"
       },
       "system": "aarch64-darwin",
       "group": "toplevel",
@@ -525,27 +409,27 @@
     {
       "attr_path": "symfony-cli",
       "broken": false,
-      "derivation": "/nix/store/zklxzkdy5sa43szipwsrx5bg0d1b74mr-symfony-cli-5.16.1.drv",
+      "derivation": "/nix/store/8kv9pqvrp6849ywd1j39ji4jv78kdwqz-symfony-cli-5.20.0.drv",
       "description": "Symfony CLI",
       "install_id": "symfony-cli",
       "license": "AGPL-3.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "symfony-cli-5.16.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "symfony-cli-5.20.0",
       "pname": "symfony-cli",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:13:02.630712Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T05:32:16.426599Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "5.16.1",
+      "version": "5.20.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/p6ngprv430arxn49j75h0ljhbcgacykg-symfony-cli-5.16.1"
+        "out": "/nix/store/7xh7gknf8mxy4lsq91ipk1d5aa237j23-symfony-cli-5.20.0"
       },
       "system": "aarch64-linux",
       "group": "toplevel",
@@ -554,56 +438,27 @@
     {
       "attr_path": "symfony-cli",
       "broken": false,
-      "derivation": "/nix/store/zbqnjq96h6s579cg5xnypym7v1xdsghq-symfony-cli-5.16.1.drv",
+      "derivation": "/nix/store/a78a8p2d9zi82cn63gyxsfb9zx41lb92-symfony-cli-5.20.0.drv",
       "description": "Symfony CLI",
       "install_id": "symfony-cli",
       "license": "AGPL-3.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "symfony-cli-5.16.1",
+      "locked_url": "https://github.com/flox/nixpkgs?rev=e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "name": "symfony-cli-5.20.0",
       "pname": "symfony-cli",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T05:45:58.704127Z",
+      "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+      "rev_count": 1079315,
+      "rev_date": "2026-09-25T08:03:29Z",
+      "scrape_date": "2026-09-26T06:08:13.521647Z",
       "stabilities": [
         "unstable"
       ],
       "unfree": false,
-      "version": "5.16.1",
+      "version": "5.20.0",
       "outputs_to_install": [
         "out"
       ],
       "outputs": {
-        "out": "/nix/store/h8mld2vpd81gzy5z01r2nxk05sd6bs8l-symfony-cli-5.16.1"
-      },
-      "system": "x86_64-darwin",
-      "group": "toplevel",
-      "priority": 5
-    },
-    {
-      "attr_path": "symfony-cli",
-      "broken": false,
-      "derivation": "/nix/store/3d5n5aq7wlj1kdnmxawyglbr9y0k1qnd-symfony-cli-5.16.1.drv",
-      "description": "Symfony CLI",
-      "install_id": "symfony-cli",
-      "license": "AGPL-3.0-or-later",
-      "locked_url": "https://github.com/flox/nixpkgs?rev=d6c71932130818840fc8fe9509cf50be8c64634f",
-      "name": "symfony-cli-5.16.1",
-      "pname": "symfony-cli",
-      "rev": "d6c71932130818840fc8fe9509cf50be8c64634f",
-      "rev_count": 942779,
-      "rev_date": "2026-02-08T14:52:16Z",
-      "scrape_date": "2026-02-09T06:22:42.574889Z",
-      "stabilities": [
-        "unstable"
-      ],
-      "unfree": false,
-      "version": "5.16.1",
-      "outputs_to_install": [
-        "out"
-      ],
-      "outputs": {
-        "out": "/nix/store/llk27cq48izd6062kdsav9zadr9y2kk5-symfony-cli-5.16.1"
+        "out": "/nix/store/34cw1ijycy08q33ys1kbalzybz8qldjk-symfony-cli-5.20.0"
       },
       "system": "x86_64-linux",
       "group": "toplevel",

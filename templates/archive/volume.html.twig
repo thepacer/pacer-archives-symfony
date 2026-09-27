@@ -17,7 +17,8 @@
     </div>
     <div class="col text-center text-md-end">
       {% if volume.issues.count > 0 %}
-      <a href="https://archive.org/details/thepacer?and[]=volume:{{volume.volumeNumber}}&sort=date" target="_blank" class="btn btn-primary mb-1"><i class="fas fa-newspaper fa-fw mr-1"></i> Browse Volume on Archive.org</a>
+      {# search?query=collection%3A(thepacer) AND volume%3A(18) #}
+      <a href="https://archive.org/search?query=collection%3A(thepacer)%20AND%20volume%3A({{volume.volumeNumber}})&sort=date" target="_blank" class="btn btn-primary mb-1"><i class="fas fa-newspaper fa-fw mr-1"></i> Browse Volume on Archive.org</a>
       {% endif %}
     </div>
   </div>
