@@ -110,15 +110,22 @@ class ImportArchiveOrgDataCommand extends Command
             }
             if (null === $issue) {
                 $issue = new Issue();
+                $issue->setVolume($volume);
+                $issue->setIssueDate(new \DateTime($doc->date));
             }
 
-            $issue->setIssueNumber($doc->issue);
-            $issue->setVolume($volume);
-            $issue->setIssueDate(new \DateTime($doc->date));
+            // Only fill blanks on existing issues so edits made in the admin survive re-imports
             $issue->setArchiveKey($doc->identifier);
-            $issue->setPageCount(isset($doc->pages) ? $doc->pages : 0);
-            $issue->setArchiveNotes(isset($doc->notes) ? $doc->notes : '');
-            if (property_exists($doc, 'utmdigitalarchive')) {
+            if (empty($issue->getIssueNumber())) {
+                $issue->setIssueNumber($doc->issue);
+            }
+            if (empty($issue->getPageCount())) {
+                $issue->setPageCount(isset($doc->pages) ? $doc->pages : 0);
+            }
+            if (empty($issue->getArchiveNotes()) && isset($doc->notes)) {
+                $issue->setArchiveNotes($doc->notes);
+            }
+            if (empty($issue->getUtmDigitalArchiveUrl()) && property_exists($doc, 'utmdigitalarchive')) {
                 $issue->setUtmDigitalArchiveUrl($doc->utmdigitalarchive);
             }
 
